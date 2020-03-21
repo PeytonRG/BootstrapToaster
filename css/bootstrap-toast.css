@@ -3,7 +3,13 @@
 }
 
 #toastContainer {
+    max-height: 100vh;
+    overflow-y: scroll;
     top: 0.8rem; 
+}
+
+#toastContainer::-webkit-scrollbar {
+    display: none;
 }
 
 @media only screen and (max-width: 576px) {
@@ -18,5 +24,19 @@
 @media only screen and (min-width: 576px) {
     #toastContainer {
         right: 0.8rem;
+    }
+}
+
+@media (prefers-color-scheme: dark){
+    .toast, .toast-header, .toast-header .close {
+        color: #f8f9fa;
+    }
+
+    .toast {
+        background-color: rgba(45,51,58,.85);
+    }
+
+    .toast-header {
+        background-color: rgba(30,40,45,.85);
     }
 }
