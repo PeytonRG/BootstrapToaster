@@ -14,7 +14,8 @@
 
 @media only screen and (max-width: 576px) {
     #toastContainer {
-        width: 100%;
+        left: 5%;
+        right: 5%;
     }
     .toast {
         margin: auto;
