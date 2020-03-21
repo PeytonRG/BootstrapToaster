@@ -38,18 +38,9 @@ const TOAST_STATUS = {
     INFO: 4
 }
 
-// toastGenerator("Your thing worked!", "The only one people will see on my pages.", TOAST_STATUS.SUCCESS);
-
-// toastGenerator("Warning", "You might want to look into that.", TOAST_STATUS.WARNING);
-
-// toastGenerator("Something went wrong", "Definitely user error. Works on my machine.", TOAST_STATUS.DANGER);
-
-// toastGenerator("Accessible as heck", "They use separate ARIA roles and statuses depending on the context, "
-//     + "and are wrapped in a region that announces toasts as atomic units for screen readers.", TOAST_STATUS.INFO);
-
 /**
- * Generates Bootstrap toasts from a template and inserts their HTML onto the page,
- * runs timers for each's elapsed time since rendering, and deletes them from the
+ * Endpoint to generate Bootstrap toasts from a template and insert their HTML onto the page,
+ * run timers for each's elapsed time since rendering, and remove them from the
  * DOM after they are hidden. Caps toast count at maxToastCount.
  * @param {string} title The text of the toast's header.
  * @param {string} message The text of the toast's body.
