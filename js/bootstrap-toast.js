@@ -2,7 +2,7 @@
 /** Container that generated toasts will be inserted into. */
 const toastContainer = document.createElement("div");
 toastContainer.id = "toastContainer";
-toastContainer.classList.add("position-fixed");
+toastContainer.className = "position-fixed";
 toastContainer.setAttribute("aria-live", "polite");
 toastContainer.setAttribute("aria-atomic", "true");
 document.body.appendChild(toastContainer);
