@@ -6,6 +6,8 @@
     max-height: 100vh;
     overflow-y: scroll;
     top: 0.8rem; 
+    /* Render in front of Bootstrap modals */
+    z-index: 1060;
 }
 
 #toastContainer::-webkit-scrollbar {
