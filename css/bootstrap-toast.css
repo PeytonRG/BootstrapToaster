@@ -18,10 +18,13 @@ for JavaScript overrides. */
 #toastContainer {
     max-height: 100vh;
     overflow-y: scroll;
+    /* Hide scrollbar in Firefox */
+    scrollbar-width: none;
     /* Render in front of Bootstrap toasts */
     z-index: 1060;
 }
 
+/* Hide scrollbar in all webkit-based browsers. */
 #toastContainer::-webkit-scrollbar {
     display: none;
 }
