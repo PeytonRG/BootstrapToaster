@@ -2,7 +2,7 @@
 /** Container that generated toasts will be inserted into. */
 const toastContainer = document.createElement("div");
 toastContainer.id = "toastContainer";
-toastContainer.className = "position-fixed";
+toastContainer.className = "position-fixed top right";
 toastContainer.setAttribute("aria-live", "polite");
 toastContainer.setAttribute("aria-atomic", "true");
 document.body.appendChild(toastContainer);
@@ -27,7 +27,7 @@ template.innerHTML = `
     `;
 
 /** Maximum amount of toasts to be allowed on the page at once. */
-const maxToastCount = 4;
+var maxToastCount = 4;
 /** Number of toasts currently rendered on the page. */
 var currentToastCount = 0;
 /** Emulates enum functionality for setting toast statuses without needing to remember actual values. */
@@ -36,6 +36,104 @@ const TOAST_STATUS = {
     DANGER: 2,
     WARNING: 3,
     INFO: 4
+}
+/** Emulates enum functionality for setting toast container position. */
+const TOAST_POSITION = {
+    TOP_RIGHT: 1,
+    BOTTOM_RIGHT: 2,
+    TOP_LEFT: 3,
+    BOTTOM_LEFT: 4
+}
+/** Emulates enum functionality for setting toast themes. */
+const TOAST_THEME = {
+    LIGHT: 1,
+    DARK: 2
+}
+
+/**
+ * Shorthand function for global toast configuration.
+ * @param {number} maxToasts Sets the maximum number of toasts allowed on the page at once.
+ * @param {number} position Sets the toast container's position, defaults to top right. This will not affect small screens in portrait.
+ * @param {number} theme Sets the toasts' theme to light or dark. If unset, they will follow OS light/dark preference.
+ */
+function configureToasts(maxToasts = null, position = TOAST_POSITION.TOP_RIGHT, theme = null) {
+    setMaxToastCount(maxToasts);
+
+    setToastPosition(position);
+
+    setToastTheme(theme);
+}
+
+/**
+ * Sets the maximum number of toasts allowed on the page at once.
+ * @param {number} maxToasts Maximum number of toasts allowed on the page at once.
+ */
+function setMaxToastCount(maxToasts) {
+    if (maxToasts != null) {
+        if (maxToasts > 0) {
+            maxToastCount = maxToasts;
+        }
+        else {
+            console.error("The maximum number of toasts must be greater than 0. Reverting to default.");
+        }
+    }
+}
+
+/**
+ * Sets the toast container's position.
+ * @param {number} position Position of the toast container.
+ */
+function setToastPosition(position) {
+    toastContainer.className = "position-fixed";
+    switch (position) {
+        case TOAST_POSITION.TOP_RIGHT:
+            toastContainer.classList.add("top");
+            toastContainer.classList.add("right");
+            break;
+        case TOAST_POSITION.BOTTOM_RIGHT:
+            toastContainer.classList.add("bottom");
+            toastContainer.classList.add("right");
+            break;
+        case TOAST_POSITION.TOP_LEFT:
+            toastContainer.classList.add("top");
+            toastContainer.classList.add("left");
+            break;
+        case TOAST_POSITION.BOTTOM_LEFT:
+            toastContainer.classList.add("bottom");
+            toastContainer.classList.add("left");
+            break;
+        default:
+            toastContainer.classList.add("top");
+            toastContainer.classList.add("right");
+            break;
+    }
+}
+
+/**
+ * Sets the toasts' theme to light or dark. If unset, they will follow OS light/dark preference.
+ * @param {number} theme The toast theme. Options are TOAST_THEME.LIGHT and TOAST_THEME.DARK.
+ */
+function setToastTheme(theme) {
+    if (theme != null) {
+        header = template.querySelector(".toast-header");
+        close = header.querySelector(".close");
+        switch (theme) {
+            case TOAST_THEME.LIGHT:
+                template.style.backgroundColor = "var(--body-bg-color-light)";
+                template.style.color = "var(--text-color-light)";
+                header.style.backgroundColor = "var(--header-bg-color-light)";
+                header.style.color = "var(--header-color-light)";
+                close.style.color = "var(--text-color-light)";
+                break;
+            case TOAST_THEME.DARK:
+                template.style.backgroundColor = "var(--body-bg-color-dark)";
+                template.style.color = "var(--text-color-dark)";
+                header.style.backgroundColor = "var(--header-bg-color-dark)";
+                header.style.color = "var(--header-color-dark)";
+                close.style.color = "var(--text-color-dark)";
+                break;
+        }
+    }
 }
 
 /**

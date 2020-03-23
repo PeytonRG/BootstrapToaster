@@ -2,11 +2,23 @@
     font-size: 1.1rem;
 }
 
+/* Dedicated to light and dark theme colors. The light theme ones are only used
+for JavaScript overrides. */
+#toastContainer {
+    --header-color-light: #6c757d;
+    --text-color-light: #212529;
+    --header-bg-color-light: rgba(255,255,255,.85);
+    --body-bg-color-light: rgba(255,255,255,.85);
+    --header-color-dark: #f8f9fa;
+    --text-color-dark: #f8f9fa;
+    --header-bg-color-dark: rgba(30,40,45,.85);
+    --body-bg-color-dark: rgba(30,40,45,.85);
+}
+
 #toastContainer {
     max-height: 100vh;
     overflow-y: scroll;
-    top: 0.8rem; 
-    /* Render in front of Bootstrap modals */
+    /* Render in front of Bootstrap toasts */
     z-index: 1060;
 }
 
@@ -18,6 +30,7 @@
     #toastContainer {
         left: 5%;
         right: 5%;
+        top: 0.8rem;
     }
     .toast {
         margin: auto;
@@ -25,21 +38,34 @@
 }
 
 @media only screen and (min-width: 576px) {
-    #toastContainer {
+
+    #toastContainer.bottom {
+        bottom: 0.8rem;
+    }
+
+    #toastContainer.left {
+        left: 0.8rem;
+    }
+
+    #toastContainer.right {
         right: 0.8rem;
+    }
+
+    #toastContainer.top {
+        top: 0.8rem;
     }
 }
 
 @media (prefers-color-scheme: dark){
     .toast, .toast-header, .toast-header .close {
-        color: #f8f9fa;
+        color: var(--text-color-dark);
     }
 
     .toast {
-        background-color: rgba(45,51,58,.85);
+        background-color: var(--body-bg-color-dark);
     }
 
     .toast-header {
-        background-color: rgba(30,40,45,.85);
+        background-color: var(--header-bg-color-dark);
     }
 }
