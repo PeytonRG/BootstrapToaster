@@ -2,6 +2,10 @@
     font-size: 1.1rem;
 }
 
+.toast {
+    min-width: 15rem;
+}
+
 /* Dedicated to light and dark theme colors. The light theme ones are only used
 for JavaScript overrides. */
 #toastContainer {
@@ -22,6 +26,10 @@ for JavaScript overrides. */
     scrollbar-width: none;
     /* Render in front of Bootstrap toasts */
     z-index: 1060;
+}
+
+.toast:last-child {
+    margin-bottom: 1.5rem;
 }
 
 /* Hide scrollbar in all webkit-based browsers. */
