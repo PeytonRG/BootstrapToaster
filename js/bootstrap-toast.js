@@ -155,7 +155,7 @@ function toastGenerator(title, message, status = 0, timeout = 0) {
     toastTitle.innerText = title;
 
     let toastBody = toast.querySelector(".toast-body");
-    toastBody.innerText = message;
+    toastBody.innerHTML = message;
 
     _setStatus(toast, status);
 
