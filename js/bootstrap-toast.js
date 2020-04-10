@@ -7,7 +7,7 @@ toastContainer.setAttribute("aria-live", "polite");
 toastContainer.setAttribute("aria-atomic", "true");
 document.body.appendChild(toastContainer);
 
-/** HTML markup for the template toast that is hidden in the page. */
+/** HTML markup for the toast template. */
 const template = document.createElement("div");
 template.className = "toast";
 template.setAttribute("role", "status");
@@ -138,7 +138,7 @@ function setToastTheme(theme) {
 
 /**
  * Endpoint to generate Bootstrap toasts from a template and insert their HTML onto the page,
- * run timers for each's elapsed time since rendering, and remove them from the
+ * run timers for each's elapsed time since appearing, and remove them from the
  * DOM after they are hidden. Caps toast count at maxToastCount.
  * @param {string} title The text of the toast's header.
  * @param {string} message The text of the toast's body.
