@@ -1,3 +1,15 @@
+/**
+ * Copyright (c) 2020 Peyton Gasink
+ * Distributed under MIT License.
+ * 
+ * This file contains all the necessary scripting to programmatically
+ * generate Bootstrap toasts. It first inserts a container at the bottom
+ * of the DOM, then fills a toast template and inserts it into the container.
+ * 
+ * Configuration options are also provided for toast positioning (the four corners),
+ * toast themes (light & dark), and the maximum number of toasts allowed on the page
+ * at any given time.
+ */
 
 /** Container that generated toasts will be inserted into. */
 const toastContainer = document.createElement("div");
