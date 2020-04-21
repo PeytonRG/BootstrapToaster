@@ -233,26 +233,31 @@ function _renderToast(toast, timeout) {
         toast.setAttribute("data-delay", timeout);
         toast.setAttribute("data-autohide", true);
     }
-    toastContainer.appendChild(toast);
-    $(toast).toast('show');
-    currentToastCount++;
+
+    let timer = toast.querySelector(".timer");
 
     if (enableTimers) {
         // Start a timer that updates the text of the time indicator every minute
         // Initially set to 1 because for the first minute the indicator reads "just now"
         let minutes = 1
-        let timer = setInterval(function () {
-            let timerText = toast.querySelector(".timer");
-            timerText.innerText = `${minutes}m ago`;
+        let elapsedTimer = setInterval(function () {
+            timer.innerText = `${minutes}m ago`;
             minutes++;
         }, 60 * 1000);
 
         // When the toast hides, delete its timer instance
         $(toast).on('hidden.bs.toast', function () {
-            clearInterval(timer);
+            clearInterval(elapsedTimer);
             console.log("Timer deleted.");
         });
     }
+    else {
+        toast.removeChild(timer);
+    }
+
+    toastContainer.appendChild(toast);
+    $(toast).toast('show');
+    currentToastCount++;
 
     // When the toast hides, remove it from the DOM
     $(toast).on('hidden.bs.toast', function () {
