@@ -38,10 +38,6 @@ template.innerHTML = `
         <div class="toast-body"></div>
     `;
 
-/** Maximum amount of toasts to be allowed on the page at once. */
-var maxToastCount = 4;
-/** Number of toasts currently rendered on the page. */
-var currentToastCount = 0;
 /** Emulates enum functionality for setting toast statuses without needing to remember actual values. */
 const TOAST_STATUS = {
     SUCCESS: 1,
@@ -62,18 +58,28 @@ const TOAST_THEME = {
     DARK: 2
 }
 
+/** Maximum amount of toasts to be allowed on the page at once. */
+var maxToastCount = 4;
+/** Number of toasts currently rendered on the page. */
+var currentToastCount = 0;
+/** Controls whether elapsed time will be displayed in the toast header. */
+var enableTimers = true;
+
 /**
- * Shorthand function for global toast configuration.
+ * Shorthand function for quickly setting multiple global toast configurations.
  * @param {number} maxToasts Sets the maximum number of toasts allowed on the page at once.
  * @param {number} position Sets the toast container's position, defaults to top right. This will not affect small screens in portrait.
  * @param {number} theme Sets the toasts' theme to light or dark. If unset, they will follow OS light/dark preference.
+ * @param {boolean} enableTimers Controls whether elapsed time will be displayed in the toast header.
  */
-function configureToasts(maxToasts = null, position = TOAST_POSITION.TOP_RIGHT, theme = null) {
+function configureToasts(maxToasts = null, position = TOAST_POSITION.TOP_RIGHT, theme = null, enableTimers = true) {
     setMaxToastCount(maxToasts);
 
     setToastPosition(position);
 
     setToastTheme(theme);
+
+    enableToastTimers(enableTimers);
 }
 
 /**
@@ -125,27 +131,39 @@ function setToastPosition(position) {
  * Sets the toasts' theme to light or dark. If unset, they will follow OS light/dark preference.
  * @param {number} theme The toast theme. Options are TOAST_THEME.LIGHT and TOAST_THEME.DARK.
  */
-function setToastTheme(theme) {
-    if (theme != null) {
-        header = template.querySelector(".toast-header");
-        close = header.querySelector(".close");
-        switch (theme) {
-            case TOAST_THEME.LIGHT:
-                template.style.backgroundColor = "var(--body-bg-color-light)";
-                template.style.color = "var(--text-color-light)";
-                header.style.backgroundColor = "var(--header-bg-color-light)";
-                header.style.color = "var(--header-color-light)";
-                close.style.color = "var(--text-color-light)";
-                break;
-            case TOAST_THEME.DARK:
-                template.style.backgroundColor = "var(--body-bg-color-dark)";
-                template.style.color = "var(--text-color-dark)";
-                header.style.backgroundColor = "var(--header-bg-color-dark)";
-                header.style.color = "var(--header-color-dark)";
-                close.style.color = "var(--text-color-dark)";
-                break;
-        }
+function setToastTheme(theme = null) {
+    header = template.querySelector(".toast-header");
+    close = header.querySelector(".close");
+    switch (theme) {
+        case TOAST_THEME.LIGHT:
+            template.style.backgroundColor = "var(--body-bg-color-light)";
+            template.style.color = "var(--text-color-light)";
+            header.style.backgroundColor = "var(--header-bg-color-light)";
+            header.style.color = "var(--header-color-light)";
+            close.style.color = "var(--text-color-light)";
+            break;
+        case TOAST_THEME.DARK:
+            template.style.backgroundColor = "var(--body-bg-color-dark)";
+            template.style.color = "var(--text-color-dark)";
+            header.style.backgroundColor = "var(--header-bg-color-dark)";
+            header.style.color = "var(--header-color-dark)";
+            close.style.color = "var(--text-color-dark)";
+            break;
+        default:
+            template.removeAttribute("style");
+            header.removeAttribute("style");
+            close.removeAttribute("style");
+            break;
     }
+}
+
+/**
+ * Enables or disables toasts displaying elapsed time since appearing in the header.
+ * Timers are enabled by default.
+ * @param {boolean} enabled Controls whether elapsed time will be displayed in the toast header.
+ */
+function enableToastTimers(enabled = true) {
+    enableTimers = enabled;
 }
 
 /**
@@ -219,18 +237,25 @@ function _renderToast(toast, timeout) {
     $(toast).toast('show');
     currentToastCount++;
 
-    // Start a timer that updates the text of the time indicator every minute
-    // Initially set to 1 because for the first minute the indicator reads "just now"
-    let minutes = 1
-    let timer = setInterval(function () {
-        let timerText = toast.querySelector(".timer");
-        timerText.innerText = `${minutes}m ago`;
-        minutes++;
-    }, 60 * 1000);
+    if (enableTimers) {
+        // Start a timer that updates the text of the time indicator every minute
+        // Initially set to 1 because for the first minute the indicator reads "just now"
+        let minutes = 1
+        let timer = setInterval(function () {
+            let timerText = toast.querySelector(".timer");
+            timerText.innerText = `${minutes}m ago`;
+            minutes++;
+        }, 60 * 1000);
 
-    // When the toast hides, delete its timer instance and remove it from the DOM
+        // When the toast hides, delete its timer instance
+        $(toast).on('hidden.bs.toast', function () {
+            clearInterval(timer);
+            console.log("Timer deleted.");
+        });
+    }
+
+    // When the toast hides, remove it from the DOM
     $(toast).on('hidden.bs.toast', function () {
-        clearInterval(timer);
         toastContainer.removeChild(toast);
         currentToastCount--;
     });
