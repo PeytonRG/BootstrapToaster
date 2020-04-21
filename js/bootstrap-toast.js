@@ -252,7 +252,8 @@ function _renderToast(toast, timeout) {
         });
     }
     else {
-        toast.removeChild(timer);
+        toastHeader = toast.querySelector(".toast-header");
+        toastHeader.removeChild(timer);
     }
 
     toastContainer.appendChild(toast);
