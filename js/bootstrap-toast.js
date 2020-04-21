@@ -248,7 +248,6 @@ function _renderToast(toast, timeout) {
         // When the toast hides, delete its timer instance
         $(toast).on('hidden.bs.toast', function () {
             clearInterval(elapsedTimer);
-            console.log("Timer deleted.");
         });
     }
     else {
