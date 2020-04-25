@@ -16,7 +16,6 @@ const toastContainer = document.createElement("div");
 toastContainer.id = "toastContainer";
 toastContainer.className = "position-fixed top right";
 toastContainer.setAttribute("aria-live", "polite");
-toastContainer.setAttribute("aria-atomic", "true");
 document.body.appendChild(toastContainer);
 
 /** HTML markup for the toast template. */
