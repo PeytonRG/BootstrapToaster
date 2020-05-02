@@ -39,3 +39,6 @@ You can download the source locally from the Releases tab, or include it via CDN
 1. JQuery (1.9.1 - 3), but only where it uses Bootstrap's own functions to create a toast
 1. Bootstrap (>= 4.2.1)
 1. Font Awesome (>= 5.0.0)
+
+## Usage
+Usage instructions forthcoming
