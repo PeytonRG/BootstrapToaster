@@ -1,5 +1,8 @@
 # bootstrap-toast.js
 
+## Contents
+* [Description](#Description)
+
 ## Description
 Plug &amp; play generator for Bootstrap toasts, with plenty of configuration options.
 
