@@ -17,3 +17,19 @@ Too many toasts can overwhelm and annoy the user, so by default no more than 4 w
 
 ### Accessible, Out-of-the-Box
 The container that houses all of the toasts is setup as an aria-live region, so changes to its descendant elements will alert screen readers. Success and Info toasts will read out when the user is not busy, leaving their flow uninterrupted, while Error and Warning toasts will read out immediately.
+
+## Getting Started
+Setup is extremely straightforward. Simply include the CSS in your document's `<head>` and the JavaScript at the bottom of the `<body>` tag.
+
+You can download the source locally from the Releases tab, or include it via CDN. Currently jsDelivr is supported.
+
+```HTML
+<head>
+  <link rel="stylesheet" type="text/css"
+           href="https://cdn.jsdelivr.net/gh/peytonrg/bootstrap-toast.js@v1.2.3-beta/css/bootstrap-toast.min.css" />
+</head>
+<body>
+  ...
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/peytonrg/bootstrap-toast.js@v1.2.3-beta/js/bootstrap-toast.min.js"></script>
+</body>
+```
