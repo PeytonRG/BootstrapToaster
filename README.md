@@ -30,6 +30,7 @@ You can download the source locally from the Releases tab, or include it via CDN
 </head>
 <body>
   ...
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/peytonrg/bootstrap-toast.js@v1.2.3-beta/js/bootstrap-toast.min.js"></script>
+  <script type="text/javascript" 
+          src="https://cdn.jsdelivr.net/gh/peytonrg/bootstrap-toast.js@v1.2.3-beta/js/bootstrap-toast.min.js"></script>
 </body>
 ```
