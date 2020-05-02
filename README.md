@@ -2,6 +2,7 @@
 
 ## Contents
 * [Description](#Description)
+* [Heads Up, Lights Out](#Heads-Up,-Lights-Out)
 
 ## Description
 Plug &amp; play generator for Bootstrap toasts, with plenty of configuration options.
