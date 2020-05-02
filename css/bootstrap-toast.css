@@ -30,7 +30,7 @@ for JavaScript overrides. */
 
 #toastContainer {
     max-height: 100vh;
-    overflow-y: auto;
+    overflow-y: scroll;
     /* Hide scrollbar in Firefox */
     scrollbar-width: none;
     /* Render in front of Bootstrap toasts */

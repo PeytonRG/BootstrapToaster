@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-toast.js",
-  "version": "1.2.4-beta",
+  "version": "1.0",
   "description": "Plug & play generator for Bootstrap toasts, with plenty of configuration options.",
   "main": "js/bootstrap-toast",
   "peerDependencies": {
