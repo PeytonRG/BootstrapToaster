@@ -34,3 +34,8 @@ You can download the source locally from the Releases tab, or include it via CDN
           src="https://cdn.jsdelivr.net/gh/peytonrg/bootstrap-toast.js@v1.2.3-beta/js/bootstrap-toast.min.js"></script>
 </body>
 ```
+
+### Dependencies
+1. JQuery (1.9.1 - 3), but only where it uses Bootstrap's own functions to create a toast
+1. Bootstrap (>= 4.2.1)
+1. Font Awesome (>= 5.0.0)
