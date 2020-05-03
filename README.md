@@ -2,11 +2,11 @@
 Robust, plug &amp; play generator for Bootstrap toasts.
 
 ## Contents
-* [Theming](#theming)
-* [Positioning](#positioning)
-* [Timers](#timers)
-* [Maximum Toast Count](#maximum-toast-count)
-* [Accessibility](#accessibility)
+* [Theming](#theming-heads-up-lights-out)
+* [Positioning](#positioning-serving-up-toast-coast-to-coast)
+* [Timers](#timers-too-much-time-on-my-hands)
+* [Maximum Toast Count](#maximum-toast-count-complexity-reducers-vs-information-producers)
+* [Accessibility](#accessibility-built-in-out-of-the-box)
 * [Getting Started](#getting-started)
   * [Dependencies](#dependencies)
 * [Usage](#usage)
@@ -15,7 +15,7 @@ Robust, plug &amp; play generator for Bootstrap toasts.
   * [Global Toast Options](#global-toast-options)
     * [Light/Dark Theme Overrides](#lightdark-theme-overrides)
     * [Toast Container Positioning](#toast-container-positioning)
-    * [Maximum Toast Count](#maximum-toast-count-1)
+    * [Maximum Toast Count](#maximum-toast-count-)
     * [Toast Timers](#toast-timers)
     * [Configuration Shorthand](#configuration-shorthand)
  * [Credits](#credits)
