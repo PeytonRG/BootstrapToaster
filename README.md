@@ -12,9 +12,9 @@
 * [Usage](#usage)
   * [Toast Status Options](#toast-status-options)
   * [Global Toast Options](#global-toast-options)
-    * [Light/Dark Theme Overrides](#light-dark-theme-overrides)
+    * [Light/Dark Theme Overrides](#lightdark-theme-overrides)
     * [Toast Container Positioning](#toast-container-positioning)
-    * [Maximum Toast Count](#maximum-toast-count)
+    * [Maximum Toast Count](#maximum-toast-count-1)
     * [Toast Timers](#toast-timers)
     * [Configuration Shorthand](#configuration-shorthand)
 
