@@ -99,11 +99,12 @@ $.ajax({
         ...
     },
     success: function (response) {
+        response = JSON.parse(response);
         toastGenerator("Success", response.message, TOAST_STATUS.SUCCESS, 10000);
     }
     error: function (response) {
         console.error(response);
-        toastGenerator("Error", response.message, TOAST_STATUS.DANGER);
+        toastGenerator("Error", "Something went wrong.", TOAST_STATUS.DANGER);
     }
 });
 ```
