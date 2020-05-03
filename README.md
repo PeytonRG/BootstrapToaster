@@ -1,6 +1,8 @@
 # bootstrap-toast.js
 Robust, plug &amp; play generator for Bootstrap toasts.
 
+[![](https://data.jsdelivr.com/v1/package/npm/bootstrap-toast.js/badge)](https://www.jsdelivr.com/package/npm/bootstrap-toast.js)
+
 ## Contents
 * [Theming](#theming-heads-up-lights-out)
 * [Positioning](#positioning-serving-up-toast-coast-to-coast)
@@ -47,17 +49,20 @@ The container that houses all of the toasts is setup as an aria-live region, so 
 ## Getting Started
 Setup is extremely straightforward. Simply include the CSS in your document's `<head>` and the JavaScript at the bottom of the `<body>` tag.
 
-You can download the source locally from the Releases tab, or include it via CDN. Currently jsDelivr is supported.
+Install from npm, or via CDN. Currently jsDelivr is supported.
+```npm
+npm i bootstrap-toast.js
+```
 
 ```HTML
 <head>
-  <link rel="stylesheet" type="text/css"
-           href="https://cdn.jsdelivr.net/gh/peytonrg/bootstrap-toast.js@v1.2.3-beta/css/bootstrap-toast.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-toast.js@1.0.0/css/bootstrap-toast.min.css"
+        integrity="sha256-brHFMMl0+rWPVzFXXH2wQfh+ce9bAtzOFkZ848v6iUs=" crossorigin="anonymous">
 </head>
 <body>
   ...
-  <script type="text/javascript" 
-          src="https://cdn.jsdelivr.net/gh/peytonrg/bootstrap-toast.js@v1.2.3-beta/js/bootstrap-toast.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-toast.js@1.0.0/js/bootstrap-toast.min.js"
+    integrity="sha256-xAVWHb2y3Yii6cfnGu69a9iMSxYdGduWX2hu3gHJK1g=" crossorigin="anonymous"></script>
 </body>
 ```
 
