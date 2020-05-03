@@ -81,15 +81,6 @@ The `toastGenerator()` function supports the following 4 parameters:
 1. `status`: The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon. Default -> no status icon, same ARIA attributes as success and info toasts
 1. `timeout`: Time in ms until toast disappears automatically. Default -> 0, in which case the toast must be manually dismissed.
 
-### Toast Status Options
-There are 4 built-in options for toast status in the call to `toastGenerator()`, named after Bootstrap's color convention. They are as follows:
-* `TOAST_STATUS.SUCCESS`
-* `TOAST_STATUS.ERROR`
-* `TOAST_STATUS.WARNING`
-* `TOAST_STATUS.INFO`
-
-As mentioned in the [accessibility](#accessibility) section, the status is important for correctly setting up ARIA attributes for the toast, but it also determines the toast's status icon.
-
 Since the invocation is so simple, you can generate a toast from anywhere or for anything! For example, here's how you might use it after using JQuery AJAX to post data to an API:
 ```JavaScript
 $.ajax({
@@ -108,6 +99,15 @@ $.ajax({
     }
 });
 ```
+
+### Toast Status Options
+There are 4 built-in options for toast status in the call to `toastGenerator()`, named after Bootstrap's color convention. They are as follows:
+* `TOAST_STATUS.SUCCESS`
+* `TOAST_STATUS.ERROR`
+* `TOAST_STATUS.WARNING`
+* `TOAST_STATUS.INFO`
+
+As mentioned in the [accessibility](#accessibility) section, the status is important for correctly setting up ARIA attributes for the toast, but it also determines the toast's status icon.
 
 ### Global Toast Options
 While the status icons and timeouts are configurable per-toast, the other configuration options are applied globally, and have their own helper functions to accomplish this. You simply need to call them prior to calling `toastGenerator()` for them to take effect on newly-generated toasts.
