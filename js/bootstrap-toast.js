@@ -68,7 +68,7 @@ var enableTimers = true;
  * Shorthand function for quickly setting multiple global toast configurations.
  * @param {number} maxToasts The maximum number of toasts allowed on the page at once.
  * @param {number} position The toast container's position, defaults to top right. This will not affect small screens in portrait.
- * @param {number} theme The toasts' theme to light or dark. If unset, they will follow OS light/dark preference.
+ * @param {number} theme The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
  * @param {boolean} enableTimers Controls whether elapsed time will be displayed in the toast header.
  */
 function configureToasts(maxToasts = null, position = TOAST_POSITION.TOP_RIGHT, theme = null, enableTimers = true) {
