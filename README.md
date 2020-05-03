@@ -11,6 +11,12 @@
   * [Dependencies](#dependencies)
 * [Usage](#usage)
   * [Toast Status Options](#toast-status-options)
+  * [Global Toast Options](#global-toast-options)
+    * [Light/Dark Theme Overrides](#light-dark-theme-overrides)
+    * [Toast Container Positioning](#toast-container-positioning)
+    * [Maximum Toast Count](#maximum-toast-count)
+    * [Toast Timers](#toast-timers)
+    * [Configuration Shorthand](#configuration-shorthand)
 
 ## Description
 Plug &amp; play generator for Bootstrap toasts, with plenty of configuration options.
@@ -113,3 +119,47 @@ As the above script implies, there are two options for the lone `theme` paramete
 1. `TOAST_THEME.DARK`
 
 In the unlikely event of forcing a theme, then wanting to leave it up to the user's preference again, calling `setToastTheme()` without any parameters will remove the forced theme settings from new toasts.
+
+#### Toast Container Positioning
+By default, the toast container will be fixed to the top right corner of the screen on larger screen sizes. The `setToastPosition()` function allows that positioning to be altered. The following example will move the toast container to the top left corner of the screen.
+```JavaScript
+setToastPosition(TOAST_POSITION.TOP_LEFT);
+```
+This function's lone `position` parameter supports the following options:
+1. `TOAST_POSITION.BOTTOM_LEFT`
+1. `TOAST_POSITION.BOTTOM_RIGHT`
+1. `TOAST_POSITION.TOP_LEFT`
+1. `TOAST_POSITION.TOP_RIGHT`
+
+Similar to the previous function, calling `setToastPosition()` with a null or missing parameter will restore the default top right configuration.
+
+#### Maximum Toast Count
+To avoid becoming a nuisance to users, especially if the creation of toasts is automated, a limit is in place to prevent too many toasts from being visible at once. By default, this limit is 4 toasts, but this can also be changed. The tool of choice is the `setMaxToastCount()` function. Below is an example of raising toast limit to 6 toasts.
+```JavaScript
+setMaxToastCount(6);
+```
+The lone `maxToasts` parameter supports any integer value greater than 0.
+
+#### Toast Timers
+Perhaps you aren't a fan of the elapsed timers on each toast, or would like to save every resource you can by not running the timers in the background. Luckily, there's a function for that, too. Introducing `enableToastTimers()`:
+```JavaScript
+enableToastTimers(false);
+```
+The lone `enabled` parameter simply accepts a boolean value, and defaults to `true`.
+
+#### Configuration Shorthand
+##### Come on all of you, all together now!
+Suppose you would like to configure multiple global toast options at once. We have just the function for you! The `configureToasts()` function exists as a quick shorthand to call each of the above config functions with a single call.
+For example,
+```JavaScript
+configureToasts(5, TOAST_POSITION.BOTTOM_RIGHT, TOAST_THEME.DARK, false);
+```
+In the above snippet, we have set the max toast count to 5, moved the toast container to the bottom right corner of the viewport, locked toasts to dark theme, and disabled elapsed timers on the toasts.
+
+`configureToasts()` supports the following parameters:
+`maxToasts`: The maximum number of toasts allowed on the page at once.
+`position`: The toast container's position, defaults to top right. This will not affect small screens in portrait.
+`theme`: The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
+`enableTimers`: Controls whether elapsed time will be displayed in the toast header.
+
+`position` and `theme` accept the same predefined options as mentioned in their respective sections, while `maxToasts` is an integer value and `enableTimers` is a boolean. Each parameter's default value is the same as in their respective helper functions.
