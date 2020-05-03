@@ -10,6 +10,7 @@
 * [Getting Started](#getting-started)
   * [Dependencies](#dependencies)
 * [Usage](#usage)
+  * [Toast Status Options](#toast-status-options)
 
 ## Description
 Plug &amp; play generator for Bootstrap toasts, with plenty of configuration options.
@@ -79,20 +80,20 @@ There are 4 built-in options for toast status in the call to toastGenerator, nam
 
 As mentioned in the [accessibility](#accessibility) section, the status is important for correctly setting up ARIA attributes for the toast, but it also determines the toast's status icon.
 
-Since the invocation is so simple, you can generate a toast from anywhere or for anything! Here's how you might use it in conjunction with a JQuery AJAX request to an API, for example.
+Since the invocation is so simple, you can generate a toast from anywhere or for anything! For example, here's how you might use it after using JQuery AJAX to post data to an API:
 ```JavaScript
 $.ajax({
-    type: 'POST',
+    type: "POST",
     url: "https://some-web-api/endpoint",
     data: {
         ...
     },
     success: function (response) {
-        toastGenerator('Success', response.message, TOAST_STATUS.SUCCESS, 10000);
+        toastGenerator("Success", response.message, TOAST_STATUS.SUCCESS, 10000);
     }
     error: function (response) {
         console.error(response);
-        toastGenerator('Error', response.message, TOAST_STATUS.DANGER, 10000);
+        toastGenerator("Error", response.message, TOAST_STATUS.DANGER);
     }
 });
 ```
