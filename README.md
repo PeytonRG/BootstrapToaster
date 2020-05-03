@@ -20,6 +20,8 @@ Robust, plug &amp; play generator for Bootstrap toasts.
     * [Maximum Toast Count](#maximum-toast-count-1)
     * [Toast Timers](#toast-timers)
     * [Configuration Shorthand](#configuration-shorthand)
+ * [Credits](#credits)
+ * [License](#license)
 
 ### Theming
 #### Heads Up, Lights Out
@@ -163,3 +165,9 @@ In the above snippet, we have set the max toast count to 5, moved the toast cont
 `enableTimers`: Controls whether elapsed time will be displayed in the toast header.
 
 `position` and `theme` accept the same predefined options as mentioned in their respective sections, while `maxToasts` is an integer value and `enableTimers` is a boolean. Each parameter's default value is the same as in their respective helper functions.
+
+## Credits
+Author: Peyton Gasink, Auburn University Software Engineering student, class of 2020
+
+## License
+Licensed under MIT License. For more information, refer to the `LICENSE` file within the GitHub repository.
