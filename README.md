@@ -56,12 +56,12 @@ npm i bootstrap-toast.js
 
 ```HTML
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-toast.js@1.0.0/css/bootstrap-toast.min.css"
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-toast.js@1.0.1/css/bootstrap-toast.min.css"
         integrity="sha256-brHFMMl0+rWPVzFXXH2wQfh+ce9bAtzOFkZ848v6iUs=" crossorigin="anonymous">
 </head>
 <body>
   ...
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap-toast.js@1.0.0/js/bootstrap-toast.min.js"
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-toast.js@1.0.1/js/bootstrap-toast.min.js"
     integrity="sha256-xAVWHb2y3Yii6cfnGu69a9iMSxYdGduWX2hu3gHJK1g=" crossorigin="anonymous"></script>
 </body>
 ```
