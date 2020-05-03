@@ -1,5 +1,8 @@
 # bootstrap-toast.js
 
+## Description
+Robust, plug &amp; play generator for Bootstrap toasts.
+
 ## Contents
 * [Description](#description)
   * [Theming](#theming)
@@ -17,9 +20,6 @@
     * [Maximum Toast Count](#maximum-toast-count-1)
     * [Toast Timers](#toast-timers)
     * [Configuration Shorthand](#configuration-shorthand)
-
-## Description
-Plug &amp; play generator for Bootstrap toasts, with plenty of configuration options.
 
 ### Theming
 #### Heads Up, Lights Out
