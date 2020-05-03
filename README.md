@@ -60,23 +60,23 @@ You can download the source locally from the Releases tab, or include it via CDN
 ## Usage
 Bootstrap-toast.js will take care of its own setup work, unless you choose to use custom configurations with it. When the script loads, it will insert a fixed position container into the DOM that will house all of your toasts when they appear, so you can get to generating toasts in a snap!
 
-All it takes to generate one is a call to the toastGenerator function, like so
+All it takes to generate one is a call to `toastGenerator()`, like so
 ```JavaScript
 toastGenerator("Wow, that was easy!", "Just like that, this toast will appear on the page",
   TOAST_STATUS.SUCCESS, 5000);
 ```
-The toastGenerator function supports the following 4 parameters:
-1. title: The text of the toast's header.
-1. message: The text of the toast's body.
-1. status: The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon. Default -> no status icon, same ARIA attributes as success and info toasts
-1. timeout: Time in ms until toast disappears automatically. Default -> 0, in which case the toast must be manually dismissed.
+The `toastGenerator()` function supports the following 4 parameters:
+1. `title`: The text of the toast's header.
+1. `message`: The text of the toast's body.
+1. `status`: The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon. Default -> no status icon, same ARIA attributes as success and info toasts
+1. `timeout`: Time in ms until toast disappears automatically. Default -> 0, in which case the toast must be manually dismissed.
 
 ### Toast Status Options
-There are 4 built-in options for toast status in the call to toastGenerator, named after Bootstrap's color convention. They are as follows:
-* TOAST_STATUS.SUCCESS
-* TOAST_STATUS.ERROR
-* TOAST_STATUS.WARNING
-* TOAST_STATUS.INFO
+There are 4 built-in options for toast status in the call to `toastGenerator()`, named after Bootstrap's color convention. They are as follows:
+* `TOAST_STATUS.SUCCESS`
+* `TOAST_STATUS.ERROR`
+* `TOAST_STATUS.WARNING`
+* `TOAST_STATUS.INFO`
 
 As mentioned in the [accessibility](#accessibility) section, the status is important for correctly setting up ARIA attributes for the toast, but it also determines the toast's status icon.
 
@@ -97,3 +97,19 @@ $.ajax({
     }
 });
 ```
+
+### Global Toast Options
+While the status icons and timeouts are configurable per-toast, the other configuration options are applied globally, and have their own helper functions to accomplish this. You simply need to call them prior to calling `toastGenerator()` for them to take effect on newly-generated toasts.
+
+#### Light/Dark Theme Overrides
+As mentioned in the prior section on [theming](#theming), in supported browsers and operating systems the default behavior for toasts is to automatically choose a theme based on the user's preference at the OS level. However, there may be times where you want to force one theme or the other. In that case, the `setToastTheme()` function is for you! Here's how it works:
+```JavaScript
+setToastTheme(TOAST_THEME.LIGHT);
+// or
+setToastTheme(TOAST_THEME.DARK);
+```
+As the above script implies, there are two options for the lone `theme` parameter:
+1. `TOAST_THEME.LIGHT`
+1. `TOAST_THEME.DARK`
+
+In the unlikely event of forcing a theme, then wanting to leave it up to the user's preference again, calling `setToastTheme()` without any parameters will remove the forced theme settings from new toasts.
