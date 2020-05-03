@@ -59,7 +59,7 @@ You can download the source locally from the Releases tab, or include it via CDN
 ```
 
 ### Dependencies
-1. JQuery (1.9.1 - 3.x), but only where it uses Bootstrap's own functions to create a toast
+1. jQuery (1.9.1 - 3.x), but only where it uses Bootstrap's own functions to create a toast
 1. Bootstrap (>= 4.2.1), for the toasts themselves
 1. Font Awesome (>= 5.0.0), for the toast status icons
 
@@ -78,7 +78,7 @@ The `toastGenerator()` function supports the following 4 parameters:
 1. `status`: The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon. Default -> no status icon, same ARIA attributes as success and info toasts
 1. `timeout`: Time in ms until toast disappears automatically. Default -> 0, in which case the toast must be manually dismissed.
 
-Since the invocation is so simple, you can generate a toast from anywhere or for anything! For example, here's how you might use it after using JQuery AJAX to post data to an API:
+Since the invocation is so simple, you can generate a toast from anywhere or for anything! For example, here's how you might use it after using jQuery AJAX to post data to an API:
 ```JavaScript
 $.ajax({
     type: "POST",
