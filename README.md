@@ -13,6 +13,7 @@ Robust, plug &amp; play generator for Bootstrap toasts.
 * [Getting Started](#getting-started)
   * [Dependencies](#dependencies)
 * [Usage](#usage)
+  * [Minimal Required Setup](#minimal-required-setup)
   * [Toast Status Options](#toast-status-options)
   * [Global Toast Options](#global-toast-options)
     * [Light/Dark Theme Overrides](#lightdark-theme-overrides)
@@ -66,9 +67,10 @@ You can download the source locally from the Releases tab, or include it via CDN
 1. Font Awesome (>= 5.0.0), for the toast status icons
 
 ## Usage
-Bootstrap-toast.js will take care of its own setup work, unless you choose to use custom configurations with it. When the script loads, it will insert a fixed position container into the DOM that will house all of your toasts when they appear, so you can get to generating toasts in a snap!
+### Minimal Required Setup
+Bootstrap-toast.js will take care of its own setup work, unless you choose to customize it, covered later on. When the script loads, it will insert a fixed position container into the DOM that will house all of your toasts when they appear, so you can get to generating toasts in a snap!
 
-All it takes to generate one is a call to `toastGenerator()`, like so
+All it takes to generate one is a call to `toastGenerator()`, like so:
 ```JavaScript
 toastGenerator("Wow, that was easy!", "Just like that, this toast will appear on the page",
   TOAST_STATUS.SUCCESS, 5000);
