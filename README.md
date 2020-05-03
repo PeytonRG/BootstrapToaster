@@ -2,12 +2,14 @@
 
 ## Contents
 * [Description](#description)
-* [Theming](#theming)
-* [Positioning](#positioning)
-* [Timers](#timers)
-* [Maximum Toast Count](#maximum-toast-count)
+  * [Theming](#theming)
+  * [Positioning](#positioning)
+  * [Timers](#timers)
+  * [Maximum Toast Count](#maximum-toast-count)
+  * [Accessibility](#accessibility)
 * [Getting Started](#getting-started)
-* [Dependencies](#dependencies)
+  * [Dependencies](#dependencies)
+* [Usage](#usage)
 
 ## Description
 Plug &amp; play generator for Bootstrap toasts, with plenty of configuration options.
@@ -28,7 +30,8 @@ Toasts support options for how long they exist on the page before expiring autom
 #### A Wealth of Information Creates a Poverty of Attention
 Too many toasts can overwhelm and annoy the user, so by default no more than 4 will be allowed to render on the page. For new ones to be generated, old ones must go. This maximum count is also configurable. In the event that the number of toasts overflows the height of the viewport, the toast container becomes scrollable too.
 
-### Accessible, Out-of-the-Box
+### Accessibility
+#### Accessible, Out-of-the-Box
 The container that houses all of the toasts is setup as an aria-live region, so changes to its descendant elements will alert screen readers. Success and Info toasts will read out when the user is not busy, leaving their flow uninterrupted, while Error and Warning toasts will read out immediately.
 
 ## Getting Started
@@ -50,8 +53,46 @@ You can download the source locally from the Releases tab, or include it via CDN
 
 ### Dependencies
 1. JQuery (1.9.1 - 3), but only where it uses Bootstrap's own functions to create a toast
-1. Bootstrap (>= 4.2.1)
-1. Font Awesome (>= 5.0.0)
+1. Bootstrap (>= 4.2.1), for the toasts themselves
+1. Font Awesome (>= 5.0.0), for the toast status icons
 
 ## Usage
-Usage instructions forthcoming
+Bootstrap-toast.js will take care of its own setup work, unless you choose to use custom configurations with it. When the script loads, it will insert a fixed position container into the DOM that will house all of your toasts when they appear, so you can get to generating toasts in a snap!
+
+All it takes to generate one is a call to the toastGenerator function, like so
+```JavaScript
+toastGenerator("Wow, that was easy!", "Just like that, this toast will appear on the page",
+  TOAST_STATUS.SUCCESS, 5000);
+```
+The toastGenerator function supports the following 4 parameters:
+1. title: The text of the toast's header.
+1. message: The text of the toast's body.
+1. status: The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon. Default -> no status icon, same ARIA attributes as success and info toasts
+1. timeout: Time in ms until toast disappears automatically. Default -> 0, in which case the toast must be manually dismissed.
+
+### Toast Status Options
+There are 4 built-in options for toast status in the call to toastGenerator, named after Bootstrap's color convention. They are as follows:
+* TOAST_STATUS.SUCCESS
+* TOAST_STATUS.ERROR
+* TOAST_STATUS.WARNING
+* TOAST_STATUS.INFO
+
+As mentioned in the [accessibility](#accessibility) section, the status is important for correctly setting up ARIA attributes for the toast, but it also determines the toast's status icon.
+
+Since the invocation is so simple, you can generate a toast from anywhere or for anything! Here's how you might use it in conjunction with a JQuery AJAX request to an API, for example.
+```JavaScript
+$.ajax({
+    type: 'POST',
+    url: "https://some-web-api/endpoint",
+    data: {
+        ...
+    },
+    success: function (response) {
+        toastGenerator('Success', response.message, TOAST_STATUS.SUCCESS, 10000);
+    }
+    error: function (response) {
+        console.error(response);
+        toastGenerator('Error', response.message, TOAST_STATUS.DANGER, 10000);
+    }
+});
+```
