@@ -1,15 +1,12 @@
 # bootstrap-toast.js
-
-## Description
 Robust, plug &amp; play generator for Bootstrap toasts.
 
 ## Contents
-* [Description](#description)
-  * [Theming](#theming)
-  * [Positioning](#positioning)
-  * [Timers](#timers)
-  * [Maximum Toast Count](#maximum-toast-count)
-  * [Accessibility](#accessibility)
+* [Theming](#theming)
+* [Positioning](#positioning)
+* [Timers](#timers)
+* [Maximum Toast Count](#maximum-toast-count)
+* [Accessibility](#accessibility)
 * [Getting Started](#getting-started)
   * [Dependencies](#dependencies)
 * [Usage](#usage)
