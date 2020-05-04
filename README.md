@@ -35,7 +35,7 @@ On desktop, toasts will position themselves in the top right corner of the viewp
 <img src="https://github.com/PeytonRG/bootstrap-toast.js/blob/master/images/toastmobile.png?raw=true" alt="A toast in the top middle of the viewport on a mobile device" width="300" />
 
 ## Timers: Too Much Time on My Hands
-Toasts support options for how long they exist on the page before expiring automatically, or if they will must be dismissed manually. Additionally, each toast displays the elapsed time since it was rendered, updated once per minute since it rendered. The elapsed timers are enabled by default but can be disabled too. Time to auto-hide a toast is per-toast and is set upon generation.
+Toasts support options for how long they exist on the page before expiring automatically, or if they must be dismissed manually. Additionally, each toast displays the elapsed time since it was rendered, updated once per minute since it rendered. The elapsed timers are enabled by default but can be disabled too. Time to auto-hide a toast is per-toast and is set upon generation.
 
 <img src="https://github.com/PeytonRG/bootstrap-toast.js/blob/master/images/timerjustnow.png?raw=true" alt="" width="300" />
 <img src="https://github.com/PeytonRG/bootstrap-toast.js/blob/master/images/timer2mago.png?raw=true" alt="" width="300" />
