@@ -108,7 +108,7 @@ $.ajax({
 ### Toast Status Options
 There are 4 built-in options for toast status in the call to `toastGenerator()`, named after Bootstrap's color convention. They are as follows:
 * `TOAST_STATUS.SUCCESS`
-* `TOAST_STATUS.ERROR`
+* `TOAST_STATUS.DANGER`
 * `TOAST_STATUS.WARNING`
 * `TOAST_STATUS.INFO`
 
