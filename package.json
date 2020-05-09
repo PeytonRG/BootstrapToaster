@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/PeytonRG/bootstrap-toast.js/issues"
   },
-  "homepage": "https://github.com/PeytonRG/bootstrap-toast.js#readme"
+  "homepage": "https://github.com/PeytonRG/bootstrap-toast.js#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
 }
