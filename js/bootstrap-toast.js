@@ -86,7 +86,7 @@ function configureToasts(maxToasts = null, position = TOAST_POSITION.TOP_RIGHT, 
  * @param {number} maxToasts Maximum number of toasts allowed on the page at once.
  */
 function setMaxToastCount(maxToasts) {
-    if (maxToasts != null) {
+    if (maxToasts !== null) {
         if (maxToasts > 0) {
             maxToastCount = maxToasts;
         }
