@@ -12,20 +12,20 @@
  */
 
 /** Container that generated toasts will be inserted into. */
-const toastContainer = document.createElement("div");
-toastContainer.id = "toastContainer";
-toastContainer.className = "position-fixed top right";
-toastContainer.setAttribute("aria-live", "polite");
-document.body.appendChild(toastContainer);
+const TOAST_CONTAINER = document.createElement("div");
+TOAST_CONTAINER.id = "toastContainer";
+TOAST_CONTAINER.className = "position-fixed top right";
+TOAST_CONTAINER.setAttribute("aria-live", "polite");
+document.body.appendChild(TOAST_CONTAINER);
 
 /** HTML markup for the toast template. */
-const template = document.createElement("div");
-template.className = "toast";
-template.setAttribute("role", "status");
-template.setAttribute("aria-live", "polite");
-template.setAttribute("aria-atomic", "true");
-template.setAttribute("data-autohide", "false");
-template.innerHTML = `
+const TEMPLATE = document.createElement("div");
+TEMPLATE.className = "toast";
+TEMPLATE.setAttribute("role", "status");
+TEMPLATE.setAttribute("aria-live", "polite");
+TEMPLATE.setAttribute("aria-atomic", "true");
+TEMPLATE.setAttribute("data-autohide", "false");
+TEMPLATE.innerHTML = `
         <div class="toast-header">
             <span class="status-icon fas mr-2" aria-hidden="true"></span>
             <strong class="mr-auto toast-title"></strong>
@@ -101,27 +101,27 @@ function setMaxToastCount(maxToasts) {
  * @param {number} position Position of the toast container.
  */
 function setToastPosition(position) {
-    toastContainer.className = "position-fixed";
+    TOAST_CONTAINER.className = "position-fixed";
     switch (position) {
         case TOAST_POSITION.TOP_RIGHT:
-            toastContainer.classList.add("top");
-            toastContainer.classList.add("right");
+            TOAST_CONTAINER.classList.add("top");
+            TOAST_CONTAINER.classList.add("right");
             break;
         case TOAST_POSITION.BOTTOM_RIGHT:
-            toastContainer.classList.add("bottom");
-            toastContainer.classList.add("right");
+            TOAST_CONTAINER.classList.add("bottom");
+            TOAST_CONTAINER.classList.add("right");
             break;
         case TOAST_POSITION.TOP_LEFT:
-            toastContainer.classList.add("top");
-            toastContainer.classList.add("left");
+            TOAST_CONTAINER.classList.add("top");
+            TOAST_CONTAINER.classList.add("left");
             break;
         case TOAST_POSITION.BOTTOM_LEFT:
-            toastContainer.classList.add("bottom");
-            toastContainer.classList.add("left");
+            TOAST_CONTAINER.classList.add("bottom");
+            TOAST_CONTAINER.classList.add("left");
             break;
         default:
-            toastContainer.classList.add("top");
-            toastContainer.classList.add("right");
+            TOAST_CONTAINER.classList.add("top");
+            TOAST_CONTAINER.classList.add("right");
             break;
     }
 }
@@ -131,25 +131,25 @@ function setToastPosition(position) {
  * @param {number} theme The toast theme. Options are TOAST_THEME.LIGHT and TOAST_THEME.DARK.
  */
 function setToastTheme(theme = null) {
-    header = template.querySelector(".toast-header");
-    close = header.querySelector(".close");
+    header = TEMPLATE.querySelector(".toast-header");
+    let close = header.querySelector(".close");
     switch (theme) {
         case TOAST_THEME.LIGHT:
-            template.style.backgroundColor = "var(--body-bg-color-light)";
-            template.style.color = "var(--text-color-light)";
+            TEMPLATE.style.backgroundColor = "var(--body-bg-color-light)";
+            TEMPLATE.style.color = "var(--text-color-light)";
             header.style.backgroundColor = "var(--header-bg-color-light)";
             header.style.color = "var(--header-color-light)";
             close.style.color = "var(--text-color-light)";
             break;
         case TOAST_THEME.DARK:
-            template.style.backgroundColor = "var(--body-bg-color-dark)";
-            template.style.color = "var(--text-color-dark)";
+            TEMPLATE.style.backgroundColor = "var(--body-bg-color-dark)";
+            TEMPLATE.style.color = "var(--text-color-dark)";
             header.style.backgroundColor = "var(--header-bg-color-dark)";
             header.style.color = "var(--header-color-dark)";
             close.style.color = "var(--text-color-dark)";
             break;
         default:
-            template.removeAttribute("style");
+            TEMPLATE.removeAttribute("style");
             header.removeAttribute("style");
             close.removeAttribute("style");
             break;
@@ -178,7 +178,7 @@ function toastGenerator(title, message, status = 0, timeout = 0) {
     if (currentToastCount >= maxToastCount)
         return;
 
-    let toast = template.cloneNode(deep = true);
+    let toast = TEMPLATE.cloneNode(deep = true);
 
     let toastTitle = toast.querySelector(".toast-title");
     toastTitle.innerText = title;
@@ -254,13 +254,13 @@ function _renderToast(toast, timeout) {
         toastHeader.removeChild(timer);
     }
 
-    toastContainer.appendChild(toast);
+    TOAST_CONTAINER.appendChild(toast);
     $(toast).toast('show');
     currentToastCount++;
 
     // When the toast hides, remove it from the DOM
     $(toast).on('hidden.bs.toast', function () {
-        toastContainer.removeChild(toast);
+        TOAST_CONTAINER.removeChild(toast);
         currentToastCount--;
     });
 }
