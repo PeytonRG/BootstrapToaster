@@ -19,13 +19,13 @@ TOAST_CONTAINER.setAttribute("aria-live", "polite");
 document.body.appendChild(TOAST_CONTAINER);
 
 /** HTML markup for the toast template. */
-const TEMPLATE = document.createElement("div");
-TEMPLATE.className = "toast";
-TEMPLATE.setAttribute("role", "status");
-TEMPLATE.setAttribute("aria-live", "polite");
-TEMPLATE.setAttribute("aria-atomic", "true");
-TEMPLATE.setAttribute("data-autohide", "false");
-TEMPLATE.innerHTML = `
+const TOAST_TEMPLATE = document.createElement("div");
+TOAST_TEMPLATE.className = "toast";
+TOAST_TEMPLATE.setAttribute("role", "status");
+TOAST_TEMPLATE.setAttribute("aria-live", "polite");
+TOAST_TEMPLATE.setAttribute("aria-atomic", "true");
+TOAST_TEMPLATE.setAttribute("data-autohide", "false");
+TOAST_TEMPLATE.innerHTML = `
         <div class="toast-header">
             <span class="status-icon fas mr-2" aria-hidden="true"></span>
             <strong class="mr-auto toast-title"></strong>
@@ -131,25 +131,25 @@ function setToastPosition(position) {
  * @param {number} theme The toast theme. Options are TOAST_THEME.LIGHT and TOAST_THEME.DARK.
  */
 function setToastTheme(theme = null) {
-    header = TEMPLATE.querySelector(".toast-header");
+    header = TOAST_TEMPLATE.querySelector(".toast-header");
     let close = header.querySelector(".close");
     switch (theme) {
         case TOAST_THEME.LIGHT:
-            TEMPLATE.style.backgroundColor = "var(--body-bg-color-light)";
-            TEMPLATE.style.color = "var(--text-color-light)";
+            TOAST_TEMPLATE.style.backgroundColor = "var(--body-bg-color-light)";
+            TOAST_TEMPLATE.style.color = "var(--text-color-light)";
             header.style.backgroundColor = "var(--header-bg-color-light)";
             header.style.color = "var(--header-color-light)";
             close.style.color = "var(--text-color-light)";
             break;
         case TOAST_THEME.DARK:
-            TEMPLATE.style.backgroundColor = "var(--body-bg-color-dark)";
-            TEMPLATE.style.color = "var(--text-color-dark)";
+            TOAST_TEMPLATE.style.backgroundColor = "var(--body-bg-color-dark)";
+            TOAST_TEMPLATE.style.color = "var(--text-color-dark)";
             header.style.backgroundColor = "var(--header-bg-color-dark)";
             header.style.color = "var(--header-color-dark)";
             close.style.color = "var(--text-color-dark)";
             break;
         default:
-            TEMPLATE.removeAttribute("style");
+            TOAST_TEMPLATE.removeAttribute("style");
             header.removeAttribute("style");
             close.removeAttribute("style");
             break;
@@ -178,7 +178,7 @@ function toastGenerator(title, message, status = 0, timeout = 0) {
     if (currentToastCount >= maxToastCount)
         return;
 
-    let toast = TEMPLATE.cloneNode(deep = true);
+    let toast = TOAST_TEMPLATE.cloneNode(deep = true);
 
     let toastTitle = toast.querySelector(".toast-title");
     toastTitle.innerText = title;
