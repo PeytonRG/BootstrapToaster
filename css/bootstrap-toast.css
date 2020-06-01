@@ -16,7 +16,7 @@
 }
 
 #toastContainer {
-    /* 
+    /*
         Variables dedicated to light and dark theme colors. The light theme ones are only used
         for JavaScript overrides, and are duplicates of Bootstrap's settings.
     */
