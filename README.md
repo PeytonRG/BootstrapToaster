@@ -1,8 +1,9 @@
 # bootstrap-toast.js
 Robust, plug &amp; play generator for Bootstrap toasts.
 
+[![CodeFactor](https://www.codefactor.io/repository/github/peytonrg/bootstrap-toast.js/badge)](https://www.codefactor.io/repository/github/peytonrg/bootstrap-toast.js)
 ![npm publish](https://github.com/PeytonRG/bootstrap-toast.js/workflows/npm%20Publish/badge.svg)
-[![](https://data.jsdelivr.com/v1/package/npm/bootstrap-toast.js/badge?style=rounded)](https://www.jsdelivr.com/package/npm/bootstrap-toast.js)
+[![jsDelivr Download Stats](https://data.jsdelivr.com/v1/package/npm/bootstrap-toast.js/badge?style=rounded)](https://www.jsdelivr.com/package/npm/bootstrap-toast.js)
 
 ## Contents
 * [Theming](#theming-heads-up-lights-out)
