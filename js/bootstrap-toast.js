@@ -300,7 +300,6 @@ function setMaxToastCount(maxToasts) {
  * 
  * Sets the toast container's position.
  * @param {number} position Position of the toast container.
- * @deprecated Starting in 2.0, to be removed in 3.0. Migrate to calling Toast.setPosition() directly instead.
  */
 function setToastPosition(position) {
     console.warn("The setToastPosition function is deprecated as of bootstrap-toast.js version 2.0. Consider updating.");
