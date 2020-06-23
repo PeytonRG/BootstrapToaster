@@ -271,12 +271,13 @@ class Toast {
 // Deprecated v1 API No Man's Land
 
 /**
+ * @deprecated Starting in 2.0, to be removed in 3.0. Migrate to calling Toast.configure() directly instead.
+ * 
  * Shorthand function for quickly setting multiple global toast configurations.
  * @param {number} maxToasts The maximum number of toasts allowed on the page at once.
  * @param {number} position The toast container's position, defaults to top right. This will not affect small screens in portrait.
  * @param {number} theme The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
  * @param {boolean} enableTimers Controls whether elapsed time will be displayed in the toast header.
- * @deprecated Starting in 2.0, to be removed in 3.0. Migrate to calling Toast.configure() directly instead.
  */
 function configureToasts(maxToasts = null, position = TOAST_POSITION.TOP_RIGHT, theme = null, enableTimers = true) {
     console.warn("The configureToasts function is deprecated as of bootstrap-toast.js version 2.0. Consider updating.");
@@ -284,9 +285,10 @@ function configureToasts(maxToasts = null, position = TOAST_POSITION.TOP_RIGHT, 
 }
 
 /**
+ * @deprecated Starting in 2.0, to be removed in 3.0. Migrate to calling Toast.setMaxCount() directly instead.
+ * 
  * Sets the maximum number of toasts allowed on the page at once.
  * @param {number} maxToasts Maximum number of toasts allowed on the page at once.
- * @deprecated Starting in 2.0, to be removed in 3.0. Migrate to calling Toast.setMaxCount() directly instead.
  */
 function setMaxToastCount(maxToasts) {
     console.warn("The setMaxToastCount function is deprecated as of bootstrap-toast.js version 2.0. Consider updating.");
@@ -294,6 +296,8 @@ function setMaxToastCount(maxToasts) {
 }
 
 /**
+ * @deprecated Starting in 2.0, to be removed in 3.0. Migrate to calling Toast.setPosition() directly instead.
+ * 
  * Sets the toast container's position.
  * @param {number} position Position of the toast container.
  * @deprecated Starting in 2.0, to be removed in 3.0. Migrate to calling Toast.setPosition() directly instead.
@@ -304,9 +308,10 @@ function setToastPosition(position) {
 }
 
 /**
+ * @deprecated Starting in 2.0, to be removed in 3.0. Migrate to calling Toast.setTheme() directly instead.
+ * 
  * Sets the toasts' theme to light or dark. If unset, they will follow OS light/dark preference.
  * @param {number} theme The toast theme. Options are TOAST_THEME.LIGHT and TOAST_THEME.DARK.
- * @deprecated Starting in 2.0, to be removed in 3.0. Migrate to calling Toast.setTheme() directly instead.
  */
 function setToastTheme(theme = null) {
     console.warn("The setToastTheme function is deprecated as of bootstrap-toast.js version 2.0. Consider updating.");
@@ -314,10 +319,11 @@ function setToastTheme(theme = null) {
 }
 
 /**
+ * @deprecated Starting in 2.0, to be removed in 3.0. Migrate to calling Toast.enableTimers() directly instead.
+ * 
  * Enables or disables toasts displaying elapsed time since appearing in the header.
  * Timers are enabled by default.
  * @param {boolean} enabled Controls whether elapsed time will be displayed in the toast header.
- * @deprecated Starting in 2.0, to be removed in 3.0. Migrate to calling Toast.enableTimers() directly instead.
  */
 function enableToastTimers(enabled = true) {
     console.warn("The enableToastTimers function is deprecated as of bootstrap-toast.js version 2.0. Consider updating.");
@@ -325,6 +331,8 @@ function enableToastTimers(enabled = true) {
 }
 
 /**
+ * @deprecated Starting in 2.0, to be removed in 3.0. Migrate to calling Toast.create() directly instead.
+ * 
  * Endpoint to generate Bootstrap toasts from a template and insert their HTML onto the page,
  * run timers for each's elapsed time since appearing, and remove them from the
  * DOM after they are hidden. Caps toast count at maxToastCount.
@@ -332,7 +340,6 @@ function enableToastTimers(enabled = true) {
  * @param {string} message The text of the toast's body.
  * @param {number} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
  * @param {number} timeout Time in ms until toast disappears automatically. Defaults to 0, which is indefinite.
- * @deprecated Starting in 2.0, to be removed in 3.0. Migrate to calling Toast.create() directly instead.
  */
 function toastGenerator(title, message, status = 0, timeout = 0) {
     console.warn("The toastGenerator function is deprecated as of bootstrap-toast.js version 2.0. Consider updating.");
