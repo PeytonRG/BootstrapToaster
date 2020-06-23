@@ -73,21 +73,21 @@ class Toast {
      * @param {number} theme The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
      * @param {boolean} enableTimers Controls whether elapsed time will be displayed in the toast header.
      */
-    static configureToasts(maxToasts = null, position = TOAST_POSITION.TOP_RIGHT, theme = null, enableTimers = true) {
-        Toast.setMaxToastCount(maxToasts);
+    static configure(maxToasts = null, position = TOAST_POSITION.TOP_RIGHT, theme = null, enableTimers = true) {
+        Toast.setMaxCount(maxToasts);
 
-        Toast.setToastPosition(position);
+        Toast.setPosition(position);
 
-        Toast.setToastTheme(theme);
+        Toast.setTheme(theme);
 
-        Toast.enableToastTimers(enableTimers);
+        Toast.enableTimers(enableTimers);
     }
 
     /**
      * Sets the maximum number of toasts allowed on the page at once.
      * @param {number} maxToasts Maximum number of toasts allowed on the page at once.
      */
-    static setMaxToastCount(maxToasts) {
+    static setMaxCount(maxToasts) {
         if (maxToasts !== null) {
             if (maxToasts > 0) {
                 maxToastCount = maxToasts;
@@ -102,7 +102,7 @@ class Toast {
      * Sets the toast container's position.
      * @param {number} position Position of the toast container.
      */
-    static setToastPosition(position) {
+    static setPosition(position) {
         TOAST_CONTAINER.className = "position-fixed";
         switch (position) {
             case TOAST_POSITION.TOP_RIGHT:
@@ -132,7 +132,7 @@ class Toast {
      * Sets the toasts' theme to light or dark. If unset, they will follow OS light/dark preference.
      * @param {number} theme The toast theme. Options are TOAST_THEME.LIGHT and TOAST_THEME.DARK.
      */
-    static setToastTheme(theme = null) {
+    static setTheme(theme = null) {
         let header = TOAST_TEMPLATE.querySelector(".toast-header");
         let close = header.querySelector(".close");
         switch (theme) {
@@ -163,7 +163,7 @@ class Toast {
      * Timers are enabled by default.
      * @param {boolean} enabled Controls whether elapsed time will be displayed in the toast header.
      */
-    static enableToastTimers(enabled = true) {
+    static enableTimers(enabled = true) {
         enableTimers = enabled;
     }
 
@@ -176,7 +176,7 @@ class Toast {
      * @param {number} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
      * @param {number} timeout Time in ms until toast disappears automatically. Defaults to 0, which is indefinite.
      */
-    static toastGenerator(title, message, status = 0, timeout = 0) {
+    static create(title, message, status = 0, timeout = 0) {
         if (currentToastCount >= maxToastCount)
             return;
 
@@ -190,7 +190,7 @@ class Toast {
 
         Toast._setStatus(toast, status);
 
-        Toast._renderToast(toast, timeout);
+        Toast._render(toast, timeout);
     }
 
     /**
@@ -229,7 +229,7 @@ class Toast {
      * @param {Node} toast The HTML of the toast being modified.
      * @param {number} timeout Time in ms until toast disappears automatically. Indefinite if zero.
      */
-    static _renderToast(toast, timeout) {
+    static _render(toast, timeout) {
         if (timeout > 0) {
             toast.setAttribute("data-delay", timeout);
             toast.setAttribute("data-autohide", true);
