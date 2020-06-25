@@ -58,13 +58,11 @@ npm i bootstrap-toast.js
 
 ```HTML
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-toast.js@1.0.8/css/bootstrap-toast.min.css"
-        integrity="sha256-brHFMMl0+rWPVzFXXH2wQfh+ce9bAtzOFkZ848v6iUs=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-toast.js@2.0.0/css/bootstrap-toast.min.css" />
 </head>
 <body>
   ...
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap-toast.js@1.0.8/js/bootstrap-toast.min.js"
-    integrity="sha256-xAVWHb2y3Yii6cfnGu69a9iMSxYdGduWX2hu3gHJK1g=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-toast.js@2.0.0/js/bootstrap-toast.min.js"></script>
 </body>
 ```
 
@@ -79,10 +77,10 @@ Bootstrap-toast.js will take care of its own setup work, unless you choose to cu
 
 All it takes to generate one is a call to `toastGenerator()`, like so:
 ```JavaScript
-toastGenerator("Wow, that was easy!", "Just like that, this toast will appear on the page",
+Toast.create("Wow, that was easy!", "Just like that, this toast will appear on the page",
   TOAST_STATUS.SUCCESS, 5000);
 ```
-The `toastGenerator()` function supports the following 4 parameters:
+The `Toast.create()` function supports the following 4 parameters:
 1. `title`: The text of the toast's header.
 1. `message`: The text of the toast's body.
 1. `status`: The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon. Default -> no status icon, same ARIA attributes as success and info toasts
@@ -98,17 +96,17 @@ $.ajax({
     },
     success: function (response) {
         response = JSON.parse(response);
-        toastGenerator("Success", response.message, TOAST_STATUS.SUCCESS, 10000);
+        Toast.create("Success", response.message, TOAST_STATUS.SUCCESS, 10000);
     }
     error: function (response) {
         console.error(response);
-        toastGenerator("Error", "Something went wrong.", TOAST_STATUS.DANGER);
+        Toast.create("Error", "Something went wrong.", TOAST_STATUS.DANGER);
     }
 });
 ```
 
 ### Toast Status Options
-There are 4 built-in options for toast status in the call to `toastGenerator()`, named after Bootstrap's color convention. They are as follows:
+There are 4 built-in options for toast status in the call to `Toast.create()`, named after Bootstrap's color convention. They are as follows:
 * `TOAST_STATUS.SUCCESS`
 * `TOAST_STATUS.DANGER`
 * `TOAST_STATUS.WARNING`
@@ -117,25 +115,25 @@ There are 4 built-in options for toast status in the call to `toastGenerator()`,
 As mentioned in the [accessibility](#accessibility) section, the status is important for correctly setting up ARIA attributes for the toast, but it also determines the toast's status icon.
 
 ### Global Toast Options
-While the status icons and timeouts are configurable per-toast, the other configuration options are applied globally, and have their own helper functions to accomplish this. You simply need to call them prior to calling `toastGenerator()` for them to take effect on newly-generated toasts.
+While the status icons and timeouts are configurable per-toast, the other configuration options are applied globally, and have their own helper functions to accomplish this. You simply need to call them prior to calling `Toast.create()` for them to take effect on newly-generated toasts.
 
 #### Light/Dark Theme Overrides
-As mentioned in the prior section on [theming](#theming), in supported browsers and operating systems the default behavior for toasts is to automatically choose a theme based on the user's preference at the OS level. However, there may be times where you want to force one theme or the other. In that case, the `setToastTheme()` function is for you! Here's how it works:
+As mentioned in the prior section on [theming](#theming), in supported browsers and operating systems the default behavior for toasts is to automatically choose a theme based on the user's preference at the OS level. However, there may be times where you want to force one theme or the other. In that case, the `Toast.setTheme()` function is for you! Here's how it works:
 ```JavaScript
-setToastTheme(TOAST_THEME.LIGHT);
+Toast.setTheme(TOAST_THEME.LIGHT);
 // or
-setToastTheme(TOAST_THEME.DARK);
+Toast.setTheme(TOAST_THEME.DARK);
 ```
 As the above script implies, there are two options for the lone `theme` parameter:
 1. `TOAST_THEME.LIGHT`
 1. `TOAST_THEME.DARK`
 
-In the unlikely event of forcing a theme, then wanting to leave it up to the user's preference again, calling `setToastTheme()` without any parameters will remove the forced theme settings from new toasts.
+In the unlikely event of forcing a theme, then wanting to leave it up to the user's preference again, calling `Toast.setTheme()` without any parameters will remove the forced theme settings from new toasts.
 
 #### Toast Container Positioning
-By default, the toast container will be fixed to the top right corner of the screen on larger screen sizes. The `setToastPosition()` function allows that positioning to be altered. The following example will move the toast container to the top left corner of the screen.
+By default, the toast container will be fixed to the top right corner of the screen on larger screen sizes. The `Toast.setPosition()` function allows that positioning to be altered. The following example will move the toast container to the top left corner of the screen.
 ```JavaScript
-setToastPosition(TOAST_POSITION.TOP_LEFT);
+Toast.setPosition(TOAST_POSITION.TOP_LEFT);
 ```
 This function's lone `position` parameter supports the following options:
 1. `TOAST_POSITION.BOTTOM_LEFT`
@@ -143,38 +141,47 @@ This function's lone `position` parameter supports the following options:
 1. `TOAST_POSITION.TOP_LEFT`
 1. `TOAST_POSITION.TOP_RIGHT`
 
-Similar to the previous function, calling `setToastPosition()` with a null or missing parameter will restore the default top right configuration.
+Similar to the previous function, calling `Toast.setPosition()` with a null or missing parameter will restore the default top right configuration.
 
 #### Maximum Toast Count
-To avoid becoming a nuisance to users, especially if the creation of toasts is automated, a limit is in place to prevent too many toasts from being visible at once. By default, this limit is 4 toasts, but this can also be changed. The tool of choice is the `setMaxToastCount()` function. Below is an example of raising toast limit to 6 toasts.
+To avoid becoming a nuisance to users, especially if the creation of toasts is automated, a limit is in place to prevent too many toasts from being visible at once. By default, this limit is 4 toasts, but this can also be changed. The tool of choice is the `Toast.setMaxCount()` function. Below is an example of raising toast limit to 6 toasts.
 ```JavaScript
-setMaxToastCount(6);
+Toast.setMaxCount(6);
 ```
 The lone `maxToasts` parameter supports any integer value greater than 0.
 
 #### Toast Timers
-Perhaps you aren't a fan of the elapsed timers on each toast, or would like to save every resource you can by not running the timers in the background. Luckily, there's a function for that, too. Introducing `enableToastTimers()`:
+Perhaps you aren't a fan of the elapsed timers on each toast, or would like to save every resource you can by not running the timers in the background. Luckily, there's a function for that, too. Introducing `Toast.enableTimers()`:
 ```JavaScript
-enableToastTimers(false);
+Toast.enableTimers(false);
 ```
 The lone `enabled` parameter simply accepts a boolean value, and defaults to `true`.
 
 #### Configuration Shorthand
 ##### Come on all of you, all together now!
-Suppose you would like to configure multiple global toast options at once. We have just the function for you! The `configureToasts()` function exists as a quick shorthand to call each of the above config functions with a single call.
+Suppose you would like to configure multiple global toast options at once. We have just the function for you! The `Toast.configure()` function exists as a quick shorthand to call each of the above config functions with a single call.
 For example,
 ```JavaScript
-configureToasts(5, TOAST_POSITION.BOTTOM_RIGHT, TOAST_THEME.DARK, false);
+Toast.configure(5, TOAST_POSITION.BOTTOM_RIGHT, TOAST_THEME.DARK, false);
 ```
 In the above snippet, we have set the max toast count to 5, moved the toast container to the bottom right corner of the viewport, locked toasts to dark theme, and disabled elapsed timers on the toasts.
 
-`configureToasts()` supports the following parameters:
+`Toast.configure()` supports the following parameters:
 `maxToasts`: The maximum number of toasts allowed on the page at once.
 `position`: The toast container's position, defaults to top right. This will not affect small screens in portrait.
 `theme`: The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
 `enableTimers`: Controls whether elapsed time will be displayed in the toast header.
 
 `position` and `theme` accept the same predefined options as mentioned in their respective sections, while `maxToasts` is an integer value and `enableTimers` is a boolean. Each parameter's default value is the same as in their respective helper functions.
+
+## Deprecated Functions
+With version 2.0, all the v1 functions have been deprecated in favor of a Toast class with static methods. This is to make distinguishing bootstrap-toast.js functions from other JavaScript easier. The old functions are still around and functions as wrappers for the new static methods, but will generate a console warning with each use. They will be removed with version 3.0. The deprecated functions are:
+- `configureToasts()`
+- `setMaxToastCount()`
+- `setToastPosition()`
+- `setToastTheme()`
+- `configureToasts()`
+- `toastGenerator()`
 
 ## Credits
 Developed by Peyton Gasink, a senior in software engineering in Auburn University's class of 2020 as a COVID-19 quarantine project ❤️
