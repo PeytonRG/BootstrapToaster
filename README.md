@@ -75,7 +75,7 @@ npm i bootstrap-toast.js
 ### Minimal Required Setup
 Bootstrap-toast.js will take care of its own setup work, unless you choose to customize it, covered later on. When the script loads, it will insert a fixed position container into the DOM that will house all of your toasts when they appear, so you can get to generating toasts in a snap!
 
-All it takes to generate one is a call to `toastGenerator()`, like so:
+All it takes to generate one is a call to `Toast.create()`, like so:
 ```JavaScript
 Toast.create("Wow, that was easy!", "Just like that, this toast will appear on the page",
   TOAST_STATUS.SUCCESS, 5000);
@@ -180,7 +180,7 @@ With version 2.0, all the v1 functions have been deprecated in favor of a Toast 
 - `setMaxToastCount()`
 - `setToastPosition()`
 - `setToastTheme()`
-- `configureToasts()`
+- `enableToastTimers()`
 - `toastGenerator()`
 
 ## Credits
