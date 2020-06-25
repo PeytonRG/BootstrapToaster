@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-toast.js",
-  "version": "1.0.9",
+  "version": "2.0.0",
   "description": "Robust, plug & play generator for Bootstrap toasts.",
   "main": "js/bootstrap-toast.js",
   "dependencies": {
