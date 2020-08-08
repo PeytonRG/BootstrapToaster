@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-        integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg=="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+        integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+        crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/bootstrap-toast.css" />
 
     <!-- Favicon -->
@@ -18,28 +20,240 @@
     <link rel="manifest" href="images/favicon/site.webmanifest">
 
     <title>bootstrap-toast.js</title>
+
+    <style>
+        .jumbotron {
+            background-color: #7952b3;
+        }
+
+        /* Codye classes */
+        .hljs-class {
+            color: #B8D7A3;
+        }
+
+        .hljs-type {
+            color: #4EC9B0;
+        }
+
+        .hljs-function {
+            color: #DCDCDC;
+        }
+
+        .hljs-strong {
+            font-weight: bold;
+        }
+
+        .hljs-title {
+            color: #DCDCDC;
+        }
+
+        .hljs-number {
+            color: #B8D7A3;
+        }
+
+        .hljs-section {
+            color: gold;
+        }
+
+        .hljs-tag {
+            color: #9B9B9B;
+        }
+
+        .hljs-meta-keyword {
+            color: #9B9B9B;
+        }
+
+        .hljs-builtin-name {
+            color: #9CDCFE;
+        }
+
+        .hljs-literal {
+            color: #569CD6;
+        }
+
+        .hljs-variable {
+            color: #BD63C5;
+        }
+
+        .hljs-attribute {
+            color: #9CDCFE;
+        }
+
+        .hljs {
+            padding: 0.5em;
+            overflow-x: auto;
+            color: #DCDCDC;
+            display: block;
+        }
+
+        .hljs-formula {
+            color: #DCDCDC;
+        }
+
+        .hljs-params {
+            color: #DCDCDC;
+        }
+
+        .hljs-addition {
+            width: 100%;
+            background-color: #144212;
+            display: inline-block;
+        }
+
+        .hljs-meta {
+            color: #9B9B9B;
+        }
+
+        .hljs-selector-id {
+            color: #D7BA7D;
+        }
+
+        .hljs-link {
+            text-decoration: underline;
+            color: #569CD6;
+        }
+
+        .hljs-keyword {
+            color: #569CD6;
+        }
+
+        .hljs-selector-tag {
+            color: #D7BA7D;
+        }
+
+        .hljs-comment {
+            font-style: italic;
+            color: #57A64A;
+        }
+
+        .hljs-emphasis {
+            font-style: italic;
+        }
+
+        .hljs-built_in {
+            color: #4EC9B0;
+        }
+
+        .hljs-selector-attr {
+            color: #D7BA7D;
+        }
+
+        .hljs-doctag {
+            color: #608B4E;
+        }
+
+        .hljs-symbol {
+            color: #569CD6;
+        }
+
+        .hljs-regexp {
+            color: #9A5334;
+        }
+
+        .hljs-attr {
+            color: #9CDCFE;
+        }
+
+        .hljs-subst {
+            color: #DCDCDC;
+        }
+
+        .hljs-deletion {
+            display: inline-block;
+            width: 100%;
+            background-color: #600;
+        }
+
+        .hljs-name {
+            color: #569CD6;
+        }
+
+        .hljs-template-variable {
+            color: #BD63C5;
+        }
+
+        .hljs-selector-pseudo {
+            color: #D7BA7D;
+        }
+
+        .hljs-bullet {
+            color: #D7BA7D;
+        }
+
+        .hljs-quote {
+            color: #57A64A;
+            font-style: italic;
+        }
+
+        .hljs-string {
+            color: #D69D85;
+        }
+
+        .hljs-template-tag {
+            color: #9A5334;
+        }
+
+        .hljs-selector-class {
+            color: #D7BA7D;
+        }
+
+        .hljs-meta-string {
+            color: #D69D85;
+        }
+    </style>
 </head>
 
 <body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container text-light text-center">
+            <h1 class="display-4">bootstrap-toast.js</h1>
+            <p class="lead">Serving up toast, coast to coast.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-keyword">static</span><span class="hljs-attribute"> create</span>(title, message, status = <span class="hljs-number">0</span>, timeout = <span class="hljs-number">0</span>) {
+                
+    <span class="hljs-keyword">if</span> (currentToastCount &gt;= maxToastCount)
+        <span class="hljs-keyword">return</span>;
+                
+    <span class="hljs-keyword">let</span> toast = <span class="hljs-type">TOAST_TEMPLATE</span>.<span class="hljs-attribute">cloneNode</span>(<span class="hljs-literal">true</span>);
+                
+    <span class="hljs-keyword">let</span> toastTitle = toast.<span class="hljs-attribute">querySelector</span>(<span class="hljs-string">".toast-title"</span>);
+    toastTitle.<span class="hljs-attribute">innerText</span> = title;
+                
+    <span class="hljs-keyword">let</span> toastBody = toast.<span class="hljs-attribute">querySelector</span>(<span class="hljs-string">".toast-body"</span>);
+    toastBody.<span class="hljs-attribute">innerHTML</span> = message;
+                
+    <span class="hljs-type">Toast</span>.<span class="hljs-attribute">_setStatus</span>(toast, status);
+                
+    <span class="hljs-type">Toast</span>.<span class="hljs-attribute">_render</span>(toast, timeout);
+}</code></pre>
+            </div>
+        </div>
+    </div>
 </body>
 
 <!-- JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
     integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"
-    integrity="sha256-OFRAJNoaD8L3Br5lglV7VyLRf0itmoBzWUoM+Sji4/8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ=="
+    crossorigin="anonymous"></script>
 <script src="../js/bootstrap-toast.js"></script>
 <script>
     // v2 API
-    Toast.configure(3, TOAST_POSITION.BOTTOM_RIGHT);
+    // Toast.configure(3, TOAST_POSITION.BOTTOM_RIGHT);
     // Toast.setPosition(TOAST_POSITION.TOP_LEFT);
     // Toast.enableTimers(false);
     // Toast.setTheme(TOAST_THEME.LIGHT);
     // Toast.setMaxCount(2);
-    Toast.create("Hello", "Goodbye", TOAST_STATUS.SUCCESS);
-    Toast.create("Hello", "Goodbye", TOAST_STATUS.DANGER);
-    Toast.create("Hello", "Goodbye", TOAST_STATUS.WARNING);
-    Toast.create("Hello", "Goodbye", TOAST_STATUS.INFO);
+    // Toast.create("Hello", "Goodbye", TOAST_STATUS.SUCCESS);
+    // Toast.create("Hello", "Goodbye", TOAST_STATUS.DANGER);
+    // Toast.create("Hello", "Goodbye", TOAST_STATUS.WARNING);
+    // Toast.create("Hello", "Goodbye", TOAST_STATUS.INFO);
 
     // v1 API
     // configureToasts(3, TOAST_POSITION.BOTTOM_RIGHT);
