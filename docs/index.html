@@ -21,186 +21,7 @@
 
     <title>bootstrap-toast.js</title>
 
-    <style>
-        .jumbotron {
-            background-color: #7952b3;
-        }
-
-        /* Codye classes */
-        .hljs-variable {
-            color: #BD63C5;
-        }
-
-        .hljs-selector-id {
-            color: #D7BA7D;
-        }
-
-        .hljs-built_in {
-            color: #4EC9B0;
-        }
-
-        .hljs-function {
-            color: #DCDCDC;
-        }
-
-        .hljs-attr {
-            color: #9CDCFE;
-        }
-
-        .hljs-template-tag {
-            color: #9A5334;
-        }
-
-        .hljs-selector-pseudo {
-            color: #D7BA7D;
-        }
-
-        .hljs-meta-string {
-            color: #D69D85;
-        }
-
-        .hljs-deletion {
-            background-color: #600;
-            width: 100%;
-            display: inline-block;
-        }
-
-        .hljs-type {
-            color: #4EC9B0;
-        }
-
-        .hljs-attribute {
-            color: #9CDCFE;
-        }
-
-        .hljs-class {
-            color: #B8D7A3;
-        }
-
-        .hljs-meta {
-            color: #9B9B9B;
-        }
-
-        .hljs-meta-keyword {
-            color: #9B9B9B;
-        }
-
-        .hljs-tag {
-            color: #9B9B9B;
-        }
-
-        .hljs-template-variable {
-            color: #BD63C5;
-        }
-
-        .hljs-doctag {
-            color: #608B4E;
-        }
-
-        .hljs-symbol {
-            color: #569CD6;
-        }
-
-        .hljs-addition {
-            width: 100%;
-            background-color: #144212;
-            display: inline-block;
-        }
-
-        .hljs-quote {
-            color: #57A64A;
-            font-style: italic;
-        }
-
-        .hljs-selector-attr {
-            color: #D7BA7D;
-        }
-
-        .hljs-bullet {
-            color: #D7BA7D;
-        }
-
-        .hljs-string {
-            color: #D69D85;
-        }
-
-        .hljs-section {
-            color: gold;
-        }
-
-        .hljs-strong {
-            font-weight: bold;
-        }
-
-        .hljs-regexp {
-            color: #9A5334;
-        }
-
-        .hljs-selector-tag {
-            color: #D7BA7D;
-        }
-
-        .hljs-name {
-            color: #569CD6;
-        }
-
-        .hljs-params {
-            color: #DCDCDC;
-        }
-
-        .hljs-emphasis {
-            font-style: italic;
-        }
-
-        .hljs-link {
-            text-decoration: underline;
-            color: #569CD6;
-        }
-
-        .hljs {
-            color: #DCDCDC;
-            display: block;
-            overflow-x: auto;
-            padding: 0.5em;
-        }
-
-        .hljs-number {
-            color: #B8D7A3;
-        }
-
-        .hljs-subst {
-            color: #DCDCDC;
-        }
-
-        .hljs-comment {
-            color: #57A64A;
-            font-style: italic;
-        }
-
-        .hljs-keyword {
-            color: #569CD6;
-        }
-
-        .hljs-literal {
-            color: #569CD6;
-        }
-
-        .hljs-title {
-            color: #DCDCDC;
-        }
-
-        .hljs-selector-class {
-            color: #D7BA7D;
-        }
-
-        .hljs-builtin-name {
-            color: #9CDCFE;
-        }
-
-        .hljs-formula {
-            color: #DCDCDC;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/index.min.css" />
 </head>
 
 <body>
@@ -234,7 +55,7 @@
     }
 });</code></pre>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 d-flex flex-column align-items-center">
                 <p>Creating a toast is simple. All you need is a call to <span
                         class="badge badge-dark">Toast.create()</span> to get started. It supports the following 4
                     parameters</p>
@@ -247,7 +68,35 @@
                     <li>timeout: Time in ms until toast disappears automatically. Defaults to 0, in which case the toast
                         must be manually dismissed.</li>
                 </ol>
-                <button id="createToast" class="btn btn-primary">Try it Out</button>
+                <p>There are 4 built-in options for toast status in the call to Toast.create(), named after Bootstrap's
+                    color convention. They are as follows:</p>
+
+                <div class="row text-center">
+                    <div class="col-md-6">
+                        <span class="badge badge-success">
+                            TOAST_STATUS.SUCCESS
+                        </span>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="badge badge-danger">
+                            TOAST_STATUS.DANGER
+                        </span>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="badge badge-warning">
+                            TOAST_STATUS.WARNING
+                        </span>
+                    </div>
+                    <div class="col-md-6">
+                        <span class="badge badge-info">
+                            TOAST_STATUS.INFO
+                        </span>
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <button id="createToast" class="btn btn-primary">Try it Out</button>
+                </div>
             </div>
         </div>
     </div>
@@ -284,10 +133,6 @@
     // toastGenerator("Hello", "Goodbye", TOAST_STATUS.INFO);
 </script>
 
-<script>
-    document.getElementById("createToast").onclick = function () {
-        Toast.create("Voila!", "How easy was that?", TOAST_STATUS.SUCCESS, 5000);
-    }
-</script>
+<script type="text/javascript" src="js/index.min.js"></script>
 
 </html>
