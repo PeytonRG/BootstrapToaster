@@ -1,4 +1,4 @@
-# bootstrap-toast.js
+# Bootstrap Toaster
 Robust, plug &amp; play generator for Bootstrap toasts.
 
 [![jsDelivr Download Stats](https://data.jsdelivr.com/v1/package/npm/bootstrap-toast.js/badge?style=rounded)](https://www.jsdelivr.com/package/npm/bootstrap-toast.js)
