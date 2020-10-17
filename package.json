@@ -4,8 +4,8 @@
   "description": "Robust, plug & play generator for Bootstrap toasts.",
   "main": "js/bootstrap-toast.js",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.14.0",
-    "bootstrap": "^4.2.1",
+    "@fortawesome/fontawesome-free": ">=5.1.0",
+    "bootstrap": ">=4.2.1",
     "jquery": "1.9.1 - 3"
   },
   "scripts": {
