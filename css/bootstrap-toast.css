@@ -43,8 +43,7 @@
 
 @media only screen and (max-width: 576px) {
     #toastContainer {
-        left: 5%;
-        right: 5%;
+        width: 100%;
         top: 0.8rem;
     }
     .toast {

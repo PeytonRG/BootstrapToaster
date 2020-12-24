@@ -127,13 +127,13 @@ class Toast {
                 TOAST_CONTAINER.classList.add("top-50", "end", "translate-middle-y");
                 break;
             case TOAST_PLACEMENT.BOTTOM_LEFT:
-                TOAST_CONTAINER.classList.add("bottom", "start");
+                TOAST_CONTAINER.classList.add("bottom-0", "start");
                 break;
             case TOAST_PLACEMENT.BOTTOM_CENTER:
-                TOAST_CONTAINER.classList.add("bottom", "start-50", "translate-middle-x");
+                TOAST_CONTAINER.classList.add("bottom-0", "start-50", "translate-middle-x");
                 break;
             case TOAST_PLACEMENT.BOTTOM_RIGHT:
-                TOAST_CONTAINER.classList.add("bottom", "end");
+                TOAST_CONTAINER.classList.add("bottom-0", "end");
                 break;
         }
     }
