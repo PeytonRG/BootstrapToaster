@@ -5,6 +5,9 @@ Robust, plug &amp; play generator for Bootstrap toasts.
 [![CodeFactor](https://www.codefactor.io/repository/github/peytonrg/bootstraptoaster/badge)](https://www.codefactor.io/repository/github/peytonrg/bootstraptoaster)
 ![deployment](https://github.com/PeytonRG/bootstrap-toast.js/workflows/deployment/badge.svg)
 
+## Bootstrap 5 Support Incoming
+Work is already underway with plans to support Bootstrap 5 on launch day!
+
 ## Contents
 * [Theming](#theming-heads-up-lights-out)
 * [Positioning](#positioning-serving-up-toast-coast-to-coast)
