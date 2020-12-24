@@ -53,21 +53,20 @@
 }
 
 @media only screen and (min-width: 576px) {
+    #toastContainer.top {
+        top: 0.8rem;
+    }
 
     #toastContainer.bottom {
         bottom: 0.8rem;
     }
 
-    #toastContainer.left {
+    #toastContainer.start {
         left: 0.8rem;
     }
 
-    #toastContainer.right {
+    #toastContainer.end {
         right: 0.8rem;
-    }
-
-    #toastContainer.top {
-        top: 0.8rem;
     }
 }
 

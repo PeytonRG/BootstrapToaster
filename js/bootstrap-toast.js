@@ -14,7 +14,7 @@
 /** Container that generated toasts will be inserted into. */
 const TOAST_CONTAINER = document.createElement("div");
 TOAST_CONTAINER.id = "toastContainer";
-TOAST_CONTAINER.className = "toast-container position-fixed top right";
+TOAST_CONTAINER.className = "toast-container position-fixed top end";
 TOAST_CONTAINER.setAttribute("aria-live", "polite");
 document.body.appendChild(TOAST_CONTAINER);
 
@@ -41,19 +41,24 @@ const TOAST_STATUS = {
     DANGER: 2,
     WARNING: 3,
     INFO: 4
-}
+};
 /** Emulates enum functionality for setting toast container position. */
-const TOAST_POSITION = {
-    TOP_RIGHT: 1,
-    BOTTOM_RIGHT: 2,
-    TOP_LEFT: 3,
-    BOTTOM_LEFT: 4
-}
+const TOAST_PLACEMENT = {
+    TOP_LEFT: 1,
+    TOP_CENTER: 2,
+    TOP_RIGHT: 3,
+    MIDDLE_LEFT: 4,
+    MIDDLE_CENTER: 5,
+    MIDDLE_RIGHT: 6,
+    BOTTOM_LEFT: 7,
+    BOTTOM_CENTER: 8,
+    BOTTOM_RIGHT: 9
+};
 /** Emulates enum functionality for setting toast themes. */
 const TOAST_THEME = {
     LIGHT: 1,
     DARK: 2
-}
+};
 
 /** Maximum amount of toasts to be allowed on the page at once. */
 var maxToastCount = 4;
@@ -71,7 +76,7 @@ class Toast {
      * @param {number} theme The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
      * @param {boolean} enableTimers Controls whether elapsed time will be displayed in the toast header.
      */
-    static configure(maxToasts = null, position = TOAST_POSITION.TOP_RIGHT, theme = null, enableTimers = true) {
+    static configure(maxToasts = null, position = TOAST_PLACEMENT.TOP_RIGHT, theme = null, enableTimers = true) {
         Toast.setMaxCount(maxToasts);
 
         Toast.setPosition(position);
@@ -103,25 +108,32 @@ class Toast {
     static setPosition(position) {
         TOAST_CONTAINER.className = "toast-container position-fixed";
         switch (position) {
-            case TOAST_POSITION.TOP_RIGHT:
-                TOAST_CONTAINER.classList.add("top");
-                TOAST_CONTAINER.classList.add("right");
+            case TOAST_PLACEMENT.TOP_LEFT:
+                TOAST_CONTAINER.classList.add("top", "start");
                 break;
-            case TOAST_POSITION.BOTTOM_RIGHT:
-                TOAST_CONTAINER.classList.add("bottom");
-                TOAST_CONTAINER.classList.add("right");
+            case TOAST_PLACEMENT.TOP_CENTER:
+                TOAST_CONTAINER.classList.add("top", "start-50", "translate-middle-x");
                 break;
-            case TOAST_POSITION.TOP_LEFT:
-                TOAST_CONTAINER.classList.add("top");
-                TOAST_CONTAINER.classList.add("left");
+            case TOAST_PLACEMENT.TOP_RIGHT:
+                TOAST_CONTAINER.classList.add("top", "end");
                 break;
-            case TOAST_POSITION.BOTTOM_LEFT:
-                TOAST_CONTAINER.classList.add("bottom");
-                TOAST_CONTAINER.classList.add("left");
+            case TOAST_PLACEMENT.MIDDLE_LEFT:
+                TOAST_CONTAINER.classList.add("top-50", "start", "translate-middle-y");
                 break;
-            default:
-                TOAST_CONTAINER.classList.add("top");
-                TOAST_CONTAINER.classList.add("right");
+            case TOAST_PLACEMENT.MIDDLE_CENTER:
+                TOAST_CONTAINER.classList.add("top-50", "start-50", "translate-middle");
+                break;
+            case TOAST_PLACEMENT.MIDDLE_RIGHT:
+                TOAST_CONTAINER.classList.add("top-50", "end", "translate-middle-y");
+                break;
+            case TOAST_PLACEMENT.BOTTOM_LEFT:
+                TOAST_CONTAINER.classList.add("bottom", "start");
+                break;
+            case TOAST_PLACEMENT.BOTTOM_CENTER:
+                TOAST_CONTAINER.classList.add("bottom", "start-50", "translate-middle-x");
+                break;
+            case TOAST_PLACEMENT.BOTTOM_RIGHT:
+                TOAST_CONTAINER.classList.add("bottom", "end");
                 break;
         }
     }
