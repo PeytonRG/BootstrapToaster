@@ -14,7 +14,7 @@
 /** Container that generated toasts will be inserted into. */
 const TOAST_CONTAINER = document.createElement("div");
 TOAST_CONTAINER.id = "toastContainer";
-TOAST_CONTAINER.className = "position-fixed top right";
+TOAST_CONTAINER.className = "toast-container position-fixed top right";
 TOAST_CONTAINER.setAttribute("aria-live", "polite");
 document.body.appendChild(TOAST_CONTAINER);
 
@@ -101,7 +101,7 @@ class Toast {
      * @param {number} position Position of the toast container.
      */
     static setPosition(position) {
-        TOAST_CONTAINER.className = "position-fixed";
+        TOAST_CONTAINER.className = "toast-container position-fixed";
         switch (position) {
             case TOAST_POSITION.TOP_RIGHT:
                 TOAST_CONTAINER.classList.add("top");
