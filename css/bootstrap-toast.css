@@ -11,10 +11,6 @@
     font-size: 1.1rem;
 }
 
-.toast {
-    min-width: 15rem;
-}
-
 #toastContainer {
     /*
         Variables dedicated to light and dark theme colors. The light theme ones are only used
