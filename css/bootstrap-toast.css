@@ -76,7 +76,7 @@
 }
 
 @media (prefers-color-scheme: dark){
-    .toast, .toast-header, .toast-header .close {
+    .toast, .toast-header, .toast-header .btn-close {
         color: var(--text-color-dark);
     }
 

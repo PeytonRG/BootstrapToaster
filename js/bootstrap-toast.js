@@ -24,15 +24,13 @@ TOAST_TEMPLATE.className = "toast";
 TOAST_TEMPLATE.setAttribute("role", "status");
 TOAST_TEMPLATE.setAttribute("aria-live", "polite");
 TOAST_TEMPLATE.setAttribute("aria-atomic", "true");
-TOAST_TEMPLATE.setAttribute("data-autohide", "false");
+TOAST_TEMPLATE.setAttribute("data-bs-autohide", "false");
 TOAST_TEMPLATE.innerHTML = `
         <div class="toast-header">
-            <span class="status-icon fas mr-2" aria-hidden="true"></span>
-            <strong class="mr-auto toast-title"></strong>
+            <span class="status-icon fas me-2" aria-hidden="true"></span>
+            <strong class="me-auto toast-title"></strong>
             <small class="timer" aria-hidden="true">just now</small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="btn-close ms-2" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body"></div>
     `;
@@ -231,8 +229,8 @@ class Toast {
      */
     static _render(toast, timeout) {
         if (timeout > 0) {
-            toast.setAttribute("data-delay", timeout);
-            toast.setAttribute("data-autohide", true);
+            toast.setAttribute("data-bs-delay", timeout);
+            toast.setAttribute("data-bs-autohide", true);
         }
 
         let timer = toast.querySelector(".timer");
@@ -247,7 +245,7 @@ class Toast {
             }, 60 * 1000);
 
             // When the toast hides, delete its timer instance
-            $(toast).on('hidden.bs.toast', function () {
+            toast.addEventListener('hidden.bs.toast', function () {
                 clearInterval(elapsedTimer);
             });
         }
@@ -257,11 +255,13 @@ class Toast {
         }
 
         TOAST_CONTAINER.appendChild(toast);
-        $(toast).toast('show');
+        // Initialize Bootstrap 5's toast plugin
+        var bsToast = new bootstrap.Toast(toast);
+        bsToast.show();
         currentToastCount++;
 
         // When the toast hides, remove it from the DOM
-        $(toast).on('hidden.bs.toast', function () {
+        toast.addEventListener('hidden.bs.toast', function () {
             TOAST_CONTAINER.removeChild(toast);
             currentToastCount--;
         });
