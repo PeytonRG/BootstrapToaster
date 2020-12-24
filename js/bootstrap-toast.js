@@ -1,14 +1,13 @@
 /**
- * Copyright (c) 2020 Peyton Gasink
+ * Copyright (c) 2021 Peyton Gasink
  * Distributed under MIT License.
  * 
  * This file contains all the necessary scripting to programmatically
  * generate Bootstrap toasts. It first inserts a container at the bottom
  * of the DOM, then fills a toast template and inserts it into the container.
  * 
- * Configuration options are also provided for toast positioning (the four corners),
- * toast themes (light & dark), and the maximum number of toasts allowed on the page
- * at any given time.
+ * Configuration options are also provided for toast placement, light & dark themes,
+ * and the maximum number of toasts allowed on the page at a given time.
  */
 
 /** Container that generated toasts will be inserted into. */
@@ -127,13 +126,13 @@ class Toast {
                 TOAST_CONTAINER.classList.add("top-50", "end", "translate-middle-y");
                 break;
             case TOAST_PLACEMENT.BOTTOM_LEFT:
-                TOAST_CONTAINER.classList.add("bottom-0", "start");
+                TOAST_CONTAINER.classList.add("bottom", "start");
                 break;
             case TOAST_PLACEMENT.BOTTOM_CENTER:
-                TOAST_CONTAINER.classList.add("bottom-0", "start-50", "translate-middle-x");
+                TOAST_CONTAINER.classList.add("bottom", "start-50", "translate-middle-x");
                 break;
             case TOAST_PLACEMENT.BOTTOM_RIGHT:
-                TOAST_CONTAINER.classList.add("bottom-0", "end");
+                TOAST_CONTAINER.classList.add("bottom", "end");
                 break;
         }
     }
