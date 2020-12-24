@@ -1,12 +1,11 @@
 {
   "name": "bootstrap-toast.js",
-  "version": "2.0.2",
+  "version": "5.0.0",
   "description": "Robust, plug & play generator for Bootstrap toasts.",
   "main": "js/bootstrap-toast.js",
   "dependencies": {
     "@fortawesome/fontawesome-free": ">=5.1.0",
-    "bootstrap": ">=4.2.1",
-    "jquery": "1.9.1 - 3"
+    "bootstrap": ">=5.0.0-beta1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\""
@@ -22,7 +21,8 @@
     "toaster",
     "notification",
     "notifications",
-    "bootstrap"
+    "bootstrap",
+    "bootstraptoaster"
   ],
   "author": "Peyton Gasink <pg@auburn.edu> (https://peytonrg.github.io)",
   "license": "MIT",

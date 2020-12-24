@@ -132,7 +132,7 @@ class Toast {
      */
     static setTheme(theme = null) {
         let header = TOAST_TEMPLATE.querySelector(".toast-header");
-        let close = header.querySelector(".close");
+        let close = header.querySelector(".btn-close");
         switch (theme) {
             case TOAST_THEME.LIGHT:
                 TOAST_TEMPLATE.style.backgroundColor = "var(--body-bg-color-light)";
