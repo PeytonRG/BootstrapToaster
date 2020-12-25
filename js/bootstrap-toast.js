@@ -150,19 +150,18 @@ class Toast {
                 TOAST_TEMPLATE.style.color = "var(--text-color-light)";
                 header.style.backgroundColor = "var(--header-bg-color-light)";
                 header.style.color = "var(--header-color-light)";
-                close.style.color = "var(--text-color-light)";
+                close.style.filter = "unset";
                 break;
             case TOAST_THEME.DARK:
                 TOAST_TEMPLATE.style.backgroundColor = "var(--body-bg-color-dark)";
                 TOAST_TEMPLATE.style.color = "var(--text-color-dark)";
                 header.style.backgroundColor = "var(--header-bg-color-dark)";
                 header.style.color = "var(--header-color-dark)";
-                close.style.color = "var(--text-color-dark)";
+                close.style.filter = "invert(1) grayscale(100%) brightness(200%)";
                 break;
             default:
                 TOAST_TEMPLATE.removeAttribute("style");
                 header.removeAttribute("style");
-                close.removeAttribute("style");
                 break;
         }
     }

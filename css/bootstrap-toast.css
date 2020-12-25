@@ -66,8 +66,13 @@
 }
 
 @media (prefers-color-scheme: dark){
-    .toast, .toast-header, .toast-header .btn-close {
+    .toast, .toast-header {
         color: var(--text-color-dark);
+    }
+
+    /* Copy of Bootstrap 5's .btn-close-white */
+    .toast-header .btn-close {
+        filter: invert(1) grayscale(100%) brightness(200%);
     }
 
     .toast {
