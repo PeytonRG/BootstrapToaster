@@ -37,31 +37,20 @@
     display: none;
 }
 
+#toastContainer .toast {
+    margin: 0.8rem;
+}
+
+/* Force toast container to top center on mobile. Using the MIDDLE-X
+    placement options will override this because of their unique styling. */
 @media only screen and (max-width: 576px) {
     #toastContainer {
         width: 100%;
-        top: 0.8rem;
-    }
-    .toast {
-        margin: auto;
-    }
-}
-
-@media only screen and (min-width: 576px) {
-    #toastContainer.top {
-        top: 0.8rem;
+        top: 0;
     }
 
-    #toastContainer.bottom {
-        bottom: 0.8rem;
-    }
-
-    #toastContainer.start {
-        left: 0.8rem;
-    }
-
-    #toastContainer.end {
-        right: 0.8rem;
+    #toastContainer .toast {
+        margin: 0.8rem auto;
     }
 }
 

@@ -13,7 +13,7 @@
 /** Container that generated toasts will be inserted into. */
 const TOAST_CONTAINER = document.createElement("div");
 TOAST_CONTAINER.id = "toastContainer";
-TOAST_CONTAINER.className = "toast-container position-fixed top end";
+TOAST_CONTAINER.className = "toast-container position-fixed top-0 end-0";
 TOAST_CONTAINER.setAttribute("aria-live", "polite");
 document.body.appendChild(TOAST_CONTAINER);
 
@@ -108,31 +108,31 @@ class Toast {
         TOAST_CONTAINER.className = "toast-container position-fixed";
         switch (position) {
             case TOAST_PLACEMENT.TOP_LEFT:
-                TOAST_CONTAINER.classList.add("top", "start");
+                TOAST_CONTAINER.classList.add("top-0", "start-0");
                 break;
             case TOAST_PLACEMENT.TOP_CENTER:
-                TOAST_CONTAINER.classList.add("top", "start-50", "translate-middle-x");
+                TOAST_CONTAINER.classList.add("top-0", "start-50", "translate-middle-x");
                 break;
             case TOAST_PLACEMENT.TOP_RIGHT:
-                TOAST_CONTAINER.classList.add("top", "end");
+                TOAST_CONTAINER.classList.add("top-0", "end-0");
                 break;
             case TOAST_PLACEMENT.MIDDLE_LEFT:
-                TOAST_CONTAINER.classList.add("top-50", "start", "translate-middle-y");
+                TOAST_CONTAINER.classList.add("top-50", "start-0", "translate-middle-y");
                 break;
             case TOAST_PLACEMENT.MIDDLE_CENTER:
                 TOAST_CONTAINER.classList.add("top-50", "start-50", "translate-middle");
                 break;
             case TOAST_PLACEMENT.MIDDLE_RIGHT:
-                TOAST_CONTAINER.classList.add("top-50", "end", "translate-middle-y");
+                TOAST_CONTAINER.classList.add("top-50", "end-0", "translate-middle-y");
                 break;
             case TOAST_PLACEMENT.BOTTOM_LEFT:
-                TOAST_CONTAINER.classList.add("bottom", "start");
+                TOAST_CONTAINER.classList.add("bottom-0", "start-0");
                 break;
             case TOAST_PLACEMENT.BOTTOM_CENTER:
-                TOAST_CONTAINER.classList.add("bottom", "start-50", "translate-middle-x");
+                TOAST_CONTAINER.classList.add("bottom-0", "start-50", "translate-middle-x");
                 break;
             case TOAST_PLACEMENT.BOTTOM_RIGHT:
-                TOAST_CONTAINER.classList.add("bottom", "end");
+                TOAST_CONTAINER.classList.add("bottom-0", "end-0");
                 break;
         }
     }
