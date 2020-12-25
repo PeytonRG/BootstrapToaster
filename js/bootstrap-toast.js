@@ -162,6 +162,7 @@ class Toast {
             default:
                 TOAST_TEMPLATE.removeAttribute("style");
                 header.removeAttribute("style");
+                close.removeAttribute("style");
                 break;
         }
     }
