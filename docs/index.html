@@ -26,7 +26,7 @@
 </head>
 
 <body>
-    <div class="jumbotron jumbotron-fluid">
+    <div id="hero" class="p-5">
         <div class="container text-light text-center">
             <h1 class="display-4"><strong>Bootstrap Toaster</strong></h1>
             <p class="lead">Serving up toast, coast to coast.</p>
@@ -35,8 +35,8 @@
 
     <div class="container">
         <h2 class="text-center">Getting Started</h2>
-        <div class="row">
-            <div class="col-md-6">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
                 <!-- First code snippet -->
                 <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px">myButton.<span class="hljs-attribute">onclick</span> = function () {
     <span class="hljs-type">Toast</span>.<span class="hljs-attribute">create</span>(<span class="hljs-string">"Voila!"</span>, <span class="hljs-string">"How easy was that?"</span>, <span class="hljs-type">TOAST_STATUS</span>.<span class="hljs-attribute">SUCCESS</span>, <span class="hljs-number">5000</span>);
@@ -58,9 +58,10 @@
     }
 });</code></pre>
             </div>
-            <div class="col-md-6 d-flex flex-column align-items-center">
+            <div class="col-md-5 d-flex flex-column align-items-center">
                 <p>Creating a toast is simple. All you need is a call to <span
-                        class="badge bg-dark">Toast.create()</span> to get started. It supports the following 4
+                        class="badge bg-dark">Toast.create()</span>
+                    to get started. It supports the following 4
                     parameters</p>
                 <ol>
                     <li>title: The text of the toast's header.</li>
