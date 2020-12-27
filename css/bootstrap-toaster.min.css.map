@@ -1,7 +1,7 @@
 {
     "version": 3,
     "sources": [
-        "bootstrap-toast.css"
+        "bootstrap-toaster.css"
     ],
     "names": [],
     "mappings": "AASA,aACI,UAAW,OAGf,gBAKI,qBAAsB,QACtB,mBAAoB,QACpB,wBAAyB,sBACzB,sBAAuB,sBACvB,oBAAqB,QACrB,kBAAmB,QACnB,uBAAwB,mBACxB,qBAAsB,mBACtB,WAAY,MACZ,WAAY,OAEZ,gBAAiB,KAEjB,QAAS,KAIb,mCACI,QAAS,KAGb,uBACI,OAAQ,MAKZ,yCACI,gBACI,MAAO,KACP,IAAK,EAGT,uBACI,OAAQ,MAAO,MAIvB,mCACI,OAAQ,cACJ,MAAO,uBAIX,yBACI,OAAQ,UAAU,gBAAgB,iBAGtC,OACI,iBAAkB,0BAGtB,cACI,iBAAkB"
