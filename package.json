@@ -22,7 +22,8 @@
     "notification",
     "notifications",
     "bootstrap",
-    "bootstraptoaster"
+    "bootstraptoaster",
+    "bootstrap-toaster"
   ],
   "author": "Peyton Gasink <pg@auburn.edu> (https://peytonrg.github.io)",
   "license": "MIT",
