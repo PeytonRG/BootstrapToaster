@@ -1,3 +1,34 @@
+        .placement-grid {
+            display: grid;
+            grid-gap: 1rem;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+        }
+
+        .grid-bottom {
+            grid-row: 3 / span 1;
+        }
+
+        .grid-center {
+            grid-column: 2 / span 1;
+        }
+
+        .grid-left {
+            grid-column: 1 / span 1;
+        }
+
+        .grid-middle {
+            grid-row: 2 / span 1;
+        }
+
+        .grid-right {
+            grid-column: 3 / span 1;
+        }
+
+        .grid-top {
+            grid-row: 1 / span 1;
+        }
+        
         #hero {
             background-color: #7952b3;
             margin-bottom: 2rem;

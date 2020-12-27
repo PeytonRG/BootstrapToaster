@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="mt-3">
-                    <button id="createToast" class="btn btn-primary">Try it Out</button>
+                    <button id="gettingStartedBtn" class="btn btn-primary">Try it Out</button>
                 </div>
             </div>
         </div>
@@ -108,28 +108,36 @@
         <div class="row justify-content-center">
             <div class="col-md-10 d-flex flex-column align-items-center">
                 <p>By default, the toast container will be fixed to the top right corner of the screen on larger screen
-                    sizes. The <span class="badge bg-primary">Toast.setPlacement()</span> function allows that
-                    positioning to be altered. The following example will move the toast container to the top left
-                    corner of the screen. The function takes in the following arguments:</p>
+                    sizes, and top center on mobile. The <span class="badge bg-primary">Toast.setPlacement()</span>
+                    function allows that positioning to be customized. The following placements are supported:</p>
 
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div class="row justify-content-between">
-                            <button class="col-md-4 btn btn-secondary">Top Left</button>
-                            <button class="col-md-4 btn btn-primary">Top Center</button>
-                            <button class="col-md-4 btn btn-primary">Top Right</button>
-                            <button class="col-md-4 btn btn-secondary">Middle Left</button>
-                            <button class="col-md-4 btn btn-secondary">Middle Center</button>
-                            <button class="col-md-4 btn btn-secondary">Middle Right</button>
-                            <button class="col-md-4 btn btn-secondary">Bottom Left</button>
-                            <button class="col-md-4 btn btn-secondary">Bottom Center</button>
-                            <button class="col-md-4 btn btn-secondary">Bottom Right</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-3">
-                    <button id="createToast" class="btn btn-primary">Try it Out</button>
+                <div class="placement-grid">
+                    <button data-placement="1" class="grid-top grid-left placement-grid-btn btn btn-secondary">
+                        Top Left
+                    </button>
+                    <button data-placement="2" class="grid-top grid-center placement-grid-btn btn btn-primary">
+                        Top Center
+                    </button>
+                    <button data-placement="3" class="grid-top grid-right placement-grid-btn btn btn-primary">
+                        Top Right
+                    </button>
+                    <button data-placement="4" class="grid-middle grid-left placement-grid-btn btn btn-secondary">
+                        Middle Left
+                    </button>
+                    <button data-placement="5" class="grid-middle grid-center placement-grid-btn btn btn-secondary">
+                        Middle Center
+                    </button>
+                    <button data-placement="6" class="grid-middle grid-right placement-grid-btn btn btn-secondary">
+                        Middle Right</button>
+                    <button data-placement="7" class="grid-bottom grid-left placement-grid-btn btn btn-secondary">
+                        Bottom Left
+                    </button>
+                    <button data-placement="8" class="grid-bottom grid-center placement-grid-btn btn btn-secondary">
+                        Bottom Center
+                    </button>
+                    <button data-placement="9" class="grid-bottom grid-right placement-grid-btn btn btn-secondary">
+                        Bottom Right
+                    </button>
                 </div>
             </div>
         </div>
