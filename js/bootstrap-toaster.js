@@ -41,7 +41,7 @@ const TOAST_STATUS = {
     WARNING: 3,
     INFO: 4
 };
-/** Emulates enum functionality for setting toast container position. */
+/** Emulates enum functionality for setting toast container placement. */
 const TOAST_PLACEMENT = {
     TOP_LEFT: 1,
     TOP_CENTER: 2,
@@ -71,14 +71,14 @@ class Toast {
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
      * @param {number} maxToasts The maximum number of toasts allowed on the page at once.
-     * @param {number} position The toast container's position, defaults to top right. This will not affect small screens in portrait.
+     * @param {number} placement The toast container's placement on-screen, defaults to top right. This will not affect small screens in portrait.
      * @param {number} theme The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
      * @param {boolean} enableTimers Controls whether elapsed time will be displayed in the toast header.
      */
-    static configure(maxToasts = null, position = TOAST_PLACEMENT.TOP_RIGHT, theme = null, enableTimers = true) {
+    static configure(maxToasts = null, placement = TOAST_PLACEMENT.TOP_RIGHT, theme = null, enableTimers = true) {
         Toast.setMaxCount(maxToasts);
 
-        Toast.setPosition(position);
+        Toast.setPlacement(placement);
 
         Toast.setTheme(theme);
 
@@ -101,12 +101,12 @@ class Toast {
     }
 
     /**
-     * Sets the toast container's position.
-     * @param {number} position Position of the toast container.
+     * Sets the toast container's placement.
+     * @param {number} placement Placement of the toast container.
      */
-    static setPosition(position) {
+    static setPlacement(placement) {
         TOAST_CONTAINER.className = "toast-container position-fixed";
-        switch (position) {
+        switch (placement) {
             case TOAST_PLACEMENT.TOP_LEFT:
                 TOAST_CONTAINER.classList.add("top-0", "start-0");
                 break;
@@ -133,6 +133,9 @@ class Toast {
                 break;
             case TOAST_PLACEMENT.BOTTOM_RIGHT:
                 TOAST_CONTAINER.classList.add("bottom-0", "end-0");
+                break;
+            default:
+                TOAST_CONTAINER.classList.add("top-0", "end-0");
                 break;
         }
     }
