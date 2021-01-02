@@ -61,18 +61,18 @@ npm i bootstrap-toaster
 
 ```HTML
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-toaster@5.0.0-rc1/css/bootstrap-toast.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-toaster@3.0.0/css/bootstrap-toaster.min.css" />
 </head>
 <body>
   ...
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap-toaster@5.0.0-rc1/js/bootstrap-toast.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-toaster@3.0.0/js/bootstrap-toaster.min.js"></script>
 </body>
 ```
 
 ### Dependencies
-1. Bootstrap (>= 5.0.0-beta1), for the toasts themselves
+1. jQuery (1.9.1 - 3.x), for Bootstrap's own functions to create a toast
+1. Bootstrap (>= 4.2.1), for the toasts themselves
 1. Font Awesome (>= 5.0.0), for the toast status icons
-Note: As of 5.0.0, jQuery is no longer a dependency
 
 ## Usage
 ### Minimal Required Setup
@@ -177,14 +177,19 @@ In the above snippet, we have set the max toast count to 5, moved the toast cont
 
 `position` and `theme` accept the same predefined options as mentioned in their respective sections, while `maxToasts` is an integer value and `enableTimers` is a boolean. Each parameter's default value is the same as in their respective helper functions.
 
-## Breaking Changes in 5.0.0
-1. This package is now officially named Bootstrap Toaster, and new versions will be published as `bootstrap-toaster` on npm rather than the previous `bootstrap-toast.js`. All old versions of the old package will be deprecated on npm.
+## Breaking Changes in 5.0.0-rc1
 1. As of 5.0.0 this package targets Bootstrap 5 rather than 4. Version 4.0.0 is planned to backport improvments made in 5.0.0 for Bootstrap 4 users.
 1. To better align with Bootstrap's documentation, all references to "position" have been renamed to placement, so a find and replace will be necessary for the following:
    - `TOAST_POSITON` -> `TOAST_PLACEMENT`
    - `Toast.setPosition` -> `Toast.setPlacement`
 1. When adding many new placement options for toasts, I changed the internal number values of the artificial TOAST_PLACEMENT enum. If you were using those rather than their named equivalents, you will likely need to update your code. If you used the named values, the above find and replace is all you need to update.
 
+## Breaking Changes in 3.0.0
+1. This package is now officially named Bootstrap Toaster, and new versions will be published as `bootstrap-toaster` on npm rather than the previous `bootstrap-toast.js`. All old versions of the old package will be deprecated on npm.
+1. The CSS and JS files have been renamed to go along with the new package name. You will need to adjust your code as follows:
+    - `bootstrap-toast.css` -> `bootstrap-toaster.css`
+    - `bootstrap-toast.js` -> `bootstrap-toaster.js`
+1. Removed the v1 API that was deprecated in v2.
 
 ## Credits
 Developed by Peyton Gasink
