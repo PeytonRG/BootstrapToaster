@@ -61,11 +61,11 @@ npm i bootstrap-toast.js
 
 ```HTML
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-toast.js@2.0.0/css/bootstrap-toast.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-toast.js@2.0.2/css/bootstrap-toast.min.css" />
 </head>
 <body>
   ...
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap-toast.js@2.0.0/js/bootstrap-toast.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-toast.js@2.0.2/js/bootstrap-toast.min.js"></script>
 </body>
 ```
 
