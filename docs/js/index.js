@@ -13,3 +13,23 @@ placementBtns.forEach(function (btn) {
         Toast.create("Placement Updated", `Current placement: ${btn.innerText}`, TOAST_STATUS.SUCCESS, 5000);
     };
 });
+
+// Theming
+var themeBtns = document.querySelectorAll(".theme-btn");
+themeBtns.forEach(function (btn) {
+    btn.onclick = function () {
+        var theme = btn.getAttribute("data-theme");
+        Toast.setTheme(parseInt(theme));
+        Toast.create("Theme Updated", `Current theme: ${btn.innerText}`, TOAST_STATUS.SUCCESS, 5000);
+    };
+});
+
+// Timers
+var timerBtns = document.querySelectorAll(".timer-btn");
+timerBtns.forEach(function (btn) {
+    btn.onclick = function () {
+        var useTimers = btn.getAttribute("data-timer");
+        Toast.enableTimers(parseInt(useTimers));
+        Toast.create(`Timers ${btn.innerText}`, `Timers have been ${btn.innerText.toLowerCase()}.`, TOAST_STATUS.SUCCESS, 5000);
+    };
+});
