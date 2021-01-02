@@ -177,7 +177,7 @@ In the above snippet, we have set the max toast count to 5, moved the toast cont
 
 `position` and `theme` accept the same predefined options as mentioned in their respective sections, while `maxToasts` is an integer value and `enableTimers` is a boolean. Each parameter's default value is the same as in their respective helper functions.
 
-## Breaking Changes in 5.0.0
+## Breaking Changes in 5.0.0-rc1
 1. As of 5.0.0 this package targets Bootstrap 5 rather than 4. Version 4.0.0 is planned to backport improvments made in 5.0.0 for Bootstrap 4 users.
 1. To better align with Bootstrap's documentation, all references to "position" have been renamed to placement, so a find and replace will be necessary for the following:
    - `TOAST_POSITON` -> `TOAST_PLACEMENT`
