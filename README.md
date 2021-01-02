@@ -61,11 +61,11 @@ npm i bootstrap-toaster
 
 ```HTML
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-toaster@3.0.0/css/bootstrap-toast.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-toaster@3.0.0/css/bootstrap-toaster.min.css" />
 </head>
 <body>
   ...
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap-toaster@3.0.0/js/bootstrap-toast.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-toaster@3.0.0/js/bootstrap-toaster.min.js"></script>
 </body>
 ```
 
