@@ -5,8 +5,8 @@ Robust, plug &amp; play generator for Bootstrap toasts.
 [![CodeFactor](https://www.codefactor.io/repository/github/peytonrg/bootstraptoaster/badge)](https://www.codefactor.io/repository/github/peytonrg/bootstraptoaster)
 ![deployment](https://github.com/PeytonRG/bootstrap-toast.js/workflows/deployment/badge.svg)
 
-## Bootstrap 5 Support Incoming
-Work is already underway with plans to support Bootstrap 5 on launch day!
+## Bootstrap 5 Support
+Version 5.0.0-rc.1 includes full support for Bootstrap 5 Beta 1. Once Bootstrap 5 is officially released, 5.0.0 will be released as well!
 
 ## Contents
 * [Theming](#theming-heads-up-lights-out)
@@ -31,19 +31,19 @@ Work is already underway with plans to support Bootstrap 5 on launch day!
 ## Theming: Heads Up, Lights Out
 Built-in support for both light and dark themes. By default, the user's operating system preference will determine the theme, but this can be overridden. In an unsupported browser/OS combo, Bootstrap's default 'light' theme will take over.
 
-<img src="https://github.com/PeytonRG/bootstrap-toast.js/blob/master/images/lightdark.gif?raw=true" alt="Toasts transitioning from light to dark theme" width="300" />
+<img src="https://github.com/PeytonRG/BootstrapToaster/blob/master/images/lightdark.gif?raw=true" alt="Toasts transitioning from light to dark theme" width="300" />
 
 ## Positioning: Serving Up Toast, Coast-to-Coast
 On desktop, toasts will position themselves in the top right corner of the viewport, though this placement can be configured. Options include the four corners of the viewport. On mobile, the two top corners will result in a top-middle placement, and the bottom corners will result in a bottom-middle placement.
 
-<img src="https://github.com/PeytonRG/bootstrap-toast.js/blob/master/images/toasttopright.png?raw=true" alt="A toast in the top right corner of the viewport" width="600" />
-<img src="https://github.com/PeytonRG/bootstrap-toast.js/blob/master/images/toastmobile.png?raw=true" alt="A toast in the top middle of the viewport on a mobile device" width="300" />
+<img src="https://github.com/PeytonRG/BootstrapToaster/blob/master/images/toasttopright.png?raw=true" alt="A toast in the top right corner of the viewport" width="600" />
+<img src="https://github.com/PeytonRG/BootstrapToaster/blob/master/images/toastmobile.png?raw=true" alt="A toast in the top middle of the viewport on a mobile device" width="300" />
 
 ## Timers: Too Much Time on My Hands
 Toasts support options for how long they exist on the page before expiring automatically, or if they must be dismissed manually. Additionally, each toast displays the elapsed time since it was rendered, updated once per minute since it rendered. The elapsed timers are enabled by default but can be disabled too. Time to auto-hide a toast is per-toast and is set upon generation.
 
-<img src="https://github.com/PeytonRG/bootstrap-toast.js/blob/master/images/timerjustnow.png?raw=true" alt="" width="300" />
-<img src="https://github.com/PeytonRG/bootstrap-toast.js/blob/master/images/timer2mago.png?raw=true" alt="" width="300" />
+<img src="https://github.com/PeytonRG/BootstrapToaster/blob/master/images/timerjustnow.png?raw=true" alt="" width="300" />
+<img src="https://github.com/PeytonRG/BootstrapToaster/blob/master/images/timer2mago.png?raw=true" alt="" width="300" />
 
 ## Maximum Toast Count: Complexity *Reducers* vs. Information *Producers*
 Too many toasts can overwhelm and annoy the user, so by default no more than 4 will be allowed to render on the page. For new ones to be generated, old ones must go. This maximum count is also configurable. In the event that the number of toasts overflows the height of the viewport, the toast container becomes scrollable too.
@@ -56,23 +56,23 @@ Setup is extremely straightforward. Simply include the CSS in your document's `<
 
 Install from npm, or via CDN. Currently jsDelivr is supported.
 ```npm
-npm i bootstrap-toast.js
+npm i bootstrap-toaster
 ```
 
 ```HTML
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-toast.js@2.0.2/css/bootstrap-toast.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-toaster@5.0.0-rc1/css/bootstrap-toast.min.css" />
 </head>
 <body>
   ...
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap-toast.js@2.0.2/js/bootstrap-toast.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-toaster@5.0.0-rc1/js/bootstrap-toast.min.js"></script>
 </body>
 ```
 
 ### Dependencies
-1. jQuery (1.9.1 - 3.x), but only where it uses Bootstrap's own functions to create a toast
-1. Bootstrap (>= 4.2.1), for the toasts themselves
+1. Bootstrap (>= 5.0.0-beta1), for the toasts themselves
 1. Font Awesome (>= 5.0.0), for the toast status icons
+Note: As of 5.0.0, jQuery is no longer a dependency
 
 ## Usage
 ### Minimal Required Setup
@@ -170,24 +170,25 @@ Toast.configure(5, TOAST_POSITION.BOTTOM_RIGHT, TOAST_THEME.DARK, false);
 In the above snippet, we have set the max toast count to 5, moved the toast container to the bottom right corner of the viewport, locked toasts to dark theme, and disabled elapsed timers on the toasts.
 
 `Toast.configure()` supports the following parameters:
-`maxToasts`: The maximum number of toasts allowed on the page at once.
-`position`: The toast container's position, defaults to top right. This will not affect small screens in portrait.
-`theme`: The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
-`enableTimers`: Controls whether elapsed time will be displayed in the toast header.
+1. `maxToasts`: The maximum number of toasts allowed on the page at once.
+1. `position`: The toast container's position, defaults to top right. This will not affect small screens in portrait.
+1. `theme`: The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
+1. `enableTimers`: Controls whether elapsed time will be displayed in the toast header.
 
 `position` and `theme` accept the same predefined options as mentioned in their respective sections, while `maxToasts` is an integer value and `enableTimers` is a boolean. Each parameter's default value is the same as in their respective helper functions.
 
-## Deprecated Functions
-With version 2.0, all the v1 functions have been deprecated in favor of a Toast class with static methods. This is to make distinguishing bootstrap-toast.js functions from other JavaScript easier. The old functions are still around and functions as wrappers for the new static methods, but will generate a console warning with each use. They will be removed with version 3.0. The deprecated functions are:
-- `configureToasts()`
-- `setMaxToastCount()`
-- `setToastPosition()`
-- `setToastTheme()`
-- `enableToastTimers()`
-- `toastGenerator()`
+## Breaking Changes in 5.0.0
+1. This package is now officially named Bootstrap Toaster, and new versions will be published as `bootstrap-toaster` on npm rather than the previous `bootstrap-toast.js`. All old versions of the old package will be deprecated on npm.
+1. As of 5.0.0 this package targets Bootstrap 5 rather than 4. Version 4.0.0 is planned to backport improvments made in 5.0.0 for Bootstrap 4 users.
+1. To better align with Bootstrap's documentation, all references to "position" have been renamed to placement, so a find and replace will be necessary for the following:
+   - `TOAST_POSITON` -> `TOAST_PLACEMENT`
+   - `Toast.setPosition` -> `Toast.setPlacement`
+1. When adding many new placement options for toasts, I changed the internal number values of the artificial TOAST_PLACEMENT enum. If you were using those rather than their named equivalents, you will likely need to update your code. If you used the named values, the above find and replace is all you need to update.
+
 
 ## Credits
-Developed by Peyton Gasink, a senior in software engineering in Auburn University's class of 2020 as a COVID-19 quarantine project ❤️
+Developed by Peyton Gasink
+Bachelor of Software Engineering, Auburn University
 
 ## License
 Licensed under MIT License. For more information, refer to the `LICENSE` file within the GitHub repository.
