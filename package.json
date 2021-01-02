@@ -1,8 +1,8 @@
 {
-  "name": "bootstrap-toast.js",
-  "version": "5.0.0",
+  "name": "bootstrap-toaster",
+  "version": "5.0.0-rc.1",
   "description": "Robust, plug & play generator for Bootstrap toasts.",
-  "main": "js/bootstrap-toast.js",
+  "main": "js/bootstrap-toaster.js",
   "dependencies": {
     "@fortawesome/fontawesome-free": ">=5.1.0",
     "bootstrap": ">=5.0.0-beta1"
@@ -15,15 +15,14 @@
     "url": "git+https://github.com/PeytonRG/BootstrapToaster.git"
   },
   "keywords": [
-    "bootstrap-toast",
+    "bootstrap-toaster",
     "toast",
     "toasts",
     "toaster",
     "notification",
     "notifications",
     "bootstrap",
-    "bootstraptoaster",
-    "bootstrap-toaster"
+    "bootstraptoaster"
   ],
   "author": "Peyton Gasink <pg@auburn.edu> (https://peytonrg.github.io)",
   "license": "MIT",
