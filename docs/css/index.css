@@ -28,6 +28,13 @@
         .grid-top {
             grid-row: 1 / span 1;
         }
+
+        #startGrid {
+            display: grid;
+            grid-gap: 1rem;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
         
         #hero {
             background-color: #7952b3;

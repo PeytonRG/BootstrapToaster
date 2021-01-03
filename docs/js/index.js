@@ -1,7 +1,22 @@
 // Getting Started
-var gettingStartedBtn = document.getElementById("gettingStartedBtn");
-gettingStartedBtn.onclick = function () {
+var successBtn = document.getElementById("successBtn");
+successBtn.onclick = function () {
     Toast.create("Voila!", "How easy was that?", TOAST_STATUS.SUCCESS, 5000);
+};
+
+var dangerBtn = document.getElementById("dangerBtn");
+dangerBtn.onclick = function () {
+    Toast.create("Oops", "That's no good.", TOAST_STATUS.DANGER, 5000);
+};
+
+var warningBtn = document.getElementById("warningBtn");
+warningBtn.onclick = function () {
+    Toast.create("Heads Up", "You might want to look into that.", TOAST_STATUS.WARNING, 5000);
+};
+
+var infoBtn = document.getElementById("infoBtn");
+infoBtn.onclick = function () {
+    Toast.create("Greetings!", "I am 2401 Penitent Tangent. I am the Monitor of Installation 05. A Reclaimer? Here? At last! We have much to do. This facility must be activated if we are to control this outbreak.", TOAST_STATUS.INFO, 5000);
 };
 
 // Placement
