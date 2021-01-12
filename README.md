@@ -6,7 +6,7 @@ Robust, plug &amp; play generator for Bootstrap toasts.
 ![deployment](https://github.com/PeytonRG/BootstrapToaster/workflows/deployment/badge.svg)
 
 ## Bootstrap 5 Support
-Version 5.0.0-rc.1 includes full support for Bootstrap 5 Beta 1. Once Bootstrap 5 is officially released, 5.0.0 will be released as well!
+Version 5.0.0-rc1 includes full support for Bootstrap 5 Beta 1. Once Bootstrap 5 is officially released, 5.0.0 will be released as well!
 
 ## Contents
 * [Theming](#theming-heads-up-lights-out)
@@ -25,8 +25,9 @@ Version 5.0.0-rc.1 includes full support for Bootstrap 5 Beta 1. Once Bootstrap 
     * [Maximum Toast Count](#maximum-toast-count)
     * [Toast Timers](#toast-timers)
     * [Configuration Shorthand](#configuration-shorthand)
- * [Credits](#credits)
- * [License](#license)
+* [Breaking Changes](#breaking-changes)
+* [Credits](#credits)
+* [License](#license)
 
 ## Theming: Heads Up, Lights Out
 Built-in support for both light and dark themes. By default, the user's operating system preference will determine the theme, but this can be overridden. In an unsupported browser/OS combo, Bootstrap's default 'light' theme will take over.
@@ -182,14 +183,22 @@ In the above snippet, we have set the max toast count to 5, moved the toast cont
 
 `placement` and `theme` accept the same predefined options as mentioned in their respective sections, while `maxToasts` is an integer value and `enableTimers` is a boolean. Each parameter's default value is the same as in their respective helper functions.
 
-## Breaking Changes in 5.0.0-rc1
+## Breaking Changes
+
+### Breaking Changes in 5.0.0-rc2
+1. Removed Font Awesome 5 dependency.
+1. Added Bootstrap Icons as a dependency.
+    - For toast icons to display, including a link tag for the Bootstrap Icons icon font stylesheet is required. View instructions on the [Bootstrap Icons Docs](https://icons.getbootstrap.com/#cdn).
+1. Changed toast template to use Bootstrap Icons CSS classes instead of Font Awesome classes.
+
+### Breaking Changes in 5.0.0-rc1
 1. As of 5.0.0 this package targets Bootstrap 5 rather than 4. Version 4.0.0 is planned to backport improvments made in 5.0.0 for Bootstrap 4 users.
 1. To better align with Bootstrap's documentation, all references to "position" have been renamed to placement, so a find and replace will be necessary for the following:
    - `TOAST_POSITION` -> `TOAST_PLACEMENT`
    - `Toast.setPosition` -> `Toast.setPlacement`
 1. When adding many new placement options for toasts, I changed the internal number values of the artificial TOAST_PLACEMENT enum. If you were using those rather than their named equivalents, you will likely need to update your code. If you used the named values, the above find and replace is all you need to update.
 
-## Breaking Changes in 3.0.0
+### Breaking Changes in 3.0.0
 1. This package is now officially named Bootstrap Toaster, and new versions will be published as `bootstrap-toaster` on npm rather than the previous `bootstrap-toast.js`. All old versions of the old package will be deprecated on npm.
 1. The CSS and JS files have been renamed to go along with the new package name. You will need to adjust your code as follows:
     - `bootstrap-toast.css` -> `bootstrap-toaster.css`
