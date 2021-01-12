@@ -26,7 +26,7 @@ TOAST_TEMPLATE.setAttribute("aria-atomic", "true");
 TOAST_TEMPLATE.setAttribute("data-bs-autohide", "false");
 TOAST_TEMPLATE.innerHTML = `
         <div class="toast-header">
-            <span class="status-icon fas me-2" aria-hidden="true"></span>
+            <span class="status-icon bi me-2" aria-hidden="true"></span>
             <strong class="me-auto toast-title"></strong>
             <small class="timer" aria-hidden="true">just now</small>
             <button type="button" class="btn-close ms-2" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -215,20 +215,20 @@ class Toast {
 
         switch (status) {
             case TOAST_STATUS.SUCCESS:
-                statusIcon.classList.add("text-success", "fa-check-circle");
+                statusIcon.classList.add("text-success", "bi-check-circle-fill");
                 break;
             case TOAST_STATUS.DANGER:
-                statusIcon.classList.add("text-danger", "fa-times-circle");
+                statusIcon.classList.add("text-danger", "bi-x-circle-fill");
                 toast.setAttribute("role", "alert");
                 toast.setAttribute("aria-live", "assertive");
                 break;
             case TOAST_STATUS.WARNING:
-                statusIcon.classList.add("text-warning", "fa-exclamation-circle");
+                statusIcon.classList.add("text-warning", "bi-exclamation-circle-fill");
                 toast.setAttribute("role", "alert");
                 toast.setAttribute("aria-live", "assertive");
                 break;
             case TOAST_STATUS.INFO:
-                statusIcon.classList.add("text-info", "fa-info-circle");
+                statusIcon.classList.add("text-info", "bi-info-circle-fill");
                 break;
             default:
                 statusIcon.classList.add("d-none");
