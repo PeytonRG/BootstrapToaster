@@ -71,9 +71,8 @@ npm i bootstrap-toaster
 ```
 
 ### Dependencies
-1. jQuery (1.9.1 - 3.x), for Bootstrap's own functions to create a toast
 1. Bootstrap (>= 4.2.1), for the toasts themselves
-1. Font Awesome (>= 5.0.0), for the toast status icons
+1. Bootstrap Icons (>= 1.3.0), for the toast status icons
 
 ## Usage
 ### Minimal Required Setup
