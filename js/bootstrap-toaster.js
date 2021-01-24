@@ -31,8 +31,7 @@ TOAST_TEMPLATE.innerHTML = `
             <small class="timer" aria-hidden="true">just now</small>
             <button type="button" class="btn-close ms-2" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
-        <div class="toast-body"></div>
-    `;
+        <div class="toast-body"></div>`;
 
 /** Emulates enum functionality for setting toast statuses without needing to remember actual values. */
 const TOAST_STATUS = {
@@ -253,13 +252,13 @@ class Toast {
             // Start a timer that updates the text of the time indicator every minute
             // Initially set to 1 because for the first minute the indicator reads "just now"
             let minutes = 1
-            let elapsedTimer = setInterval(function () {
+            let elapsedTimer = setInterval(() => {
                 timer.innerText = `${minutes}m ago`;
                 minutes++;
             }, 60 * 1000);
 
             // When the toast hides, delete its timer instance
-            toast.addEventListener('hidden.bs.toast', function () {
+            toast.addEventListener('hidden.bs.toast', () => {
                 clearInterval(elapsedTimer);
             });
         }
@@ -275,7 +274,7 @@ class Toast {
         currentToastCount++;
 
         // When the toast hides, remove it from the DOM
-        toast.addEventListener('hidden.bs.toast', function () {
+        toast.addEventListener('hidden.bs.toast', () => {
             TOAST_CONTAINER.removeChild(toast);
             currentToastCount--;
         });
