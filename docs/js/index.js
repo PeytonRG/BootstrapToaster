@@ -5,9 +5,9 @@ timeoutInput.onchange = () => {
     // convert seconds to milliseconds
     timeout = timeoutInput.value * 1000;
     if (timeout !== 0)
-        Toast.create("Timout Updated", `Toasts will disappear after ${timeoutInput.value} seconds.`, TOAST_STATUS.SUCCESS, timeout);
+        Toast.create("Timeout Updated", `Toasts will disappear after ${timeoutInput.value} seconds.`, TOAST_STATUS.SUCCESS, timeout);
     else
-        Toast.create("Timout Updated", `New toasts must be manually dismissed.`, TOAST_STATUS.SUCCESS, timeout);
+        Toast.create("Timeout Updated", `New toasts must be manually dismissed.`, TOAST_STATUS.SUCCESS, timeout);
 };
 
 var successBtn = document.getElementById("successBtn");
