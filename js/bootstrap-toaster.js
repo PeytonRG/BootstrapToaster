@@ -1,19 +1,19 @@
 /**
  * Copyright (c) 2021 Peyton Gasink
  * Distributed under MIT License.
- *
+ * 
  * This file contains all the necessary scripting to programmatically
  * generate Bootstrap toasts. It first inserts a container at the bottom
  * of the DOM, then fills a toast template and inserts it into the container.
- *
- * Configuration options are also provided for toast positioning, light & dark themes,
+ * 
+ * Configuration options are also provided for toast placement, light & dark themes,
  * and the maximum number of toasts allowed on the page at a given time.
  */
 
 /** Container that generated toasts will be inserted into. */
 const TOAST_CONTAINER = document.createElement("div");
 TOAST_CONTAINER.id = "toastContainer";
-TOAST_CONTAINER.className = "position-fixed top right";
+TOAST_CONTAINER.className = "position-fixed top-0 right-0";
 TOAST_CONTAINER.setAttribute("aria-live", "polite");
 document.body.appendChild(TOAST_CONTAINER);
 
@@ -26,15 +26,14 @@ TOAST_TEMPLATE.setAttribute("aria-atomic", "true");
 TOAST_TEMPLATE.setAttribute("data-autohide", "false");
 TOAST_TEMPLATE.innerHTML = `
         <div class="toast-header">
-            <span class="status-icon fas mr-2" aria-hidden="true"></span>
+            <span class="status-icon bi mr-2" aria-hidden="true"></span>
             <strong class="mr-auto toast-title"></strong>
             <small class="timer" aria-hidden="true">just now</small>
             <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="toast-body"></div>
-    `;
+        <div class="toast-body"></div>`;
 
 /** Emulates enum functionality for setting toast statuses without needing to remember actual values. */
 const TOAST_STATUS = {
@@ -42,19 +41,24 @@ const TOAST_STATUS = {
     DANGER: 2,
     WARNING: 3,
     INFO: 4
-}
-/** Emulates enum functionality for setting toast container position. */
-const TOAST_POSITION = {
-    TOP_RIGHT: 1,
-    BOTTOM_RIGHT: 2,
-    TOP_LEFT: 3,
-    BOTTOM_LEFT: 4
-}
+};
+/** Emulates enum functionality for setting toast container placement. */
+const TOAST_PLACEMENT = {
+    TOP_LEFT: 1,
+    TOP_CENTER: 2,
+    TOP_RIGHT: 3,
+    MIDDLE_LEFT: 4,
+    MIDDLE_CENTER: 5,
+    MIDDLE_RIGHT: 6,
+    BOTTOM_LEFT: 7,
+    BOTTOM_CENTER: 8,
+    BOTTOM_RIGHT: 9
+};
 /** Emulates enum functionality for setting toast themes. */
 const TOAST_THEME = {
     LIGHT: 1,
     DARK: 2
-}
+};
 
 /** Maximum amount of toasts to be allowed on the page at once. */
 var maxToastCount = 4;
@@ -68,14 +72,14 @@ class Toast {
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
      * @param {number} maxToasts The maximum number of toasts allowed on the page at once.
-     * @param {number} position The toast container's position, defaults to top right. This will not affect small screens in portrait.
+     * @param {number} placement The toast container's placement on-screen, defaults to top right. This will not affect small screens in portrait.
      * @param {number} theme The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
      * @param {boolean} enableTimers Controls whether elapsed time will be displayed in the toast header.
      */
-    static configure(maxToasts = null, position = TOAST_POSITION.TOP_RIGHT, theme = null, enableTimers = true) {
+    static configure(maxToasts = null, placement = TOAST_PLACEMENT.TOP_RIGHT, theme = null, enableTimers = true) {
         Toast.setMaxCount(maxToasts);
 
-        Toast.setPosition(position);
+        Toast.setPlacement(placement);
 
         Toast.setTheme(theme);
 
@@ -98,31 +102,41 @@ class Toast {
     }
 
     /**
-     * Sets the toast container's position.
-     * @param {number} position Position of the toast container.
+     * Sets the toast container's placement.
+     * @param {number} placement Placement of the toast container.
      */
-    static setPosition(position) {
+    static setPlacement(placement) {
         TOAST_CONTAINER.className = "position-fixed";
-        switch (position) {
-            case TOAST_POSITION.TOP_RIGHT:
-                TOAST_CONTAINER.classList.add("top");
-                TOAST_CONTAINER.classList.add("right");
+        switch (placement) {
+            case TOAST_PLACEMENT.TOP_LEFT:
+                TOAST_CONTAINER.classList.add("top-0", "left-0");
                 break;
-            case TOAST_POSITION.BOTTOM_RIGHT:
-                TOAST_CONTAINER.classList.add("bottom");
-                TOAST_CONTAINER.classList.add("right");
+            case TOAST_PLACEMENT.TOP_CENTER:
+                TOAST_CONTAINER.classList.add("top-0", "left-50", "translate-middle-x");
                 break;
-            case TOAST_POSITION.TOP_LEFT:
-                TOAST_CONTAINER.classList.add("top");
-                TOAST_CONTAINER.classList.add("left");
+            case TOAST_PLACEMENT.TOP_RIGHT:
+                TOAST_CONTAINER.classList.add("top-0", "right-0");
                 break;
-            case TOAST_POSITION.BOTTOM_LEFT:
-                TOAST_CONTAINER.classList.add("bottom");
-                TOAST_CONTAINER.classList.add("left");
+            case TOAST_PLACEMENT.MIDDLE_LEFT:
+                TOAST_CONTAINER.classList.add("top-50", "left-0", "translate-middle-y");
+                break;
+            case TOAST_PLACEMENT.MIDDLE_CENTER:
+                TOAST_CONTAINER.classList.add("top-50", "left-50", "translate-middle");
+                break;
+            case TOAST_PLACEMENT.MIDDLE_RIGHT:
+                TOAST_CONTAINER.classList.add("top-50", "right-0", "translate-middle-y");
+                break;
+            case TOAST_PLACEMENT.BOTTOM_LEFT:
+                TOAST_CONTAINER.classList.add("bottom-0", "left-0");
+                break;
+            case TOAST_PLACEMENT.BOTTOM_CENTER:
+                TOAST_CONTAINER.classList.add("bottom-0", "left-50", "translate-middle-x");
+                break;
+            case TOAST_PLACEMENT.BOTTOM_RIGHT:
+                TOAST_CONTAINER.classList.add("bottom-0", "right-0");
                 break;
             default:
-                TOAST_CONTAINER.classList.add("top");
-                TOAST_CONTAINER.classList.add("right");
+                TOAST_CONTAINER.classList.add("top-0", "right-0");
                 break;
         }
     }
@@ -202,20 +216,20 @@ class Toast {
 
         switch (status) {
             case TOAST_STATUS.SUCCESS:
-                statusIcon.classList.add("text-success", "fa-check-circle");
+                statusIcon.classList.add("text-success", "bi-check-circle-fill");
                 break;
             case TOAST_STATUS.DANGER:
-                statusIcon.classList.add("text-danger", "fa-times-circle");
+                statusIcon.classList.add("text-danger", "bi-x-circle-fill");
                 toast.setAttribute("role", "alert");
                 toast.setAttribute("aria-live", "assertive");
                 break;
             case TOAST_STATUS.WARNING:
-                statusIcon.classList.add("text-warning", "fa-exclamation-circle");
+                statusIcon.classList.add("text-warning", "bi-exclamation-circle-fill");
                 toast.setAttribute("role", "alert");
                 toast.setAttribute("aria-live", "assertive");
                 break;
             case TOAST_STATUS.INFO:
-                statusIcon.classList.add("text-info", "fa-info-circle");
+                statusIcon.classList.add("text-info", "bi-info-circle-fill");
                 break;
             default:
                 statusIcon.classList.add("d-none");
@@ -240,13 +254,13 @@ class Toast {
             // Start a timer that updates the text of the time indicator every minute
             // Initially set to 1 because for the first minute the indicator reads "just now"
             let minutes = 1
-            let elapsedTimer = setInterval(function () {
+            let elapsedTimer = setInterval(() => {
                 timer.innerText = `${minutes}m ago`;
                 minutes++;
             }, 60 * 1000);
 
             // When the toast hides, delete its timer instance
-            $(toast).on('hidden.bs.toast', function () {
+            $(toast).on('hidden.bs.toast', () => {
                 clearInterval(elapsedTimer);
             });
         }
@@ -260,7 +274,7 @@ class Toast {
         currentToastCount++;
 
         // When the toast hides, remove it from the DOM
-        $(toast).on('hidden.bs.toast', function () {
+        $(toast).on('hidden.bs.toast', () => {
             TOAST_CONTAINER.removeChild(toast);
             currentToastCount--;
         });

@@ -3,14 +3,14 @@ Robust, plug &amp; play generator for Bootstrap toasts.
 
 [![jsDelivr Download Stats](https://data.jsdelivr.com/v1/package/npm/bootstrap-toast.js/badge?style=rounded)](https://www.jsdelivr.com/package/npm/bootstrap-toast.js)
 [![CodeFactor](https://www.codefactor.io/repository/github/peytonrg/bootstraptoaster/badge)](https://www.codefactor.io/repository/github/peytonrg/bootstraptoaster)
-![deployment](https://github.com/PeytonRG/bootstrap-toast.js/workflows/deployment/badge.svg)
+![deployment](https://github.com/PeytonRG/BootstrapToaster/workflows/deployment/badge.svg)
 
 ## Bootstrap 5 Support
-Version 5.0.0-rc.1 includes full support for Bootstrap 5 Beta 1. Once Bootstrap 5 is officially released, 5.0.0 will be released as well!
+Version 5.0.0-rc1 includes full support for Bootstrap 5 Beta 1. Once Bootstrap 5 is officially released, 5.0.0 will be released as well!
 
 ## Contents
 * [Theming](#theming-heads-up-lights-out)
-* [Positioning](#positioning-serving-up-toast-coast-to-coast)
+* [Placement](#placement-serving-up-toast-coast-to-coast)
 * [Timers](#timers-too-much-time-on-my-hands)
 * [Maximum Toast Count](#maximum-toast-count-complexity-reducers-vs-information-producers)
 * [Accessibility](#accessibility-built-in-out-of-the-box)
@@ -21,20 +21,22 @@ Version 5.0.0-rc.1 includes full support for Bootstrap 5 Beta 1. Once Bootstrap 
   * [Toast Status Options](#toast-status-options)
   * [Global Toast Options](#global-toast-options)
     * [Light/Dark Theme Overrides](#lightdark-theme-overrides)
-    * [Toast Container Positioning](#toast-container-positioning)
+    * [Toast Container Placement](#toast-container-placement)
     * [Maximum Toast Count](#maximum-toast-count)
     * [Toast Timers](#toast-timers)
     * [Configuration Shorthand](#configuration-shorthand)
- * [Credits](#credits)
- * [License](#license)
+* [Release Notes](#release-notes)
+* [Breaking Changes](#breaking-changes)
+* [Credits](#credits)
+* [License](#license)
 
 ## Theming: Heads Up, Lights Out
 Built-in support for both light and dark themes. By default, the user's operating system preference will determine the theme, but this can be overridden. In an unsupported browser/OS combo, Bootstrap's default 'light' theme will take over.
 
 <img src="https://github.com/PeytonRG/BootstrapToaster/blob/master/images/lightdark.gif?raw=true" alt="Toasts transitioning from light to dark theme" width="300" />
 
-## Positioning: Serving Up Toast, Coast-to-Coast
-On desktop, toasts will position themselves in the top right corner of the viewport, though this placement can be configured. Options include the four corners of the viewport. On mobile, the two top corners will result in a top-middle placement, and the bottom corners will result in a bottom-middle placement.
+## Placement: Serving Up Toast, Coast-to-Coast
+On desktop, the toast container defaults to the top right corner of the viewport, though this placement can be configured to any of 9 different areas. On mobile, the toast container will automatically lock to top center.
 
 <img src="https://github.com/PeytonRG/BootstrapToaster/blob/master/images/toasttopright.png?raw=true" alt="A toast in the top right corner of the viewport" width="600" />
 <img src="https://github.com/PeytonRG/BootstrapToaster/blob/master/images/toastmobile.png?raw=true" alt="A toast in the top middle of the viewport on a mobile device" width="300" />
@@ -72,11 +74,11 @@ npm i bootstrap-toaster
 ### Dependencies
 1. jQuery (1.9.1 - 3.x), for Bootstrap's own functions to create a toast
 1. Bootstrap (>= 4.2.1), for the toasts themselves
-1. Font Awesome (>= 5.0.0), for the toast status icons
+1. Bootstrap Icons (>= 1.3.0), for the toast status icons
 
 ## Usage
 ### Minimal Required Setup
-Bootstrap-toast.js will take care of its own setup work, unless you choose to customize it, covered later on. When the script loads, it will insert a fixed position container into the DOM that will house all of your toasts when they appear, so you can get to generating toasts in a snap!
+Bootstrap Toaster will take care of its own setup work, unless you choose to customize it, covered later on. When the script loads, it will insert a fixed-position container into the DOM that will house all of your toasts when they appear, so you can get to generating toasts in a snap!
 
 All it takes to generate one is a call to `Toast.create()`, like so:
 ```JavaScript
@@ -133,18 +135,23 @@ As the above script implies, there are two options for the lone `theme` paramete
 
 In the unlikely event of forcing a theme, then wanting to leave it up to the user's preference again, calling `Toast.setTheme()` without any parameters will remove the forced theme settings from new toasts.
 
-#### Toast Container Positioning
-By default, the toast container will be fixed to the top right corner of the screen on larger screen sizes. The `Toast.setPosition()` function allows that positioning to be altered. The following example will move the toast container to the top left corner of the screen.
+#### Toast Container Placement
+By default, the toast container will be fixed to the top right corner of the screen on larger screen sizes. The `Toast.setPlacement()` function allows that placement to be altered. The following example will move the toast container to the top left corner of the screen.
 ```JavaScript
-Toast.setPosition(TOAST_POSITION.TOP_LEFT);
+Toast.setPlacement(TOAST_PLACEMENT.TOP_LEFT);
 ```
-This function's lone `position` parameter supports the following options:
-1. `TOAST_POSITION.BOTTOM_LEFT`
-1. `TOAST_POSITION.BOTTOM_RIGHT`
-1. `TOAST_POSITION.TOP_LEFT`
-1. `TOAST_POSITION.TOP_RIGHT`
+This function's lone `placement` parameter supports the following options:
+1. `TOAST_PLACEMENT.TOP_LEFT`
+1. `TOAST_PLACEMENT.TOP_CENTER`
+1. `TOAST_PLACEMENT.TOP_RIGHT`
+1. `TOAST_PLACEMENT.MIDDLE_LEFT`
+1. `TOAST_PLACEMENT.MIDDLE_CENTER`
+1. `TOAST_PLACEMENT.MIDDLE_RIGHT`
+1. `TOAST_PLACEMENT.BOTTOM_LEFT`
+1. `TOAST_PLACEMENT.BOTTOM_CENTER`
+1. `TOAST_PLACEMENT.BOTTOM_RIGHT`
 
-Similar to the previous function, calling `Toast.setPosition()` with a null or missing parameter will restore the default top right configuration.
+Similar to the previous function, calling `Toast.setPlacement()` with a null or missing parameter will restore the default top right configuration.
 
 #### Maximum Toast Count
 To avoid becoming a nuisance to users, especially if the creation of toasts is automated, a limit is in place to prevent too many toasts from being visible at once. By default, this limit is 4 toasts, but this can also be changed. The tool of choice is the `Toast.setMaxCount()` function. Below is an example of raising toast limit to 6 toasts.
@@ -165,26 +172,40 @@ The lone `enabled` parameter simply accepts a boolean value, and defaults to `tr
 Suppose you would like to configure multiple global toast options at once. We have just the function for you! The `Toast.configure()` function exists as a quick shorthand to call each of the above config functions with a single call.
 For example,
 ```JavaScript
-Toast.configure(5, TOAST_POSITION.BOTTOM_RIGHT, TOAST_THEME.DARK, false);
+Toast.configure(5, TOAST_PLACEMENT.BOTTOM_RIGHT, TOAST_THEME.DARK, false);
 ```
 In the above snippet, we have set the max toast count to 5, moved the toast container to the bottom right corner of the viewport, locked toasts to dark theme, and disabled elapsed timers on the toasts.
 
 `Toast.configure()` supports the following parameters:
 1. `maxToasts`: The maximum number of toasts allowed on the page at once.
-1. `position`: The toast container's position, defaults to top right. This will not affect small screens in portrait.
+1. `placement`: The toast container's placement, defaults to top right. This will not affect small screens in portrait.
 1. `theme`: The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
 1. `enableTimers`: Controls whether elapsed time will be displayed in the toast header.
 
-`position` and `theme` accept the same predefined options as mentioned in their respective sections, while `maxToasts` is an integer value and `enableTimers` is a boolean. Each parameter's default value is the same as in their respective helper functions.
+`placement` and `theme` accept the same predefined options as mentioned in their respective sections, while `maxToasts` is an integer value and `enableTimers` is a boolean. Each parameter's default value is the same as in their respective helper functions.
 
-## Breaking Changes in 5.0.0-rc1
-1. As of 5.0.0 this package targets Bootstrap 5 rather than 4. Version 4.0.0 is planned to backport improvments made in 5.0.0 for Bootstrap 4 users.
+## Release Notes
+Full release notes can be found on the [Releases](https://github.com/PeytonRG/BootstrapToaster/releases) page of the repo, but a summary of breaking changes in each version is below.
+
+## Breaking Changes
+
+### Breaking Changes in 5.0.0-rc1
+1. As of 5.0.0 this package targets Bootstrap 5 rather than 4.
+    - If updating from 4.x, assuming your website is using Bootstrap 5, there are no breaking changes.
+    - If updating from 3.x, all breaking changes of 4.x will apply here as well.
+
+### Breaking Changes in 4.0.0
+#### This version is designed to back-port improvements made from version 5.0.0 to Bootstrap 4. As such, its features code improvements from that version while maintaining full compatibility with Bootstrap 4. Unlike previous versions, 4 and 5 will both be maintained as current releases.
 1. To better align with Bootstrap's documentation, all references to "position" have been renamed to placement, so a find and replace will be necessary for the following:
-   - `TOAST_POSITON` -> `TOAST_PLACEMENT`
+   - `TOAST_POSITION` -> `TOAST_PLACEMENT`
    - `Toast.setPosition` -> `Toast.setPlacement`
 1. When adding many new placement options for toasts, I changed the internal number values of the artificial TOAST_PLACEMENT enum. If you were using those rather than their named equivalents, you will likely need to update your code. If you used the named values, the above find and replace is all you need to update.
+1. Removed Font Awesome 5 dependency.
+1. Added Bootstrap Icons as a dependency.
+    - For toast icons to display, including a link tag for the Bootstrap Icons icon font stylesheet is required. View instructions on the [Bootstrap Icons Docs](https://icons.getbootstrap.com/#cdn).
+1. Changed toast template to use Bootstrap Icons CSS classes instead of Font Awesome classes.
 
-## Breaking Changes in 3.0.0
+### Breaking Changes in 3.0.0
 1. This package is now officially named Bootstrap Toaster, and new versions will be published as `bootstrap-toaster` on npm rather than the previous `bootstrap-toast.js`. All old versions of the old package will be deprecated on npm.
 1. The CSS and JS files have been renamed to go along with the new package name. You will need to adjust your code as follows:
     - `bootstrap-toast.css` -> `bootstrap-toaster.css`

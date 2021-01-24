@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"
-        integrity="sha512-oc9+XSs1H243/FRN9Rw62Fn8EtxjEYWHXRvjS43YtueEewbS6ObfXcJNyohjHqVKFPoXXUxwc+q1K7Dee6vv9g=="
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+        integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=="
         crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
-        crossorigin="anonymous" />
-    <link rel="stylesheet" href="../css/bootstrap-toast.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+        integrity="sha256-MsxKR7Nw4ngHKmRAJJhy5oHvodmSYAQgwDqWMdqIXXA=" crossorigin="anonymous">
+    <!-- Release -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-toaster@5.0.0-rc2/css/bootstrap-toaster.min.css"
+        integrity="sha256-uBQpVig3Rrrac36i0ej0eHPrbYaXUM0V8OY509tSlOk=" crossorigin="anonymous"> -->
+    <!-- Dev -->
+    <link rel="stylesheet" href="../css/bootstrap-toaster.css" />
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
@@ -25,17 +28,18 @@
 </head>
 
 <body>
-    <div class="jumbotron jumbotron-fluid">
+    <div id="hero" class="p-5">
         <div class="container text-light text-center">
             <h1 class="display-4"><strong>Bootstrap Toaster</strong></h1>
             <p class="lead">Serving up toast, coast to coast.</p>
+            <small>Site in development, reflects 4.0.0</small>
         </div>
     </div>
 
     <div class="container">
         <h2 class="text-center">Getting Started</h2>
-        <div class="row">
-            <div class="col-md-6">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
                 <!-- First code snippet -->
                 <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px">myButton.<span class="hljs-attribute">onclick</span> = function () {
     <span class="hljs-type">Toast</span>.<span class="hljs-attribute">create</span>(<span class="hljs-string">"Voila!"</span>, <span class="hljs-string">"How easy was that?"</span>, <span class="hljs-type">TOAST_STATUS</span>.<span class="hljs-attribute">SUCCESS</span>, <span class="hljs-number">5000</span>);
@@ -57,9 +61,10 @@
     }
 });</code></pre>
             </div>
-            <div class="col-md-6 d-flex flex-column align-items-center">
+            <div class="col-md-5 d-flex flex-column align-items-center">
                 <p>Creating a toast is simple. All you need is a call to <span
-                        class="badge badge-dark">Toast.create()</span> to get started. It supports the following 4
+                        class="badge bg-dark">Toast.create()</span>
+                    to get started. It supports the following 4
                     parameters</p>
                 <ol>
                     <li>title: The text of the toast's header.</li>
@@ -73,32 +78,168 @@
                 <p>There are 4 built-in options for toast status in the call to Toast.create(), named after Bootstrap's
                     color convention. They are as follows:</p>
 
-                <div class="row text-center">
-                    <div class="col-md-6">
-                        <span class="badge badge-success">
-                            TOAST_STATUS.SUCCESS
-                        </span>
-                    </div>
-                    <div class="col-md-6">
-                        <span class="badge badge-danger">
-                            TOAST_STATUS.DANGER
-                        </span>
-                    </div>
-                    <div class="col-md-6">
-                        <span class="badge badge-warning">
-                            TOAST_STATUS.WARNING
-                        </span>
-                    </div>
-                    <div class="col-md-6">
-                        <span class="badge badge-info">
-                            TOAST_STATUS.INFO
-                        </span>
+                <div id="startGrid">
+                    <button id="successBtn" class="grid-left grid-top btn btn-success">
+                        Success
+                    </button>
+                    <button id="dangerBtn" class="grid-center grid-top btn btn-danger">
+                        Danger
+                    </button>
+                    <button id="warningBtn" class="grid-left grid-bottom-2 btn btn-warning">
+                        Warning
+                    </button>
+                    <button id="infoBtn" class="grid-center grid-bottom-2 btn btn-info">
+                        Info
+                    </button>
+                    <div id="timeoutRow" class="form-floating">
+                        <input id="timeoutInput" class="form-control" type="number" placeholder="5" />
+                        <label for="timeoutInput">Set Timeout (sec)</label>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="mt-3">
-                    <button id="createToast" class="btn btn-primary">Try it Out</button>
+        <h2 class="mt-3 text-center">Placement</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-5 d-flex flex-column align-items-center">
+                <p>By default, the toast container will be fixed to the top right corner of the screen on larger screen
+                    sizes, and top center on mobile. The <span class="badge bg-primary">Toast.setPlacement()</span>
+                    function allows that positioning to be customized. Modifying placement is unique in that it will
+                    affect toasts that have already been rendered, because it moves the entire toast container. Top
+                    right and top center are most commonly used for notifications, but each of the following placements
+                    is supported:</p>
+
+                <div id="placementGrid">
+                    <button data-placement="1" class="grid-top grid-left placement-grid-btn btn btn-secondary">
+                        Top Left
+                    </button>
+                    <button data-placement="2" class="grid-top grid-center placement-grid-btn btn btn-primary">
+                        Top Center
+                    </button>
+                    <button data-placement="3" class="grid-top grid-right placement-grid-btn btn btn-primary">
+                        Top Right
+                    </button>
+                    <button data-placement="4" class="grid-middle grid-left placement-grid-btn btn btn-secondary">
+                        Middle Left
+                    </button>
+                    <button data-placement="5" class="grid-middle grid-center placement-grid-btn btn btn-secondary">
+                        Middle Center
+                    </button>
+                    <button data-placement="6" class="grid-middle grid-right placement-grid-btn btn btn-secondary">
+                        Middle Right</button>
+                    <button data-placement="7" class="grid-bottom grid-left placement-grid-btn btn btn-secondary">
+                        Bottom Left
+                    </button>
+                    <button data-placement="8" class="grid-bottom grid-center placement-grid-btn btn btn-secondary">
+                        Bottom Center
+                    </button>
+                    <button data-placement="9" class="grid-bottom grid-right placement-grid-btn btn btn-secondary">
+                        Bottom Right
+                    </button>
                 </div>
+                <p>Click each button to move the toast container!</p>
+            </div>
+            <div class="col-md-5">
+                <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">setPlacement</span>(<span class="hljs-type">TOAST_PLACEMENT</span>.<span class="hljs-attribute">MIDDLE_CENTER</span>);
+<span class="hljs-type">Toast</span>.<span class="hljs-attribute">create</span>(<span class="hljs-string">"Placement Updated"</span>, <span class="hljs-string">"Current placement: X"</span>, <span class="hljs-type">TOAST_STATUS</span>.<span class="hljs-attribute">SUCCESS</span>, <span class="hljs-number">5000</span>);
+</code></pre>
+            </div>
+        </div>
+
+        <h2 class="mt-3 text-center">Theming</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">setTheme</span>(<span class="hljs-type">TOAST_THEME</span>.<span class="hljs-attribute">LIGHT</span>);
+<span class="hljs-type">Toast</span>.<span class="hljs-attribute">create</span>(<span class="hljs-string">"Theme Updated"</span>, <span class="hljs-string">"Current theme: X"</span>, <span class="hljs-type">TOAST_STATUS</span>.<span class="hljs-attribute">SUCCESS</span>, <span class="hljs-number">5000</span>);</code></pre>
+            </div>
+            <div class="col-md-5 d-flex flex-column align-items-center">
+                <p>In supported browsers and operating systems, toasts will automatically choose a theme based on the
+                    user's OS settings. However, there may be times where you want to force one theme or the other. In
+                    that case, the <span class="badge bg-primary">Toast.setTheme()</span> function is for you! Each
+                    toast created <em>after</em> the function is called will have the new theme, but previously rendered
+                    toasts will not change themes. Try it out below:</p>
+
+                <div class="alert alert-primary">
+                    <div class="d-flex justify-content-center">
+                        <button data-theme="1" class="me-3 theme-btn btn btn-light">
+                            Light
+                        </button>
+                        <button data-theme="2" class="theme-btn btn btn-dark">
+                            Dark
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2 class="text-center">Maximum Toast Count</h2>
+                        <div class="d-flex flex-column align-items-center">
+                            <p>To avoid becoming a nuisance to users, especially if the creation of toasts is
+                                automated, a
+                                limit
+                                is
+                                in place to prevent too many toasts from being visible at once. By default, this
+                                limit is 4
+                                toasts,
+                                but this can also be changed. The tool of choice is the
+                                <span class="badge bg-primary">Toast.setMaxCount()</span> function. Below is an
+                                example of
+                                raising
+                                toast limit to 6 toasts.
+                            </p>
+
+                            <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">setMaxCount</span>(<span class="hljs-number">6</span>);</code></pre>
+                            <div class="form-floating ms-3">
+                                <input id="maxCountInput" class="form-control" type="number" placeholder="6" />
+                                <label for="maxCountInput">Set Max Count</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h2 class="text-center">Toast Timers</h2>
+                        <div class="d-flex flex-column align-items-center">
+                            <p>Perhaps you aren't a fan of the elapsed timers on each toast, or would like to save
+                                every
+                                resource
+                                you can by not running the timers in the background. Luckily, there's a function for
+                                that,
+                                too.
+                                Introducing <span class="badge bg-primary">Toast.enableTimers()</span>:
+                            </p>
+
+                            <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">enableTimers</span>(<span class="hljs-literal">false</span>);</code></pre>
+
+                            <div class="d-flex justify-content-center">
+                                <button data-timer="1" class="me-3 timer-btn btn btn-success">
+                                    Enabled
+                                </button>
+                                <button data-theme="0" class="timer-btn btn btn-danger">
+                                    Disabled
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="mt-3 text-center">Note on Accessibility</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <p>The toast container is setup as an aria-live region, so changes to its descendant
+                    elements will alert screen readers. <span class="badge bg-success">Success</span> and
+                    <span class="badge bg-info">Info</span> toasts will read out when the user is not busy,
+                    leaving their flow uninterrupted, while <span class="badge bg-danger">Error</span> and
+                    <span class="badge bg-warning">Warning</span> toasts will read out immediately. In
+                    addition, all toast status icons and elapsed timers are hidden to screen readers, as
+                    they are purely visual indicators. Provided you properly use the statuses, all the
+                    accessibility work is done for you!
+                </p>
             </div>
         </div>
     </div>
@@ -106,34 +247,16 @@
 
 <!-- JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"
-    integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw=="
+    integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
     crossorigin="anonymous"></script>
-<script src="../js/bootstrap-toast.js"></script>
-<script>
-    // v2 API
-    // Toast.configure(3, TOAST_POSITION.BOTTOM_RIGHT);
-    // Toast.setPosition(TOAST_POSITION.TOP_LEFT);
-    // Toast.enableTimers(false);
-    // Toast.setTheme(TOAST_THEME.LIGHT);
-    // Toast.setMaxCount(2);
-    // Toast.create("Hello", "Goodbye", TOAST_STATUS.SUCCESS);
-    // Toast.create("Hello", "Goodbye", TOAST_STATUS.DANGER);
-    // Toast.create("Hello", "Goodbye", TOAST_STATUS.WARNING);
-    // Toast.create("Hello", "Goodbye", TOAST_STATUS.INFO);
-
-    // v1 API
-    // configureToasts(3, TOAST_POSITION.BOTTOM_RIGHT);
-    // setToastPosition(TOAST_POSITION.TOP_LEFT);
-    // enableToastTimers(false);
-    // setToastTheme(TOAST_THEME.LIGHT);
-    // setMaxToastCount(2);
-    // toastGenerator("Hello", "Goodbye", TOAST_STATUS.SUCCESS);
-    // toastGenerator("Hello", "Goodbye", TOAST_STATUS.DANGER);
-    // toastGenerator("Hello", "Goodbye", TOAST_STATUS.WARNING);
-    // toastGenerator("Hello", "Goodbye", TOAST_STATUS.INFO);
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"
+    integrity="sha512-XKa9Hemdy1Ui3KSGgJdgMyYlUg1gM+QhL6cnlyTe2qzMCYm4nAZ1PsVerQzTTXzonUR+dmswHqgJPuwCq1MaAg=="
+    crossorigin="anonymous"></script>
+<!-- Release -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-toaster@5.0.0-rc2/js/bootstrap-toaster.min.js"
+    integrity="sha256-7zXiTVr5JnExbKTiMSJbyjUPLRHZB14rlMnlVtwiOfQ=" crossorigin="anonymous"></script> -->
+<!-- Dev -->
+<script src="../js/bootstrap-toaster.js"></script>
 
 <script type="text/javascript" src="js/index.min.js"></script>
 
