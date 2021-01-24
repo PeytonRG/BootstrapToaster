@@ -25,6 +25,8 @@
     --header-bg-color-dark: rgba(30,40,45,.85);
     --body-bg-color-dark: rgba(30,40,45,.85);
     max-height: 100vh;
+    /* Override Bootstrap 5's pointer-events:none on .toast-container, so overflow-y: scroll works */
+    pointer-events: auto;
     overflow-y: scroll;
     /* Hide scrollbar in Firefox */
     scrollbar-width: none;
