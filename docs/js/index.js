@@ -4,6 +4,10 @@ var timeout = 5000;
 timeoutInput.onchange = () => {
     // convert seconds to milliseconds
     timeout = timeoutInput.value * 1000;
+    if (timeout !== 0)
+        Toast.create("Timout Updated", `Toasts will disappear after ${timeoutInput.value} seconds.`, TOAST_STATUS.SUCCESS, timeout);
+    else
+        Toast.create("Timout Updated", `New toasts must be manually dismissed.`, TOAST_STATUS.SUCCESS, timeout);
 };
 
 var successBtn = document.getElementById("successBtn");
@@ -32,7 +36,7 @@ placementBtns.forEach(btn => {
     btn.onclick = () => {
         var placement = btn.getAttribute("data-placement");
         Toast.setPlacement(parseInt(placement));
-        Toast.create("Placement Updated", `Current placement: ${btn.innerText}`, TOAST_STATUS.SUCCESS, 5000);
+        Toast.create("Placement Updated", `Current placement: ${btn.innerText}`, TOAST_STATUS.SUCCESS, timeout);
     };
 });
 
@@ -42,7 +46,7 @@ var maxCount = 4;
 maxCountInput.onchange = () => {
     maxCount = maxCountInput.value;
     Toast.setMaxCount(maxCount);
-    Toast.create("Max Count Updated", `Only ${maxCount} toasts can appear at once.`, TOAST_STATUS.SUCCESS, 5000);
+    Toast.create("Max Count Updated", `Only ${maxCount} toasts can appear at once.`, TOAST_STATUS.SUCCESS, timeout);
 };
 
 // Theming
@@ -51,7 +55,7 @@ themeBtns.forEach(btn => {
     btn.onclick = () => {
         var theme = btn.getAttribute("data-theme");
         Toast.setTheme(parseInt(theme));
-        Toast.create("Theme Updated", `Current theme: ${btn.innerText}`, TOAST_STATUS.SUCCESS, 5000);
+        Toast.create("Theme Updated", `Current theme: ${btn.innerText}`, TOAST_STATUS.SUCCESS, timeout);
     };
 });
 
@@ -61,6 +65,6 @@ timerBtns.forEach(btn => {
     btn.onclick = () => {
         var useTimers = btn.getAttribute("data-timer");
         Toast.enableTimers(parseInt(useTimers));
-        Toast.create(`Timers ${btn.innerText}`, `Timers have been ${btn.innerText.toLowerCase()}.`, TOAST_STATUS.SUCCESS, 5000);
+        Toast.create(`Timers ${btn.innerText}`, `Timers have been ${btn.innerText.toLowerCase()}.`, TOAST_STATUS.SUCCESS, timeout);
     };
 });
