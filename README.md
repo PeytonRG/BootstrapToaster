@@ -200,10 +200,8 @@ Full release notes can be found on the [Releases](https://github.com/PeytonRG/Bo
    - `TOAST_POSITION` -> `TOAST_PLACEMENT`
    - `Toast.setPosition` -> `Toast.setPlacement`
 1. When adding many new placement options for toasts, I changed the internal number values of the artificial TOAST_PLACEMENT enum. If you were using those rather than their named equivalents, you will likely need to update your code. If you used the named values, the above find and replace is all you need to update.
-1. Removed Font Awesome 5 dependency.
-1. Added Bootstrap Icons as a dependency.
-    - For toast icons to display, including a link tag for the Bootstrap Icons icon font stylesheet is required. View instructions on the [Bootstrap Icons Docs](https://icons.getbootstrap.com/#cdn).
-1. Changed toast template to use Bootstrap Icons CSS classes instead of Font Awesome classes.
+1. Replaced Font Awesome 5 dependency with Bootstrap Icons for toast status icons.
+    - For the icons to display, including a link tag for the Bootstrap Icons icon font stylesheet is required. View instructions on the [Bootstrap Icons Docs](https://icons.getbootstrap.com/#cdn).
 
 ### Breaking Changes in 3.0.0
 1. This package is now officially named Bootstrap Toaster, and new versions will be published as `bootstrap-toaster` on npm rather than the previous `bootstrap-toast.js`. All old versions of the old package will be deprecated on npm.
