@@ -25,6 +25,7 @@ Version 5.0.0-rc1 includes full support for Bootstrap 5 Beta 1. Once Bootstrap 5
     * [Maximum Toast Count](#maximum-toast-count)
     * [Toast Timers](#toast-timers)
     * [Configuration Shorthand](#configuration-shorthand)
+* [Release Notes](#release-notes)
 * [Breaking Changes](#breaking-changes)
 * [Credits](#credits)
 * [License](#license)
@@ -62,16 +63,16 @@ npm i bootstrap-toaster
 
 ```HTML
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-toaster@3.0.0/css/bootstrap-toaster.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-toaster@4.0.0/css/bootstrap-toaster.min.css" />
 </head>
 <body>
   ...
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap-toaster@3.0.0/js/bootstrap-toaster.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-toaster@4.0.0/js/bootstrap-toaster.min.js"></script>
 </body>
 ```
 
 ### Dependencies
-1. Bootstrap (>= 4.2.1), for the toasts themselves
+1. Bootstrap (>= 5.0.0-beta1), for the toasts themselves
 1. Bootstrap Icons (>= 1.3.0), for the toast status icons
 
 ## Usage
@@ -176,26 +177,30 @@ In the above snippet, we have set the max toast count to 5, moved the toast cont
 
 `Toast.configure()` supports the following parameters:
 1. `maxToasts`: The maximum number of toasts allowed on the page at once.
-1. `PLACEMENT`: The toast container's placement, defaults to top right. This will not affect small screens in portrait.
+1. `placement`: The toast container's placement, defaults to top right. This will not affect small screens in portrait.
 1. `theme`: The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
 1. `enableTimers`: Controls whether elapsed time will be displayed in the toast header.
 
 `placement` and `theme` accept the same predefined options as mentioned in their respective sections, while `maxToasts` is an integer value and `enableTimers` is a boolean. Each parameter's default value is the same as in their respective helper functions.
 
+## Release Notes
+Full release notes can be found on the [Releases](https://github.com/PeytonRG/BootstrapToaster/releases) page of the repo, but a summary of breaking changes in each version is below.
+
 ## Breaking Changes
 
-### Breaking Changes in 5.0.0-rc2
-1. Removed Font Awesome 5 dependency.
-1. Added Bootstrap Icons as a dependency.
-    - For toast icons to display, including a link tag for the Bootstrap Icons icon font stylesheet is required. View instructions on the [Bootstrap Icons Docs](https://icons.getbootstrap.com/#cdn).
-1. Changed toast template to use Bootstrap Icons CSS classes instead of Font Awesome classes.
-
 ### Breaking Changes in 5.0.0-rc1
-1. As of 5.0.0 this package targets Bootstrap 5 rather than 4. Version 4.0.0 is planned to backport improvments made in 5.0.0 for Bootstrap 4 users.
+1. As of 5.0.0 this package targets Bootstrap 5 rather than 4.
+    - If updating from 4.x, assuming your website is using Bootstrap 5, there are no breaking changes.
+    - If updating from 3.x, all breaking changes of 4.x will apply here as well.
+
+### Breaking Changes in 4.0.0
+#### This version is designed to back-port improvements made from version 5.0.0 to Bootstrap 4. As such, its features code improvements from that version while maintaining full compatibility with Bootstrap 4. Unlike previous versions, 4 and 5 will both be maintained as current releases.
 1. To better align with Bootstrap's documentation, all references to "position" have been renamed to placement, so a find and replace will be necessary for the following:
    - `TOAST_POSITION` -> `TOAST_PLACEMENT`
    - `Toast.setPosition` -> `Toast.setPlacement`
 1. When adding many new placement options for toasts, I changed the internal number values of the artificial TOAST_PLACEMENT enum. If you were using those rather than their named equivalents, you will likely need to update your code. If you used the named values, the above find and replace is all you need to update.
+1. Replaced Font Awesome 5 dependency with Bootstrap Icons for toast status icons.
+    - For the icons to display, including a link tag for the Bootstrap Icons icon font stylesheet is required. View instructions on the [Bootstrap Icons Docs](https://icons.getbootstrap.com/#cdn).
 
 ### Breaking Changes in 3.0.0
 1. This package is now officially named Bootstrap Toaster, and new versions will be published as `bootstrap-toaster` on npm rather than the previous `bootstrap-toast.js`. All old versions of the old package will be deprecated on npm.
