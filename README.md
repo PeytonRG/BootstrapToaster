@@ -6,7 +6,7 @@ Robust, plug &amp; play generator for Bootstrap toasts.
 ![deployment](https://github.com/PeytonRG/BootstrapToaster/workflows/deployment/badge.svg)
 
 ## Bootstrap 5 Support
-Version 5.0.0-rc1 includes full support for Bootstrap 5 Beta 1. Once Bootstrap 5 is officially released, 5.0.0 will be released as well!
+Version 5.0.0-rc4 includes full support for Bootstrap 5 Beta 1. Once Bootstrap 5 is officially released, 5.0.0 will be released as well!
 
 ## Contents
 * [Theming](#theming-heads-up-lights-out)
