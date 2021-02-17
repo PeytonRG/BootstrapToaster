@@ -38,7 +38,7 @@
     <div class="container">
         <h2 class="text-center">Getting Started</h2>
         <div class="row justify-content-center">
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <!-- First code snippet -->
                 <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px">myButton.<span class="hljs-attribute">onclick</span> = function () {
     <span class="hljs-type">Toast</span>.<span class="hljs-attribute">create</span>(<span class="hljs-string">"Voila!"</span>, <span class="hljs-string">"How easy was that?"</span>, <span class="hljs-type">TOAST_STATUS</span>.<span class="hljs-attribute">SUCCESS</span>, <span class="hljs-number">5000</span>);
@@ -60,17 +60,17 @@
     }
 });</code></pre>
             </div>
-            <div class="col-md-5 d-flex flex-column align-items-center">
+            <div class="col-md-6 d-flex flex-column align-items-center">
                 <p>Creating a toast is simple. All you need is a call to <span
-                        class="badge bg-dark">Toast.create()</span>
-                    to get started. It supports the following 4
-                    parameters</p>
+                        class="badge bg-dark">Toast.create()</span> to get started. It supports the following 4
+                    parameters
+                </p>
                 <ol>
                     <li>title: The text of the toast's header.</li>
                     <li>message: The text of the toast's body.</li>
                     <li>status: The status/urgency of the toast. Affects status icon and ARIA accessibility features.
-                        Defaults to 0, which
-                        renders no icon and has the same ARIA attributes as success and info toasts</li>
+                        Defaults to 0, which renders no icon and has the same ARIA attributes as success and info toasts
+                    </li>
                     <li>timeout: Time in ms until toast disappears automatically. Defaults to 0, in which case the toast
                         must be manually dismissed.</li>
                 </ol>
@@ -98,15 +98,19 @@
             </div>
         </div>
 
-        <h2 class="mt-3 text-center">Placement</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-5 d-flex flex-column align-items-center">
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-6 d-flex flex-column align-items-center">
+                <h2 class="text-center">Placement</h2>
+                <pre
+                    class="align-self-stretch"><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">setPlacement</span>(<span class="hljs-type">TOAST_PLACEMENT</span>.<span class="hljs-attribute">MIDDLE_CENTER</span>);
+<span class="hljs-type">Toast</span>.<span class="hljs-attribute">create</span>(<span class="hljs-string">"Placement Updated"</span>, <span class="hljs-string">"Current placement: X"</span>, <span class="hljs-type">TOAST_STATUS</span>.<span class="hljs-attribute">SUCCESS</span>, <span class="hljs-number">5000</span>);</code></pre>
                 <p>By default, the toast container will be fixed to the top right corner of the screen on larger screen
                     sizes, and top center on mobile. The <span class="badge bg-primary">Toast.setPlacement()</span>
-                    function allows that positioning to be customized. Modifying placement is unique in that it will
-                    affect toasts that have already been rendered, because it moves the entire toast container. Top
-                    right and top center are most commonly used for notifications, but each of the following placements
-                    is supported:</p>
+                    function allows that positioning to be
+                    customized. Modifying placement is unique in that it will affect toasts that have already been
+                    rendered, because it moves the entire toast container. Top right and top center are most commonly
+                    used for notifications, but each of the
+                    following placements is supported:</p>
 
                 <div id="placementGrid">
                     <button data-placement="1" class="grid-top grid-left placement-grid-btn btn btn-secondary">
@@ -138,20 +142,12 @@
                 </div>
                 <p>Click each button to move the toast container!</p>
             </div>
-            <div class="col-md-5">
-                <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">setPlacement</span>(<span class="hljs-type">TOAST_PLACEMENT</span>.<span class="hljs-attribute">MIDDLE_CENTER</span>);
-<span class="hljs-type">Toast</span>.<span class="hljs-attribute">create</span>(<span class="hljs-string">"Placement Updated"</span>, <span class="hljs-string">"Current placement: X"</span>, <span class="hljs-type">TOAST_STATUS</span>.<span class="hljs-attribute">SUCCESS</span>, <span class="hljs-number">5000</span>);
-</code></pre>
-            </div>
-        </div>
 
-        <h2 class="mt-3 text-center">Theming</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-5">
-                <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">setTheme</span>(<span class="hljs-type">TOAST_THEME</span>.<span class="hljs-attribute">LIGHT</span>);
+            <div class="col-md-6 d-flex flex-column align-items-center">
+                <h2 class="text-center">Theming</h2>
+                <pre
+                    class="align-self-stretch"><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">setTheme</span>(<span class="hljs-type">TOAST_THEME</span>.<span class="hljs-attribute">LIGHT</span>);
 <span class="hljs-type">Toast</span>.<span class="hljs-attribute">create</span>(<span class="hljs-string">"Theme Updated"</span>, <span class="hljs-string">"Current theme: X"</span>, <span class="hljs-type">TOAST_STATUS</span>.<span class="hljs-attribute">SUCCESS</span>, <span class="hljs-number">5000</span>);</code></pre>
-            </div>
-            <div class="col-md-5 d-flex flex-column align-items-center">
                 <p>In supported browsers and operating systems, toasts will automatically choose a theme based on the
                     user's OS settings. However, there may be times where you want to force one theme or the other. In
                     that case, the <span class="badge bg-primary">Toast.setTheme()</span> function is for you! Each
@@ -172,76 +168,97 @@
         </div>
 
         <div class="row justify-content-center mt-3">
-            <div class="col-md-10">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h2 class="text-center">Maximum Toast Count</h2>
-                        <div class="d-flex flex-column align-items-center">
-                            <p>To avoid becoming a nuisance to users, especially if the creation of toasts is
-                                automated, a
-                                limit
-                                is
-                                in place to prevent too many toasts from being visible at once. By default, this
-                                limit is 4
-                                toasts,
-                                but this can also be changed. The tool of choice is the
-                                <span class="badge bg-primary">Toast.setMaxCount()</span> function. Below is an
-                                example of
-                                raising
-                                toast limit to 6 toasts.
-                            </p>
+            <div class="col-md-6">
+                <h2 class="text-center">Maximum Toast Count</h2>
+                <div class="d-flex flex-column align-items-center">
+                    <p>To avoid becoming a nuisance to users, especially if the creation of toasts is automated, a limit
+                        is in place to prevent too many toasts from being visible at once. By default, this limit is 4
+                        toasts, but this can also be changed.
+                        The tool of choice is the
+                        <span class="badge bg-primary">Toast.setMaxCount()</span> function. Below is an example of
+                        raising toast limit to 6 toasts.
+                    </p>
 
-                            <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">setMaxCount</span>(<span class="hljs-number">6</span>);</code></pre>
-                            <div class="form-floating ms-3">
-                                <input id="maxCountInput" class="form-control" type="number" placeholder="6" />
-                                <label for="maxCountInput">Set Max Count</label>
-                            </div>
-                        </div>
+                    <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">setMaxCount</span>(<span class="hljs-number">6</span>);</code></pre>
+                    <div class="form-floating ms-3">
+                        <input id="maxCountInput" class="form-control" type="number" placeholder="6" />
+                        <label for="maxCountInput">Set Max Count</label>
                     </div>
+                </div>
+            </div>
 
-                    <div class="col-md-6">
-                        <h2 class="text-center">Toast Timers</h2>
-                        <div class="d-flex flex-column align-items-center">
-                            <p>Perhaps you aren't a fan of the elapsed timers on each toast, or would like to save
-                                every
-                                resource
-                                you can by not running the timers in the background. Luckily, there's a function for
-                                that,
-                                too.
-                                Introducing <span class="badge bg-primary">Toast.enableTimers()</span>:
-                            </p>
+            <div class="col-md-6">
+                <h2 class="text-center">Toast Timers</h2>
+                <div class="d-flex flex-column align-items-center">
+                    <p>Perhaps you aren't a fan of the elapsed timers on each toast, or would like to save every
+                        resource you can by not running the timers in the background. Luckily, there's a function for
+                        that, too. Introducing <span class="badge bg-primary">Toast.enableTimers()</span>:
+                    </p>
 
-                            <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">enableTimers</span>(<span class="hljs-literal">false</span>);</code></pre>
+                    <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">enableTimers</span>(<span class="hljs-literal">false</span>);</code></pre>
 
-                            <div class="d-flex justify-content-center">
-                                <button data-timer="1" class="me-3 timer-btn btn btn-success">
-                                    Enabled
-                                </button>
-                                <button data-theme="0" class="timer-btn btn btn-danger">
-                                    Disabled
-                                </button>
-                            </div>
-                        </div>
+                    <div class="d-flex justify-content-center">
+                        <button data-timer="1" class="me-3 timer-btn btn btn-success">
+                            Enabled
+                        </button>
+                        <button data-theme="0" class="timer-btn btn btn-danger">
+                            Disabled
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <h2 class="mt-3 text-center">Note on Accessibility</h2>
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <p>The toast container is setup as an aria-live region, so changes to its descendant
-                    elements will alert screen readers. <span class="badge bg-success">Success</span> and
-                    <span class="badge bg-info">Info</span> toasts will read out when the user is not busy,
-                    leaving their flow uninterrupted, while <span class="badge bg-danger">Error</span> and
-                    <span class="badge bg-warning">Warning</span> toasts will read out immediately. In
-                    addition, all toast status icons and elapsed timers are hidden to screen readers, as
-                    they are purely visual indicators. Provided you properly use the statuses, all the
-                    accessibility work is done for you!
+        <div class="row justify-content-center mt-3">
+            <h2 class="text-center">Note on Accessibility</h2>
+            <div class="col-12">
+                <p>The toast container is setup as an aria-live region, so changes to its descendant elements will alert
+                    screen readers. <span class="badge bg-success">Success</span> and
+                    <span class="badge bg-info">Info</span> toasts will read out when the user is not busy, leaving
+                    their flow uninterrupted, while <span class="badge bg-danger">Error</span> and
+                    <span class="badge bg-warning">Warning</span> toasts will read out immediately. In addition, all
+                    toast status icons and elapsed timers are hidden to screen readers, as they are purely visual
+                    indicators. Provided you properly use the
+                    statuses, all the accessibility work is done for you!
                 </p>
             </div>
         </div>
     </div>
+
+    <footer class="mt-3">
+        <div class="container">
+            <div class="row justify-content-around">
+                <div class="d-none d-md-block col-md-2">
+                    <img class="circle-image" src="images/peyton.png" alt="" />
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <h4 class="text-center">Free Forever</h4>
+                    <hr />
+                    <p class="text-center">
+                        Bootstrap Toaster is and always will be free to use however you like. To get started setting it
+                        up, take a look at the documentation on the <a
+                            href="https://github.com/PeytonRG/BootstrapToaster" target="_blank" rel="noopener">GitHub
+                            repo</a>!
+                    </p>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <h4 class="text-center">Connect with Me</h4>
+                    <hr />
+                    <div class="row justify-content-around text-center">
+                        <a class="col-6 col-md-4" href="https://www.linkedin.com/in/peytongasink/" target="_blank"
+                            rel="noopener">
+                            <img class="connect-image" src="images/footer-linkedin.png" alt="" />
+                            <p>LinkedIn</p>
+                        </a>
+                        <a class="col-6 col-md-4" href="https://github.com/PeytonRG" target="_blank" rel="noopener">
+                            <img class="connect-image" src="images/footer-github.png" alt="" />
+                            <p>GitHub</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 <!-- JavaScript -->
