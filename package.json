@@ -22,12 +22,14 @@
     "notification",
     "notifications",
     "bootstrap",
-    "bootstraptoaster"
+    "bootstraptoaster",
+    "bootstrap4",
+    "bootstrap5"
   ],
-  "author": "Peyton Gasink <pg@auburn.edu> (https://peytonrg.github.io)",
+  "author": "Peyton Gasink <pg@auburn.edu> (https://peytongasink.dev)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/PeytonRG/BootstrapToaster/issues"
   },
-  "homepage": "https://github.com/PeytonRG/BootstrapToaster#readme"
+  "homepage": "https://bootstraptoaster.peytongasink.dev"
 }
