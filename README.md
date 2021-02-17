@@ -72,7 +72,7 @@ npm i bootstrap-toaster
 ```
 
 ### Dependencies
-1. Bootstrap (>= 5.0.0-beta1), for the toasts themselves
+1. Bootstrap (>= 5.0.0-beta2), for the toasts themselves
 1. Bootstrap Icons (>= 1.3.0), for the toast status icons
 
 ## Usage
