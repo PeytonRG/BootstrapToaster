@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-toaster",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Robust, plug & play generator for Bootstrap toasts.",
   "main": "js/bootstrap-toaster.js",
   "dependencies": {
@@ -23,12 +23,14 @@
     "notification",
     "notifications",
     "bootstrap",
-    "bootstraptoaster"
+    "bootstraptoaster",
+    "bootstrap4",
+    "bootstrap5"
   ],
-  "author": "Peyton Gasink <pg@auburn.edu> (https://peytonrg.github.io)",
+  "author": "Peyton Gasink <pg@auburn.edu> (https://peytongasink.dev)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/PeytonRG/BootstrapToaster/issues"
   },
-  "homepage": "https://github.com/PeytonRG/BootstrapToaster#readme"
+  "homepage": "https://bootstraptoaster.peytongasink.dev"
 }
