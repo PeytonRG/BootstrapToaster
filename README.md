@@ -188,7 +188,7 @@ Full release notes can be found on the [Releases](https://github.com/PeytonRG/Bo
 
 ## Breaking Changes
 
-### Breaking Changes in 5.0.0-rc1
+### Breaking Changes in 5.0.0
 1. As of 5.0.0 this package targets Bootstrap 5 rather than 4.
     - If updating from 4.x, assuming your website is using Bootstrap 5, there are no breaking changes.
     - If updating from 3.x, all breaking changes of 4.x will apply here as well.
