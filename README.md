@@ -5,6 +5,9 @@ Robust, plug &amp; play generator for Bootstrap toasts.
 [![CodeFactor](https://www.codefactor.io/repository/github/peytonrg/bootstraptoaster/badge)](https://www.codefactor.io/repository/github/peytonrg/bootstraptoaster)
 ![deployment](https://github.com/PeytonRG/BootstrapToaster/workflows/deployment/badge.svg)
 
+## Demo
+A demo page is available at [bootstraptoaster.peytongasink.dev](https://bootstraptoaster.peytongasink.dev) for you to try out all the features listed below!
+
 ## Bootstrap 5 Support
 Version 5.0.0-rc4 includes full support for Bootstrap 5 Beta 2. Once Bootstrap 5 is officially released, 5.0.0 will be released as well!
 
@@ -37,9 +40,6 @@ Built-in support for both light and dark themes. By default, the user's operatin
 
 ## Placement: Serving Up Toast, Coast-to-Coast
 On desktop, the toast container defaults to the top right corner of the viewport, though this placement can be configured to any of 9 different areas. On mobile, the toast container will automatically lock to top center.
-
-<img src="https://github.com/PeytonRG/BootstrapToaster/blob/master/images/toasttopright.png?raw=true" alt="A toast in the top right corner of the viewport" width="600" />
-<img src="https://github.com/PeytonRG/BootstrapToaster/blob/master/images/toastmobile.png?raw=true" alt="A toast in the top middle of the viewport on a mobile device" width="300" />
 
 ## Timers: Too Much Time on My Hands
 Toasts support options for how long they exist on the page before expiring automatically, or if they must be dismissed manually. Additionally, each toast displays the elapsed time since it was rendered, updated once per minute since it rendered. The elapsed timers are enabled by default but can be disabled too. Time to auto-hide a toast is per-toast and is set upon generation.
