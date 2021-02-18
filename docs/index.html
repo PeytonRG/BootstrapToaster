@@ -35,8 +35,8 @@
     </div>
 
     <div class="container">
-        <h2 class="text-center">Getting Started</h2>
         <div class="row justify-content-center">
+            <h2 class="text-center">Getting Started</h2>
             <div class="col-md-6">
                 <!-- First code snippet -->
                 <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px">myButton.<span class="hljs-attribute">onclick</span> = function () {
@@ -170,6 +170,8 @@
             <div class="col-md-6">
                 <h2 class="text-center">Maximum Toast Count</h2>
                 <div class="d-flex flex-column align-items-center">
+                    <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">setMaxCount</span>(<span class="hljs-number">6</span>);</code></pre>
+
                     <p>To avoid becoming a nuisance to users, especially if the creation of toasts is automated, a limit
                         is in place to prevent too many toasts from being visible at once. By default, this limit is 4
                         toasts, but this can also be changed.
@@ -178,7 +180,6 @@
                         raising toast limit to 6 toasts.
                     </p>
 
-                    <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">setMaxCount</span>(<span class="hljs-number">6</span>);</code></pre>
                     <div class="form-floating ms-3">
                         <input id="maxCountInput" class="form-control" type="number" placeholder="6" />
                         <label for="maxCountInput">Set Max Count</label>
@@ -189,12 +190,12 @@
             <div class="col-md-6">
                 <h2 class="text-center">Toast Timers</h2>
                 <div class="d-flex flex-column align-items-center">
+                    <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">enableTimers</span>(<span class="hljs-literal">false</span>);</code></pre>
+
                     <p>Perhaps you aren't a fan of the elapsed timers on each toast, or would like to save every
                         resource you can by not running the timers in the background. Luckily, there's a function for
                         that, too. Introducing <span class="badge bg-primary">Toast.enableTimers()</span>:
                     </p>
-
-                    <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">enableTimers</span>(<span class="hljs-literal">false</span>);</code></pre>
 
                     <div class="d-flex justify-content-center">
                         <button data-timer="1" class="me-3 timer-btn btn btn-success">
@@ -209,9 +210,16 @@
         </div>
 
         <div class="row justify-content-center mt-3">
-            <h2 class="text-center">Note on Accessibility</h2>
-            <div class="col-12">
-                <p>The toast container is setup as an aria-live region, so changes to its descendant elements will alert
+            <div class="col-md-6">
+                <h2 class="text-center">Choosing the Right Version</h2>
+                <p>Bootstrap Toaster offers versions for both Bootstrap 4 and Bootstrap 5! For Bootstrap 4
+                    compatibility, use version 4.x, and for Bootstrap 5, use version 5.x. They are functionally
+                    identical and both fully supported!</p>
+            </div>
+            <div class="col-md-6">
+                <h2 class="text-center">Accessibility</h2>
+                <p>The toast container is setup as an aria-live region, so changes to its descendant elements will
+                    alert
                     screen readers. <span class="badge bg-success">Success</span> and
                     <span class="badge bg-info">Info</span> toasts will read out when the user is not busy, leaving
                     their flow uninterrupted, while <span class="badge bg-danger">Error</span> and
