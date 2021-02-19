@@ -1,7 +1,7 @@
 # Bootstrap Toaster
 Robust, plug &amp; play generator for Bootstrap toasts. Supports Bootstrap 4 and Bootstrap 5.
 
-[![jsDelivr Download Stats](https://data.jsdelivr.com/v1/package/npm/bootstrap-toaster/badge?style=rounded)](https://www.jsdelivr.com/package/npm/bootstrap-toaster)
+[![jsDelivr Download Stats](https://data.jsdelivr.com/v1/package/npm/bootstrap-toast.js/badge?style=rounded)](https://www.jsdelivr.com/package/npm/bootstrap-toast.js)
 [![CodeFactor](https://www.codefactor.io/repository/github/peytonrg/bootstraptoaster/badge)](https://www.codefactor.io/repository/github/peytonrg/bootstraptoaster)
 ![deployment](https://github.com/PeytonRG/BootstrapToaster/workflows/deployment/badge.svg)
 
