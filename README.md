@@ -9,7 +9,7 @@ Robust, plug &amp; play generator for Bootstrap toasts. Supports Bootstrap 4 and
 A demo page is available at [bootstraptoaster.peytongasink.dev](https://bootstraptoaster.peytongasink.dev) for you to try out all the features listed below!
 
 ## Bootstrap 5 Support
-Version 5.0.0-rc4 includes full support for Bootstrap 5 Beta 2. Once Bootstrap 5 is officially released, 5.0.0 will be released as well!
+Version 5.0.0-rc4 includes full support for Bootstrap 5 Beta 3. Once Bootstrap 5 is officially released, 5.0.0 will be released as well!
 
 ## Documentation
 Full documentation is available in the [Bootstrap Toaster Wiki](https://github.com/PeytonRG/BootstrapToaster/wiki).
