@@ -4,7 +4,7 @@
   "description": "Robust, plug & play generator for Bootstrap toasts.",
   "main": "js/bootstrap-toaster.js",
   "dependencies": {
-    "bootstrap": ">=5.0.0-beta2",
+    "bootstrap": ">=5.0.0-beta3",
     "bootstrap-icons": ">=1.4.0"
   },
   "scripts": {
