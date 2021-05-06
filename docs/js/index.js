@@ -27,7 +27,9 @@ warningBtn.onclick = () => {
 
 var infoBtn = document.getElementById("infoBtn");
 infoBtn.onclick = () => {
-    Toast.create("Greetings!", "I am 2401 Penitent Tangent. I am the Monitor of Installation 05. A Reclaimer? Here? At last! We have much to do. This facility must be activated if we are to control this outbreak.", TOAST_STATUS.INFO, timeout);
+    Toast.create("Greetings!", "I am <a href=\"https://www.halopedia.org/2401_Penitent_Tangent\" class=\"link-danger\" target=\"_blank\"" +
+        " rel=\"noopener\">2401 Penitent Tangent</a>. I am the Monitor of Installation 05. A Reclaimer? Here? At last! We have much to do." +
+        " This facility must be activated if we are to control this outbreak.", TOAST_STATUS.INFO, timeout);
 };
 
 // Placement
