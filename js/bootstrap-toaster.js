@@ -13,7 +13,7 @@
 /** Container that generated toasts will be inserted into. */
 const TOAST_CONTAINER = document.createElement("div");
 TOAST_CONTAINER.id = "toastContainer";
-TOAST_CONTAINER.className = "position-fixed top-0 right-0";
+TOAST_CONTAINER.className = "toast-container position-fixed top-0 end-0";
 TOAST_CONTAINER.setAttribute("aria-live", "polite");
 document.body.appendChild(TOAST_CONTAINER);
 
@@ -23,15 +23,13 @@ TOAST_TEMPLATE.className = "toast";
 TOAST_TEMPLATE.setAttribute("role", "status");
 TOAST_TEMPLATE.setAttribute("aria-live", "polite");
 TOAST_TEMPLATE.setAttribute("aria-atomic", "true");
-TOAST_TEMPLATE.setAttribute("data-autohide", "false");
+TOAST_TEMPLATE.setAttribute("data-bs-autohide", "false");
 TOAST_TEMPLATE.innerHTML = `
         <div class="toast-header">
-            <span class="status-icon bi mr-2" aria-hidden="true"></span>
-            <strong class="mr-auto toast-title"></strong>
+            <span class="status-icon bi me-2" aria-hidden="true"></span>
+            <strong class="me-auto toast-title"></strong>
             <small class="timer" aria-hidden="true">just now</small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="btn-close ms-2" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body"></div>`;
 
@@ -106,37 +104,37 @@ class Toast {
      * @param {number} placement Placement of the toast container.
      */
     static setPlacement(placement) {
-        TOAST_CONTAINER.className = "position-fixed";
+        TOAST_CONTAINER.className = "toast-container position-fixed";
         switch (placement) {
             case TOAST_PLACEMENT.TOP_LEFT:
-                TOAST_CONTAINER.classList.add("top-0", "left-0");
+                TOAST_CONTAINER.classList.add("top-0", "start-0");
                 break;
             case TOAST_PLACEMENT.TOP_CENTER:
-                TOAST_CONTAINER.classList.add("top-0", "left-50", "translate-middle-x");
+                TOAST_CONTAINER.classList.add("top-0", "start-50", "translate-middle-x");
                 break;
             case TOAST_PLACEMENT.TOP_RIGHT:
-                TOAST_CONTAINER.classList.add("top-0", "right-0");
+                TOAST_CONTAINER.classList.add("top-0", "end-0");
                 break;
             case TOAST_PLACEMENT.MIDDLE_LEFT:
-                TOAST_CONTAINER.classList.add("top-50", "left-0", "translate-middle-y");
+                TOAST_CONTAINER.classList.add("top-50", "start-0", "translate-middle-y");
                 break;
             case TOAST_PLACEMENT.MIDDLE_CENTER:
-                TOAST_CONTAINER.classList.add("top-50", "left-50", "translate-middle");
+                TOAST_CONTAINER.classList.add("top-50", "start-50", "translate-middle");
                 break;
             case TOAST_PLACEMENT.MIDDLE_RIGHT:
-                TOAST_CONTAINER.classList.add("top-50", "right-0", "translate-middle-y");
+                TOAST_CONTAINER.classList.add("top-50", "end-0", "translate-middle-y");
                 break;
             case TOAST_PLACEMENT.BOTTOM_LEFT:
-                TOAST_CONTAINER.classList.add("bottom-0", "left-0");
+                TOAST_CONTAINER.classList.add("bottom-0", "start-0");
                 break;
             case TOAST_PLACEMENT.BOTTOM_CENTER:
-                TOAST_CONTAINER.classList.add("bottom-0", "left-50", "translate-middle-x");
+                TOAST_CONTAINER.classList.add("bottom-0", "start-50", "translate-middle-x");
                 break;
             case TOAST_PLACEMENT.BOTTOM_RIGHT:
-                TOAST_CONTAINER.classList.add("bottom-0", "right-0");
+                TOAST_CONTAINER.classList.add("bottom-0", "end-0");
                 break;
             default:
-                TOAST_CONTAINER.classList.add("top-0", "right-0");
+                TOAST_CONTAINER.classList.add("top-0", "end-0");
                 break;
         }
     }
@@ -147,21 +145,21 @@ class Toast {
      */
     static setTheme(theme = null) {
         let header = TOAST_TEMPLATE.querySelector(".toast-header");
-        let close = header.querySelector(".close");
+        let close = header.querySelector(".btn-close");
         switch (theme) {
             case TOAST_THEME.LIGHT:
                 TOAST_TEMPLATE.style.backgroundColor = "var(--body-bg-color-light)";
                 TOAST_TEMPLATE.style.color = "var(--text-color-light)";
                 header.style.backgroundColor = "var(--header-bg-color-light)";
                 header.style.color = "var(--header-color-light)";
-                close.style.color = "var(--text-color-light)";
+                close.style.filter = "unset";
                 break;
             case TOAST_THEME.DARK:
                 TOAST_TEMPLATE.style.backgroundColor = "var(--body-bg-color-dark)";
                 TOAST_TEMPLATE.style.color = "var(--text-color-dark)";
                 header.style.backgroundColor = "var(--header-bg-color-dark)";
                 header.style.color = "var(--header-color-dark)";
-                close.style.color = "var(--text-color-dark)";
+                close.style.filter = "invert(1) grayscale(100%) brightness(200%)";
                 break;
             default:
                 TOAST_TEMPLATE.removeAttribute("style");
@@ -244,8 +242,8 @@ class Toast {
      */
     static _render(toast, timeout) {
         if (timeout > 0) {
-            toast.setAttribute("data-delay", timeout);
-            toast.setAttribute("data-autohide", true);
+            toast.setAttribute("data-bs-delay", timeout);
+            toast.setAttribute("data-bs-autohide", true);
         }
 
         let timer = toast.querySelector(".timer");
@@ -260,7 +258,7 @@ class Toast {
             }, 60 * 1000);
 
             // When the toast hides, delete its timer instance
-            $(toast).on('hidden.bs.toast', () => {
+            toast.addEventListener('hidden.bs.toast', () => {
                 clearInterval(elapsedTimer);
             });
         }
@@ -270,11 +268,13 @@ class Toast {
         }
 
         TOAST_CONTAINER.appendChild(toast);
-        $(toast).toast('show');
+        // Initialize Bootstrap 5's toast plugin
+        var bsToast = new bootstrap.Toast(toast);
+        bsToast.show();
         currentToastCount++;
 
         // When the toast hides, remove it from the DOM
-        $(toast).on('hidden.bs.toast', () => {
+        toast.addEventListener('hidden.bs.toast', () => {
             TOAST_CONTAINER.removeChild(toast);
             currentToastCount--;
         });

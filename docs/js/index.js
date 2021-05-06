@@ -5,9 +5,9 @@ timeoutInput.onchange = () => {
     // convert seconds to milliseconds
     timeout = timeoutInput.value * 1000;
     if (timeout !== 0)
-        Toast.create("Timout Updated", `Toasts will disappear after ${timeoutInput.value} seconds.`, TOAST_STATUS.SUCCESS, timeout);
+        Toast.create("Timeout Updated", `Toasts will disappear after ${timeoutInput.value} seconds.`, TOAST_STATUS.SUCCESS, timeout);
     else
-        Toast.create("Timout Updated", `New toasts must be manually dismissed.`, TOAST_STATUS.SUCCESS, timeout);
+        Toast.create("Timeout Updated", `New toasts must be manually dismissed.`, TOAST_STATUS.SUCCESS, timeout);
 };
 
 var successBtn = document.getElementById("successBtn");
@@ -27,7 +27,9 @@ warningBtn.onclick = () => {
 
 var infoBtn = document.getElementById("infoBtn");
 infoBtn.onclick = () => {
-    Toast.create("Greetings!", "I am 2401 Penitent Tangent. I am the Monitor of Installation 05. A Reclaimer? Here? At last! We have much to do. This facility must be activated if we are to control this outbreak.", TOAST_STATUS.INFO, timeout);
+    Toast.create("Greetings!", "I am <a href=\"https://www.halopedia.org/2401_Penitent_Tangent\" class=\"link-danger\" target=\"_blank\"" +
+        " rel=\"noopener\">2401 Penitent Tangent</a>. I am the Monitor of Installation 05. A Reclaimer? Here? At last! We have much to do." +
+        " This facility must be activated if we are to control this outbreak.", TOAST_STATUS.INFO, timeout);
 };
 
 // Placement
