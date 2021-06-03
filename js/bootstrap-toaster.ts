@@ -1,25 +1,26 @@
-"use strict";
 /**
  * Copyright (c) 2021 Peyton Gasink
  * Distributed under MIT License.
- *
+ * 
  * This file contains all the necessary scripting to programmatically
  * generate Bootstrap toasts. It first inserts a container at the bottom
  * of the DOM, then fills a toast template and inserts it into the container.
- *
+ * 
  * Configuration options are also provided for toast placement, light & dark themes,
  * and the maximum number of toasts allowed on the page at a given time.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-const bootstrap_1 = require("bootstrap");
+
+import { Toast as BootstrapToast } from 'bootstrap';
+
 /** Container that generated toasts will be inserted into. */
-const TOAST_CONTAINER = document.createElement("div");
+const TOAST_CONTAINER: Element = document.createElement("div");
 TOAST_CONTAINER.id = "toastContainer";
 TOAST_CONTAINER.className = "toast-container position-fixed top-0 end-0";
 TOAST_CONTAINER.setAttribute("aria-live", "polite");
 document.body.appendChild(TOAST_CONTAINER);
+
 /** HTML markup for the toast template. */
-const TOAST_TEMPLATE = document.createElement("div");
+const TOAST_TEMPLATE: HTMLDivElement = document.createElement("div");
 TOAST_TEMPLATE.className = "toast";
 TOAST_TEMPLATE.setAttribute("role", "status");
 TOAST_TEMPLATE.setAttribute("aria-live", "polite");
@@ -33,43 +34,41 @@ TOAST_TEMPLATE.innerHTML = `
             <button type="button" class="btn-close ms-2" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body"></div>`;
+
 /** Emulates enum functionality for setting toast statuses without needing to remember actual values. */
-var TOAST_STATUS;
-(function (TOAST_STATUS) {
-    TOAST_STATUS[TOAST_STATUS["SUCCESS"] = 1] = "SUCCESS";
-    TOAST_STATUS[TOAST_STATUS["DANGER"] = 2] = "DANGER";
-    TOAST_STATUS[TOAST_STATUS["WARNING"] = 3] = "WARNING";
-    TOAST_STATUS[TOAST_STATUS["INFO"] = 4] = "INFO";
-})(TOAST_STATUS || (TOAST_STATUS = {}));
-;
+enum TOAST_STATUS {
+    SUCCESS = 1,
+    DANGER,
+    WARNING,
+    INFO
+};
 /** Emulates enum functionality for setting toast container placement. */
-var TOAST_PLACEMENT;
-(function (TOAST_PLACEMENT) {
-    TOAST_PLACEMENT[TOAST_PLACEMENT["TOP_LEFT"] = 1] = "TOP_LEFT";
-    TOAST_PLACEMENT[TOAST_PLACEMENT["TOP_CENTER"] = 2] = "TOP_CENTER";
-    TOAST_PLACEMENT[TOAST_PLACEMENT["TOP_RIGHT"] = 3] = "TOP_RIGHT";
-    TOAST_PLACEMENT[TOAST_PLACEMENT["MIDDLE_LEFT"] = 4] = "MIDDLE_LEFT";
-    TOAST_PLACEMENT[TOAST_PLACEMENT["MIDDLE_CENTER"] = 5] = "MIDDLE_CENTER";
-    TOAST_PLACEMENT[TOAST_PLACEMENT["MIDDLE_RIGHT"] = 6] = "MIDDLE_RIGHT";
-    TOAST_PLACEMENT[TOAST_PLACEMENT["BOTTOM_LEFT"] = 7] = "BOTTOM_LEFT";
-    TOAST_PLACEMENT[TOAST_PLACEMENT["BOTTOM_CENTER"] = 8] = "BOTTOM_CENTER";
-    TOAST_PLACEMENT[TOAST_PLACEMENT["BOTTOM_RIGHT"] = 9] = "BOTTOM_RIGHT";
-})(TOAST_PLACEMENT || (TOAST_PLACEMENT = {}));
-;
+enum TOAST_PLACEMENT {
+    TOP_LEFT = 1,
+    TOP_CENTER,
+    TOP_RIGHT,
+    MIDDLE_LEFT,
+    MIDDLE_CENTER,
+    MIDDLE_RIGHT,
+    BOTTOM_LEFT,
+    BOTTOM_CENTER,
+    BOTTOM_RIGHT
+};
 /** Emulates enum functionality for setting toast themes. */
-var TOAST_THEME;
-(function (TOAST_THEME) {
-    TOAST_THEME[TOAST_THEME["LIGHT"] = 1] = "LIGHT";
-    TOAST_THEME[TOAST_THEME["DARK"] = 2] = "DARK";
-})(TOAST_THEME || (TOAST_THEME = {}));
-;
+enum TOAST_THEME {
+    LIGHT = 1,
+    DARK
+};
+
 /** Maximum amount of toasts to be allowed on the page at once. */
-var maxToastCount = 4;
+var maxToastCount: number = 4;
 /** Number of toasts currently rendered on the page. */
-var currentToastCount = 0;
+var currentToastCount: number = 0;
 /** Controls whether elapsed time will be displayed in the toast header. */
-var enableTimers = true;
-class Toast {
+var enableTimers: boolean = true;
+
+export default class Toast {
+
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
      * @param {number} maxToasts The maximum number of toasts allowed on the page at once.
@@ -77,17 +76,21 @@ class Toast {
      * @param {number} theme The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
      * @param {boolean} enableTimers Controls whether elapsed time will be displayed in the toast header.
      */
-    static configure(maxToasts = null, placement = TOAST_PLACEMENT.TOP_RIGHT, theme = null, enableTimers = true) {
+    public static configure(maxToasts: number = null, placement: number = TOAST_PLACEMENT.TOP_RIGHT, theme: number = null, enableTimers: boolean = true): void {
         Toast.setMaxCount(maxToasts);
+
         Toast.setPlacement(placement);
+
         Toast.setTheme(theme);
+
         Toast.enableTimers(enableTimers);
     }
+
     /**
      * Sets the maximum number of toasts allowed on the page at once.
      * @param {number} maxToasts Maximum number of toasts allowed on the page at once.
      */
-    static setMaxCount(maxToasts) {
+    public static setMaxCount(maxToasts: number): void {
         if (maxToasts !== null) {
             if (maxToasts > 0) {
                 maxToastCount = maxToasts;
@@ -97,11 +100,12 @@ class Toast {
             }
         }
     }
+
     /**
      * Sets the toast container's placement.
      * @param {number} placement Placement of the toast container.
      */
-    static setPlacement(placement) {
+    public static setPlacement(placement: number): void {
         TOAST_CONTAINER.className = "toast-container position-fixed";
         switch (placement) {
             case TOAST_PLACEMENT.TOP_LEFT:
@@ -136,13 +140,14 @@ class Toast {
                 break;
         }
     }
+
     /**
      * Sets the toasts' theme to light or dark. If unset, they will follow OS light/dark preference.
      * @param {number} theme The toast theme. Options are TOAST_THEME.LIGHT and TOAST_THEME.DARK.
      */
-    static setTheme(theme = null) {
-        let header = TOAST_TEMPLATE.querySelector(".toast-header");
-        let close = header.querySelector(".btn-close");
+    public static setTheme(theme: number = null): void {
+        let header: any = TOAST_TEMPLATE.querySelector(".toast-header");
+        let close: any = header.querySelector(".btn-close");
         switch (theme) {
             case TOAST_THEME.LIGHT:
                 TOAST_TEMPLATE.style.backgroundColor = "var(--body-bg-color-light)";
@@ -165,14 +170,16 @@ class Toast {
                 break;
         }
     }
+
     /**
      * Enables or disables toasts displaying elapsed time since appearing in the header.
      * Timers are enabled by default.
      * @param {boolean} enabled Controls whether elapsed time will be displayed in the toast header.
      */
-    static enableTimers(enabled = true) {
+    public static enableTimers(enabled: boolean = true): void {
         enableTimers = enabled;
     }
+
     /**
      * Endpoint to generate Bootstrap toasts from a template and insert their HTML onto the page,
      * run timers for each's elapsed time since appearing, and remove them from the
@@ -182,24 +189,31 @@ class Toast {
      * @param {number} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
      * @param {number} timeout Time in ms until toast disappears automatically. Defaults to 0, which is indefinite.
      */
-    static create(title, message, status = 0, timeout = 0) {
+    public static create(title: string, message: string, status: number = 0, timeout: number = 0): void {
         if (currentToastCount >= maxToastCount)
             return;
-        let toast = TOAST_TEMPLATE.cloneNode(true);
+
+        let toast: any = TOAST_TEMPLATE.cloneNode(true);
+
         let toastTitle = toast.querySelector(".toast-title");
         toastTitle.innerText = title;
+
         let toastBody = toast.querySelector(".toast-body");
         toastBody.innerHTML = message;
+
         Toast.setStatus(toast, status);
+
         Toast.render(toast, timeout);
     }
+
     /**
      * Sets the status icon and modifies ARIA properties if the context necessitates it
      * @param {Node} toast The HTML of the toast being modified.
      * @param {number} status The integer value representing the toast's status.
      */
-    static setStatus(toast, status) {
+    private static setStatus(toast: any, status: number): void {
         let statusIcon = toast.querySelector(".status-icon");
+
         switch (status) {
             case TOAST_STATUS.SUCCESS:
                 statusIcon.classList.add("text-success", "bi-check-circle-fill");
@@ -222,25 +236,29 @@ class Toast {
                 break;
         }
     }
+
     /**
      * Inserts toast HTML onto page and sets up for toast deletion.
      * @param {Node} toast The HTML of the toast being modified.
      * @param {number} timeout Time in ms until toast disappears automatically. Indefinite if zero.
      */
-    static render(toast, timeout) {
+    private static render(toast: any, timeout: number): void {
         if (timeout > 0) {
             toast.setAttribute("data-bs-delay", timeout);
             toast.setAttribute("data-bs-autohide", true);
         }
+
         let timer = toast.querySelector(".timer");
+
         if (enableTimers) {
             // Start a timer that updates the text of the time indicator every minute
             // Initially set to 1 because for the first minute the indicator reads "just now"
-            let minutes = 1;
+            let minutes = 1
             let elapsedTimer = setInterval(() => {
                 timer.innerText = `${minutes}m ago`;
                 minutes++;
             }, 60 * 1000);
+
             // When the toast hides, delete its timer instance
             toast.addEventListener('hidden.bs.toast', () => {
                 clearInterval(elapsedTimer);
@@ -250,11 +268,13 @@ class Toast {
             let toastHeader = toast.querySelector(".toast-header");
             toastHeader.removeChild(timer);
         }
+
         TOAST_CONTAINER.appendChild(toast);
         // Initialize Bootstrap 5's toast plugin
-        var bsToast = new bootstrap_1.Toast(toast);
+        var bsToast = new BootstrapToast(toast);
         bsToast.show();
         currentToastCount++;
+
         // When the toast hides, remove it from the DOM
         toast.addEventListener('hidden.bs.toast', () => {
             TOAST_CONTAINER.removeChild(toast);
@@ -262,5 +282,3 @@ class Toast {
         });
     }
 }
-exports.default = Toast;
-//# sourceMappingURL=bootstrap-toaster.js.map
