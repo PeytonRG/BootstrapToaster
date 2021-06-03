@@ -1,4 +1,3 @@
-"use strict";
 /**
  * Copyright (c) 2021 Peyton Gasink
  * Distributed under MIT License.
@@ -10,8 +9,7 @@
  * Configuration options are also provided for toast placement, light & dark themes,
  * and the maximum number of toasts allowed on the page at a given time.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
-const bootstrap_1 = require("bootstrap");
+// import { Toast as BootstrapToast } from 'bootstrap';
 /** Container that generated toasts will be inserted into. */
 const TOAST_CONTAINER = document.createElement("div");
 TOAST_CONTAINER.id = "toastContainer";
@@ -252,7 +250,7 @@ class Toast {
         }
         TOAST_CONTAINER.appendChild(toast);
         // Initialize Bootstrap 5's toast plugin
-        var bsToast = new bootstrap_1.Toast(toast);
+        var bsToast = new bootstrap.Toast(toast);
         bsToast.show();
         currentToastCount++;
         // When the toast hides, remove it from the DOM
@@ -262,5 +260,4 @@ class Toast {
         });
     }
 }
-exports.default = Toast;
 //# sourceMappingURL=bootstrap-toaster.js.map
