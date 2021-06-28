@@ -9,7 +9,7 @@
  * Configuration options are also provided for toast placement, light & dark themes,
  * and the maximum number of toasts allowed on the page at a given time.
  */
-// import { Toast as BootstrapToast } from 'bootstrap';
+import { Toast as BootstrapToast } from 'bootstrap';
 /** Container that generated toasts will be inserted into. */
 const TOAST_CONTAINER = document.createElement("div");
 TOAST_CONTAINER.id = "toastContainer";
@@ -67,7 +67,7 @@ var maxToastCount = 4;
 var currentToastCount = 0;
 /** Controls whether elapsed time will be displayed in the toast header. */
 var enableTimers = true;
-class Toast {
+export default class Toast {
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
      * @param {number} maxToasts The maximum number of toasts allowed on the page at once.
@@ -250,7 +250,7 @@ class Toast {
         }
         TOAST_CONTAINER.appendChild(toast);
         // Initialize Bootstrap 5's toast plugin
-        var bsToast = new bootstrap.Toast(toast);
+        var bsToast = new BootstrapToast(toast);
         bsToast.show();
         currentToastCount++;
         // When the toast hides, remove it from the DOM

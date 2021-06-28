@@ -10,7 +10,7 @@
  * and the maximum number of toasts allowed on the page at a given time.
  */
 
-// import { Toast as BootstrapToast } from 'bootstrap';
+import { Toast as BootstrapToast } from 'bootstrap';
 
 /** Container that generated toasts will be inserted into. */
 const TOAST_CONTAINER: Element = document.createElement("div");
@@ -67,7 +67,7 @@ var currentToastCount: number = 0;
 /** Controls whether elapsed time will be displayed in the toast header. */
 var enableTimers: boolean = true;
 
-class Toast {
+export default class Toast {
 
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
@@ -271,7 +271,7 @@ class Toast {
 
         TOAST_CONTAINER.appendChild(toast);
         // Initialize Bootstrap 5's toast plugin
-        var bsToast = new bootstrap.Toast(toast);
+        var bsToast = new BootstrapToast(toast);
         bsToast.show();
         currentToastCount++;
 
