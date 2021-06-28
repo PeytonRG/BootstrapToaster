@@ -9,7 +9,6 @@
  * Configuration options are also provided for toast placement, light & dark themes,
  * and the maximum number of toasts allowed on the page at a given time.
  */
-import { Toast as BootstrapToast } from 'bootstrap';
 /** Container that generated toasts will be inserted into. */
 const TOAST_CONTAINER = document.createElement("div");
 TOAST_CONTAINER.id = "toastContainer";
@@ -31,8 +30,8 @@ TOAST_TEMPLATE.innerHTML = `
             <button type="button" class="btn-close ms-2" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body"></div>`;
-/** Emulates enum functionality for setting toast statuses without needing to remember actual values. */
-var TOAST_STATUS;
+/** Defines the valid status options for toasts. */
+export var TOAST_STATUS;
 (function (TOAST_STATUS) {
     TOAST_STATUS[TOAST_STATUS["SUCCESS"] = 1] = "SUCCESS";
     TOAST_STATUS[TOAST_STATUS["DANGER"] = 2] = "DANGER";
@@ -40,8 +39,8 @@ var TOAST_STATUS;
     TOAST_STATUS[TOAST_STATUS["INFO"] = 4] = "INFO";
 })(TOAST_STATUS || (TOAST_STATUS = {}));
 ;
-/** Emulates enum functionality for setting toast container placement. */
-var TOAST_PLACEMENT;
+/** Defines the valid placement options for the toast container. */
+export var TOAST_PLACEMENT;
 (function (TOAST_PLACEMENT) {
     TOAST_PLACEMENT[TOAST_PLACEMENT["TOP_LEFT"] = 1] = "TOP_LEFT";
     TOAST_PLACEMENT[TOAST_PLACEMENT["TOP_CENTER"] = 2] = "TOP_CENTER";
@@ -54,8 +53,8 @@ var TOAST_PLACEMENT;
     TOAST_PLACEMENT[TOAST_PLACEMENT["BOTTOM_RIGHT"] = 9] = "BOTTOM_RIGHT";
 })(TOAST_PLACEMENT || (TOAST_PLACEMENT = {}));
 ;
-/** Emulates enum functionality for setting toast themes. */
-var TOAST_THEME;
+/** Defines the valid options for toast themes. */
+export var TOAST_THEME;
 (function (TOAST_THEME) {
     TOAST_THEME[TOAST_THEME["LIGHT"] = 1] = "LIGHT";
     TOAST_THEME[TOAST_THEME["DARK"] = 2] = "DARK";
@@ -67,7 +66,7 @@ var maxToastCount = 4;
 var currentToastCount = 0;
 /** Controls whether elapsed time will be displayed in the toast header. */
 var enableTimers = true;
-export default class Toast {
+export class Toast {
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
      * @param {number} maxToasts The maximum number of toasts allowed on the page at once.
@@ -250,7 +249,7 @@ export default class Toast {
         }
         TOAST_CONTAINER.appendChild(toast);
         // Initialize Bootstrap 5's toast plugin
-        var bsToast = new BootstrapToast(toast);
+        const bsToast = new window["bootstrap"].Toast(toast);
         bsToast.show();
         currentToastCount++;
         // When the toast hides, remove it from the DOM

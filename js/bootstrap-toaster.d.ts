@@ -9,7 +9,31 @@
  * Configuration options are also provided for toast placement, light & dark themes,
  * and the maximum number of toasts allowed on the page at a given time.
  */
-export default class Toast {
+/** Defines the valid status options for toasts. */
+export declare enum TOAST_STATUS {
+    SUCCESS = 1,
+    DANGER = 2,
+    WARNING = 3,
+    INFO = 4
+}
+/** Defines the valid placement options for the toast container. */
+export declare enum TOAST_PLACEMENT {
+    TOP_LEFT = 1,
+    TOP_CENTER = 2,
+    TOP_RIGHT = 3,
+    MIDDLE_LEFT = 4,
+    MIDDLE_CENTER = 5,
+    MIDDLE_RIGHT = 6,
+    BOTTOM_LEFT = 7,
+    BOTTOM_CENTER = 8,
+    BOTTOM_RIGHT = 9
+}
+/** Defines the valid options for toast themes. */
+export declare enum TOAST_THEME {
+    LIGHT = 1,
+    DARK = 2
+}
+export declare class Toast {
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
      * @param {number} maxToasts The maximum number of toasts allowed on the page at once.

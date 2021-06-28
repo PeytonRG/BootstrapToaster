@@ -10,8 +10,6 @@
  * and the maximum number of toasts allowed on the page at a given time.
  */
 
-import { Toast as BootstrapToast } from 'bootstrap';
-
 /** Container that generated toasts will be inserted into. */
 const TOAST_CONTAINER: Element = document.createElement("div");
 TOAST_CONTAINER.id = "toastContainer";
@@ -35,15 +33,15 @@ TOAST_TEMPLATE.innerHTML = `
         </div>
         <div class="toast-body"></div>`;
 
-/** Emulates enum functionality for setting toast statuses without needing to remember actual values. */
-enum TOAST_STATUS {
+/** Defines the valid status options for toasts. */
+export enum TOAST_STATUS {
     SUCCESS = 1,
     DANGER,
     WARNING,
     INFO
 };
-/** Emulates enum functionality for setting toast container placement. */
-enum TOAST_PLACEMENT {
+/** Defines the valid placement options for the toast container. */
+export enum TOAST_PLACEMENT {
     TOP_LEFT = 1,
     TOP_CENTER,
     TOP_RIGHT,
@@ -54,8 +52,8 @@ enum TOAST_PLACEMENT {
     BOTTOM_CENTER,
     BOTTOM_RIGHT
 };
-/** Emulates enum functionality for setting toast themes. */
-enum TOAST_THEME {
+/** Defines the valid options for toast themes. */
+export enum TOAST_THEME {
     LIGHT = 1,
     DARK
 };
@@ -67,7 +65,7 @@ var currentToastCount: number = 0;
 /** Controls whether elapsed time will be displayed in the toast header. */
 var enableTimers: boolean = true;
 
-export default class Toast {
+export class Toast {
 
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
@@ -195,10 +193,10 @@ export default class Toast {
 
         let toast: any = TOAST_TEMPLATE.cloneNode(true);
 
-        let toastTitle = toast.querySelector(".toast-title");
+        let toastTitle: any = toast.querySelector(".toast-title");
         toastTitle.innerText = title;
 
-        let toastBody = toast.querySelector(".toast-body");
+        let toastBody: any = toast.querySelector(".toast-body");
         toastBody.innerHTML = message;
 
         Toast.setStatus(toast, status);
@@ -271,7 +269,7 @@ export default class Toast {
 
         TOAST_CONTAINER.appendChild(toast);
         // Initialize Bootstrap 5's toast plugin
-        var bsToast = new BootstrapToast(toast);
+        const bsToast = new window["bootstrap"].Toast(toast);
         bsToast.show();
         currentToastCount++;
 
