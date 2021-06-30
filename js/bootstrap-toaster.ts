@@ -73,11 +73,11 @@ interface QueuedToast {
 }
 
 interface ConfigureOptions {
-    maxToasts: number;
-    placement: TOAST_PLACEMENT;
-    theme: TOAST_THEME;
-    enableTimers: boolean;
-    enableQueue: boolean;
+    maxToasts?: number;
+    placement?: TOAST_PLACEMENT;
+    theme?: TOAST_THEME;
+    enableTimers?: boolean;
+    enableQueue?: boolean;
 }
 
 class Toast {
@@ -89,11 +89,11 @@ class Toast {
      * @param {ConfigureOptions} options Object containing all the desired toast options.
      */
     public static configure(options: ConfigureOptions): void {
-        Toast.setMaxCount(options.maxToasts);
-        Toast.setPlacement(options.placement);
-        Toast.setTheme(options.theme);
-        Toast.enableTimers(options.enableTimers);
-        Toast.enableQueue(options.enableQueue)
+        Toast.setMaxCount(options?.maxToasts);
+        Toast.setPlacement(options?.placement);
+        Toast.setTheme(options?.theme);
+        Toast.enableTimers(options?.enableTimers);
+        Toast.enableQueue(options?.enableQueue)
     }
 
     /**

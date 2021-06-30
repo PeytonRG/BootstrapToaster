@@ -74,11 +74,11 @@ class Toast {
      * @param {ConfigureOptions} options Object containing all the desired toast options.
      */
     static configure(options) {
-        Toast.setMaxCount(options.maxToasts);
-        Toast.setPlacement(options.placement);
-        Toast.setTheme(options.theme);
-        Toast.enableTimers(options.enableTimers);
-        Toast.enableQueue(options.enableQueue);
+        Toast.setMaxCount(options === null || options === void 0 ? void 0 : options.maxToasts);
+        Toast.setPlacement(options === null || options === void 0 ? void 0 : options.placement);
+        Toast.setTheme(options === null || options === void 0 ? void 0 : options.theme);
+        Toast.enableTimers(options === null || options === void 0 ? void 0 : options.enableTimers);
+        Toast.enableQueue(options === null || options === void 0 ? void 0 : options.enableQueue);
     }
     /**
      * Sets the maximum number of toasts allowed on the page at once.

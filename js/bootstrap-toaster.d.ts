@@ -50,11 +50,11 @@ interface QueuedToast {
     timeout: number;
 }
 interface ConfigureOptions {
-    maxToasts: number;
-    placement: TOAST_PLACEMENT;
-    theme: TOAST_THEME;
-    enableTimers: boolean;
-    enableQueue: boolean;
+    maxToasts?: number;
+    placement?: TOAST_PLACEMENT;
+    theme?: TOAST_THEME;
+    enableTimers?: boolean;
+    enableQueue?: boolean;
 }
 declare class Toast {
     private static queue;
