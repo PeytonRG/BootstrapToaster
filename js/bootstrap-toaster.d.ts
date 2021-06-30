@@ -39,19 +39,30 @@ declare enum TOAST_THEME {
 }
 /** Maximum amount of toasts to be allowed on the page at once. */
 declare var maxToastCount: number;
+/** Controls whether to queue toasts that exceed the maximum toast count. */
+declare var enableQueue: boolean;
 /** Number of toasts currently rendered on the page. */
 declare var currentToastCount: number;
 /** Controls whether elapsed time will be displayed in the toast header. */
 declare var enableTimers: boolean;
+interface QueuedToast {
+    toast: HTMLElement;
+    timeout: number;
+}
+interface ConfigureOptions {
+    maxToasts: number;
+    placement: TOAST_PLACEMENT;
+    theme: TOAST_THEME;
+    enableTimers: boolean;
+    enableQueue: boolean;
+}
 declare class Toast {
+    private static queue;
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
-     * @param {number} maxToasts The maximum number of toasts allowed on the page at once.
-     * @param {number} placement The toast container's placement on-screen, defaults to top right. This will not affect small screens in portrait.
-     * @param {number} theme The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
-     * @param {boolean} enableTimers Controls whether elapsed time will be displayed in the toast header.
+     * @param {ConfigureOptions} options Object containing all the desired toast options.
      */
-    static configure(maxToasts?: number, placement?: number, theme?: number, enableTimers?: boolean): void;
+    static configure(options: ConfigureOptions): void;
     /**
      * Sets the maximum number of toasts allowed on the page at once.
      * @param {number} maxToasts Maximum number of toasts allowed on the page at once.
@@ -59,14 +70,14 @@ declare class Toast {
     static setMaxCount(maxToasts: number): void;
     /**
      * Sets the toast container's placement.
-     * @param {number} placement Placement of the toast container.
+     * @param {TOAST_PLACEMENT} placement Placement of the toast container.
      */
-    static setPlacement(placement: number): void;
+    static setPlacement(placement: TOAST_PLACEMENT): void;
     /**
      * Sets the toasts' theme to light or dark. If unset, they will follow OS light/dark preference.
-     * @param {number} theme The toast theme. Options are TOAST_THEME.LIGHT and TOAST_THEME.DARK.
+     * @param {TOAST_THEME} theme The toast theme. Options are TOAST_THEME.LIGHT and TOAST_THEME.DARK.
      */
-    static setTheme(theme?: number): void;
+    static setTheme(theme?: TOAST_THEME): void;
     /**
      * Enables or disables toasts displaying elapsed time since appearing in the header.
      * Timers are enabled by default.
@@ -74,24 +85,30 @@ declare class Toast {
      */
     static enableTimers(enabled?: boolean): void;
     /**
+     * Enables or disables toasts queueing after the maximum toast count is reached.
+     * Queuing is enabled by default.
+     * @param {boolean} enabled Controls whether queue is enabled.
+     */
+    static enableQueue(enabled?: boolean): void;
+    /**
      * Endpoint to generate Bootstrap toasts from a template and insert their HTML onto the page,
      * run timers for each's elapsed time since appearing, and remove them from the
      * DOM after they are hidden. Caps toast count at maxToastCount.
      * @param {string} title The text of the toast's header.
      * @param {string} message The text of the toast's body.
-     * @param {number} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
+     * @param {TOAST_STATUS} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
      * @param {number} timeout Time in ms until toast disappears automatically. Defaults to 0, which is indefinite.
      */
-    static create(title: string, message: string, status?: number, timeout?: number): void;
+    static create(title: string, message: string, status?: TOAST_STATUS, timeout?: number): void;
     /**
      * Sets the status icon and modifies ARIA properties if the context necessitates it
-     * @param {Node} toast The HTML of the toast being modified.
-     * @param {number} status The integer value representing the toast's status.
+     * @param {HTMLElement} toast The HTML of the toast being modified.
+     * @param {TOAST_STATUS} status The integer value representing the toast's status.
      */
     private static setStatus;
     /**
      * Inserts toast HTML onto page and sets up for toast deletion.
-     * @param {Node} toast The HTML of the toast being modified.
+     * @param {HTMLElement} toast The HTML of the toast being modified.
      * @param {number} timeout Time in ms until toast disappears automatically. Indefinite if zero.
      */
     private static render;

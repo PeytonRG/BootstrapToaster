@@ -62,6 +62,8 @@ var TOAST_THEME;
 ;
 /** Maximum amount of toasts to be allowed on the page at once. */
 var maxToastCount = 4;
+/** Controls whether to queue toasts that exceed the maximum toast count. */
+var enableQueue = true;
 /** Number of toasts currently rendered on the page. */
 var currentToastCount = 0;
 /** Controls whether elapsed time will be displayed in the toast header. */
@@ -69,16 +71,14 @@ var enableTimers = true;
 class Toast {
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
-     * @param {number} maxToasts The maximum number of toasts allowed on the page at once.
-     * @param {number} placement The toast container's placement on-screen, defaults to top right. This will not affect small screens in portrait.
-     * @param {number} theme The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
-     * @param {boolean} enableTimers Controls whether elapsed time will be displayed in the toast header.
+     * @param {ConfigureOptions} options Object containing all the desired toast options.
      */
-    static configure(maxToasts = null, placement = TOAST_PLACEMENT.TOP_RIGHT, theme = null, enableTimers = true) {
-        Toast.setMaxCount(maxToasts);
-        Toast.setPlacement(placement);
-        Toast.setTheme(theme);
-        Toast.enableTimers(enableTimers);
+    static configure(options) {
+        Toast.setMaxCount(options.maxToasts);
+        Toast.setPlacement(options.placement);
+        Toast.setTheme(options.theme);
+        Toast.enableTimers(options.enableTimers);
+        Toast.enableQueue(options.enableQueue);
     }
     /**
      * Sets the maximum number of toasts allowed on the page at once.
@@ -96,7 +96,7 @@ class Toast {
     }
     /**
      * Sets the toast container's placement.
-     * @param {number} placement Placement of the toast container.
+     * @param {TOAST_PLACEMENT} placement Placement of the toast container.
      */
     static setPlacement(placement) {
         TOAST_CONTAINER.className = "toast-container position-fixed";
@@ -135,7 +135,7 @@ class Toast {
     }
     /**
      * Sets the toasts' theme to light or dark. If unset, they will follow OS light/dark preference.
-     * @param {number} theme The toast theme. Options are TOAST_THEME.LIGHT and TOAST_THEME.DARK.
+     * @param {TOAST_THEME} theme The toast theme. Options are TOAST_THEME.LIGHT and TOAST_THEME.DARK.
      */
     static setTheme(theme = null) {
         let header = TOAST_TEMPLATE.querySelector(".toast-header");
@@ -171,29 +171,46 @@ class Toast {
         enableTimers = enabled;
     }
     /**
+     * Enables or disables toasts queueing after the maximum toast count is reached.
+     * Queuing is enabled by default.
+     * @param {boolean} enabled Controls whether queue is enabled.
+     */
+    static enableQueue(enabled = true) {
+        enableQueue = enabled;
+    }
+    /**
      * Endpoint to generate Bootstrap toasts from a template and insert their HTML onto the page,
      * run timers for each's elapsed time since appearing, and remove them from the
      * DOM after they are hidden. Caps toast count at maxToastCount.
      * @param {string} title The text of the toast's header.
      * @param {string} message The text of the toast's body.
-     * @param {number} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
+     * @param {TOAST_STATUS} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
      * @param {number} timeout Time in ms until toast disappears automatically. Defaults to 0, which is indefinite.
      */
     static create(title, message, status = 0, timeout = 0) {
-        if (currentToastCount >= maxToastCount)
-            return;
         let toast = TOAST_TEMPLATE.cloneNode(true);
         let toastTitle = toast.querySelector(".toast-title");
         toastTitle.innerText = title;
         let toastBody = toast.querySelector(".toast-body");
         toastBody.innerHTML = message;
         Toast.setStatus(toast, status);
+        // Add toast to the queue if it would exceed maxToastCount
+        if (currentToastCount >= maxToastCount) {
+            if (!enableQueue)
+                return;
+            const toastToQueue = {
+                toast: toast,
+                timeout: timeout
+            };
+            this.queue.push(toastToQueue);
+            return;
+        }
         Toast.render(toast, timeout);
     }
     /**
      * Sets the status icon and modifies ARIA properties if the context necessitates it
-     * @param {Node} toast The HTML of the toast being modified.
-     * @param {number} status The integer value representing the toast's status.
+     * @param {HTMLElement} toast The HTML of the toast being modified.
+     * @param {TOAST_STATUS} status The integer value representing the toast's status.
      */
     static setStatus(toast, status) {
         let statusIcon = toast.querySelector(".status-icon");
@@ -221,13 +238,13 @@ class Toast {
     }
     /**
      * Inserts toast HTML onto page and sets up for toast deletion.
-     * @param {Node} toast The HTML of the toast being modified.
+     * @param {HTMLElement} toast The HTML of the toast being modified.
      * @param {number} timeout Time in ms until toast disappears automatically. Indefinite if zero.
      */
     static render(toast, timeout) {
         if (timeout > 0) {
-            toast.setAttribute("data-bs-delay", timeout);
-            toast.setAttribute("data-bs-autohide", true);
+            toast.setAttribute("data-bs-delay", timeout.toString());
+            toast.setAttribute("data-bs-autohide", "true");
         }
         let timer = toast.querySelector(".timer");
         if (enableTimers) {
@@ -256,7 +273,12 @@ class Toast {
         toast.addEventListener('hidden.bs.toast', () => {
             TOAST_CONTAINER.removeChild(toast);
             currentToastCount--;
+            if (enableQueue && this.queue.length > 0 && currentToastCount < maxToastCount) {
+                const queuedToast = this.queue.shift();
+                this.render(queuedToast.toast, queuedToast.timeout);
+            }
         });
     }
 }
+Toast.queue = [];
 //# sourceMappingURL=bootstrap-toaster.js.map

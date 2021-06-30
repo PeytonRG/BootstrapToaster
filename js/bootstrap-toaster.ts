@@ -60,28 +60,40 @@ enum TOAST_THEME {
 
 /** Maximum amount of toasts to be allowed on the page at once. */
 var maxToastCount: number = 4;
+/** Controls whether to queue toasts that exceed the maximum toast count. */
+var enableQueue: boolean = true;
 /** Number of toasts currently rendered on the page. */
 var currentToastCount: number = 0;
 /** Controls whether elapsed time will be displayed in the toast header. */
 var enableTimers: boolean = true;
 
+interface QueuedToast {
+    toast: HTMLElement;
+    timeout: number;
+}
+
+interface ConfigureOptions {
+    maxToasts: number;
+    placement: TOAST_PLACEMENT;
+    theme: TOAST_THEME;
+    enableTimers: boolean;
+    enableQueue: boolean;
+}
+
 class Toast {
+
+    private static queue: QueuedToast[] = [];
 
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
-     * @param {number} maxToasts The maximum number of toasts allowed on the page at once.
-     * @param {number} placement The toast container's placement on-screen, defaults to top right. This will not affect small screens in portrait.
-     * @param {number} theme The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
-     * @param {boolean} enableTimers Controls whether elapsed time will be displayed in the toast header.
+     * @param {ConfigureOptions} options Object containing all the desired toast options.
      */
-    public static configure(maxToasts: number = null, placement: number = TOAST_PLACEMENT.TOP_RIGHT, theme: number = null, enableTimers: boolean = true): void {
-        Toast.setMaxCount(maxToasts);
-
-        Toast.setPlacement(placement);
-
-        Toast.setTheme(theme);
-
-        Toast.enableTimers(enableTimers);
+    public static configure(options: ConfigureOptions): void {
+        Toast.setMaxCount(options.maxToasts);
+        Toast.setPlacement(options.placement);
+        Toast.setTheme(options.theme);
+        Toast.enableTimers(options.enableTimers);
+        Toast.enableQueue(options.enableQueue)
     }
 
     /**
@@ -101,9 +113,9 @@ class Toast {
 
     /**
      * Sets the toast container's placement.
-     * @param {number} placement Placement of the toast container.
+     * @param {TOAST_PLACEMENT} placement Placement of the toast container.
      */
-    public static setPlacement(placement: number): void {
+    public static setPlacement(placement: TOAST_PLACEMENT): void {
         TOAST_CONTAINER.className = "toast-container position-fixed";
         switch (placement) {
             case TOAST_PLACEMENT.TOP_LEFT:
@@ -141,9 +153,9 @@ class Toast {
 
     /**
      * Sets the toasts' theme to light or dark. If unset, they will follow OS light/dark preference.
-     * @param {number} theme The toast theme. Options are TOAST_THEME.LIGHT and TOAST_THEME.DARK.
+     * @param {TOAST_THEME} theme The toast theme. Options are TOAST_THEME.LIGHT and TOAST_THEME.DARK.
      */
-    public static setTheme(theme: number = null): void {
+    public static setTheme(theme: TOAST_THEME = null): void {
         let header: any = TOAST_TEMPLATE.querySelector(".toast-header");
         let close: any = header.querySelector(".btn-close");
         switch (theme) {
@@ -179,38 +191,57 @@ class Toast {
     }
 
     /**
+     * Enables or disables toasts queueing after the maximum toast count is reached.
+     * Queuing is enabled by default.
+     * @param {boolean} enabled Controls whether queue is enabled.
+     */
+    public static enableQueue(enabled: boolean = true): void {
+        enableQueue = enabled;
+    }
+
+    /**
      * Endpoint to generate Bootstrap toasts from a template and insert their HTML onto the page,
      * run timers for each's elapsed time since appearing, and remove them from the
      * DOM after they are hidden. Caps toast count at maxToastCount.
      * @param {string} title The text of the toast's header.
      * @param {string} message The text of the toast's body.
-     * @param {number} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
+     * @param {TOAST_STATUS} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
      * @param {number} timeout Time in ms until toast disappears automatically. Defaults to 0, which is indefinite.
      */
-    public static create(title: string, message: string, status: number = 0, timeout: number = 0): void {
-        if (currentToastCount >= maxToastCount)
-            return;
+    public static create(title: string, message: string, status: TOAST_STATUS = 0, timeout: number = 0): void {
+        let toast: HTMLElement = (<HTMLElement>TOAST_TEMPLATE.cloneNode(true));
 
-        let toast: any = TOAST_TEMPLATE.cloneNode(true);
-
-        let toastTitle: any = toast.querySelector(".toast-title");
+        let toastTitle: HTMLElement = toast.querySelector(".toast-title");
         toastTitle.innerText = title;
 
-        let toastBody: any = toast.querySelector(".toast-body");
+        let toastBody: HTMLElement = toast.querySelector(".toast-body");
         toastBody.innerHTML = message;
 
         Toast.setStatus(toast, status);
+
+        // Add toast to the queue if it would exceed maxToastCount
+        if (currentToastCount >= maxToastCount) {
+            if (!enableQueue)
+                return;
+
+            const toastToQueue: QueuedToast = {
+                toast: toast,
+                timeout: timeout
+            }
+            this.queue.push(toastToQueue);
+            return;
+        }
 
         Toast.render(toast, timeout);
     }
 
     /**
      * Sets the status icon and modifies ARIA properties if the context necessitates it
-     * @param {Node} toast The HTML of the toast being modified.
-     * @param {number} status The integer value representing the toast's status.
+     * @param {HTMLElement} toast The HTML of the toast being modified.
+     * @param {TOAST_STATUS} status The integer value representing the toast's status.
      */
-    private static setStatus(toast: any, status: number): void {
-        let statusIcon = toast.querySelector(".status-icon");
+    private static setStatus(toast: HTMLElement, status: TOAST_STATUS): void {
+        let statusIcon: HTMLElement = toast.querySelector(".status-icon");
 
         switch (status) {
             case TOAST_STATUS.SUCCESS:
@@ -237,22 +268,22 @@ class Toast {
 
     /**
      * Inserts toast HTML onto page and sets up for toast deletion.
-     * @param {Node} toast The HTML of the toast being modified.
+     * @param {HTMLElement} toast The HTML of the toast being modified.
      * @param {number} timeout Time in ms until toast disappears automatically. Indefinite if zero.
      */
-    private static render(toast: any, timeout: number): void {
+    private static render(toast: HTMLElement, timeout: number): void {
         if (timeout > 0) {
-            toast.setAttribute("data-bs-delay", timeout);
-            toast.setAttribute("data-bs-autohide", true);
+            toast.setAttribute("data-bs-delay", timeout.toString());
+            toast.setAttribute("data-bs-autohide", "true");
         }
 
-        let timer = toast.querySelector(".timer");
+        let timer: HTMLElement = toast.querySelector(".timer");
 
         if (enableTimers) {
             // Start a timer that updates the text of the time indicator every minute
             // Initially set to 1 because for the first minute the indicator reads "just now"
-            let minutes = 1
-            let elapsedTimer = setInterval(() => {
+            let minutes: number = 1
+            let elapsedTimer: number = setInterval(() => {
                 timer.innerText = `${minutes}m ago`;
                 minutes++;
             }, 60 * 1000);
@@ -263,7 +294,7 @@ class Toast {
             });
         }
         else {
-            let toastHeader = toast.querySelector(".toast-header");
+            let toastHeader: HTMLElement = toast.querySelector(".toast-header");
             toastHeader.removeChild(timer);
         }
 
@@ -277,6 +308,10 @@ class Toast {
         toast.addEventListener('hidden.bs.toast', () => {
             TOAST_CONTAINER.removeChild(toast);
             currentToastCount--;
+            if (enableQueue && this.queue.length > 0 && currentToastCount < maxToastCount) {
+                const queuedToast = this.queue.shift();
+                this.render(queuedToast.toast, queuedToast.timeout);
+            }
         });
     }
 }
