@@ -34,14 +34,14 @@ TOAST_TEMPLATE.innerHTML = `
         <div class="toast-body"></div>`;
 
 /** Defines the valid status options for toasts. */
-export enum TOAST_STATUS {
+enum TOAST_STATUS {
     SUCCESS = 1,
     DANGER,
     WARNING,
     INFO
 };
 /** Defines the valid placement options for the toast container. */
-export enum TOAST_PLACEMENT {
+enum TOAST_PLACEMENT {
     TOP_LEFT = 1,
     TOP_CENTER,
     TOP_RIGHT,
@@ -53,7 +53,7 @@ export enum TOAST_PLACEMENT {
     BOTTOM_RIGHT
 };
 /** Defines the valid options for toast themes. */
-export enum TOAST_THEME {
+enum TOAST_THEME {
     LIGHT = 1,
     DARK
 };
@@ -65,7 +65,7 @@ var currentToastCount: number = 0;
 /** Controls whether elapsed time will be displayed in the toast header. */
 var enableTimers: boolean = true;
 
-export class Toast {
+class Toast {
 
     /**
      * Shorthand function for quickly setting multiple global toast configurations.

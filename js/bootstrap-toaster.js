@@ -31,7 +31,7 @@ TOAST_TEMPLATE.innerHTML = `
         </div>
         <div class="toast-body"></div>`;
 /** Defines the valid status options for toasts. */
-export var TOAST_STATUS;
+var TOAST_STATUS;
 (function (TOAST_STATUS) {
     TOAST_STATUS[TOAST_STATUS["SUCCESS"] = 1] = "SUCCESS";
     TOAST_STATUS[TOAST_STATUS["DANGER"] = 2] = "DANGER";
@@ -40,7 +40,7 @@ export var TOAST_STATUS;
 })(TOAST_STATUS || (TOAST_STATUS = {}));
 ;
 /** Defines the valid placement options for the toast container. */
-export var TOAST_PLACEMENT;
+var TOAST_PLACEMENT;
 (function (TOAST_PLACEMENT) {
     TOAST_PLACEMENT[TOAST_PLACEMENT["TOP_LEFT"] = 1] = "TOP_LEFT";
     TOAST_PLACEMENT[TOAST_PLACEMENT["TOP_CENTER"] = 2] = "TOP_CENTER";
@@ -54,7 +54,7 @@ export var TOAST_PLACEMENT;
 })(TOAST_PLACEMENT || (TOAST_PLACEMENT = {}));
 ;
 /** Defines the valid options for toast themes. */
-export var TOAST_THEME;
+var TOAST_THEME;
 (function (TOAST_THEME) {
     TOAST_THEME[TOAST_THEME["LIGHT"] = 1] = "LIGHT";
     TOAST_THEME[TOAST_THEME["DARK"] = 2] = "DARK";
@@ -66,7 +66,7 @@ var maxToastCount = 4;
 var currentToastCount = 0;
 /** Controls whether elapsed time will be displayed in the toast header. */
 var enableTimers = true;
-export class Toast {
+class Toast {
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
      * @param {number} maxToasts The maximum number of toasts allowed on the page at once.

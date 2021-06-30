@@ -9,15 +9,19 @@
  * Configuration options are also provided for toast placement, light & dark themes,
  * and the maximum number of toasts allowed on the page at a given time.
  */
+/** Container that generated toasts will be inserted into. */
+declare const TOAST_CONTAINER: Element;
+/** HTML markup for the toast template. */
+declare const TOAST_TEMPLATE: HTMLDivElement;
 /** Defines the valid status options for toasts. */
-export declare enum TOAST_STATUS {
+declare enum TOAST_STATUS {
     SUCCESS = 1,
     DANGER = 2,
     WARNING = 3,
     INFO = 4
 }
 /** Defines the valid placement options for the toast container. */
-export declare enum TOAST_PLACEMENT {
+declare enum TOAST_PLACEMENT {
     TOP_LEFT = 1,
     TOP_CENTER = 2,
     TOP_RIGHT = 3,
@@ -29,11 +33,17 @@ export declare enum TOAST_PLACEMENT {
     BOTTOM_RIGHT = 9
 }
 /** Defines the valid options for toast themes. */
-export declare enum TOAST_THEME {
+declare enum TOAST_THEME {
     LIGHT = 1,
     DARK = 2
 }
-export declare class Toast {
+/** Maximum amount of toasts to be allowed on the page at once. */
+declare var maxToastCount: number;
+/** Number of toasts currently rendered on the page. */
+declare var currentToastCount: number;
+/** Controls whether elapsed time will be displayed in the toast header. */
+declare var enableTimers: boolean;
+declare class Toast {
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
      * @param {number} maxToasts The maximum number of toasts allowed on the page at once.
