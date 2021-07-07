@@ -67,12 +67,19 @@ var currentToastCount: number = 0;
 /** Controls whether elapsed time will be displayed in the toast header. */
 var enableTimers: boolean = true;
 
-interface QueuedToast {
+interface IToast {
     toast: HTMLElement;
     timeout: number;
 }
 
-interface ConfigureOptions {
+interface IToastOptions {
+    title: string,
+    message: string,
+    status?: TOAST_STATUS,
+    timeout?: number
+}
+
+interface IConfiguration {
     maxToasts?: number;
     placement?: TOAST_PLACEMENT;
     theme?: TOAST_THEME;
@@ -82,13 +89,13 @@ interface ConfigureOptions {
 
 class Toast {
 
-    private static queue: QueuedToast[] = [];
+    private static queue: IToast[] = [];
 
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
-     * @param {ConfigureOptions} options Object containing all the desired toast options.
+     * @param {IConfiguration} options Object containing all the desired toast options.
      */
-    public static configure(options: ConfigureOptions): void {
+    public static configure(options: IConfiguration): void {
         Toast.setMaxCount(options?.maxToasts);
         Toast.setPlacement(options?.placement);
         Toast.setTheme(options?.theme);
@@ -208,31 +215,36 @@ class Toast {
      * @param {TOAST_STATUS} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
      * @param {number} timeout Time in ms until toast disappears automatically. Defaults to 0, which is indefinite.
      */
-    public static create(title: string, message: string, status: TOAST_STATUS = 0, timeout: number = 0): void {
-        let toast: HTMLElement = (<HTMLElement>TOAST_TEMPLATE.cloneNode(true));
+    public static create(toastOptions: IToastOptions): void {
+        let toastEl: HTMLElement = (<HTMLElement>TOAST_TEMPLATE.cloneNode(true));
 
-        let toastTitle: HTMLElement = toast.querySelector(".toast-title");
-        toastTitle.innerText = title;
+        let toastTitle: HTMLElement = toastEl.querySelector(".toast-title");
+        toastTitle.innerText = toastOptions.title;
 
-        let toastBody: HTMLElement = toast.querySelector(".toast-body");
-        toastBody.innerHTML = message;
+        let toastBody: HTMLElement = toastEl.querySelector(".toast-body");
+        toastBody.innerHTML = toastOptions.message;
 
-        Toast.setStatus(toast, status);
+        Toast.setStatus(toastEl, toastOptions.status);
 
         // Add toast to the queue if it would exceed maxToastCount
         if (currentToastCount >= maxToastCount) {
             if (!enableQueue)
                 return;
 
-            const toastToQueue: QueuedToast = {
-                toast: toast,
-                timeout: timeout
+            const toastToQueue: IToast = {
+                toast: toastEl,
+                timeout: toastOptions.timeout
             }
             this.queue.push(toastToQueue);
             return;
         }
 
-        Toast.render(toast, timeout);
+        const toastInfo: IToast = {
+            toast: toastEl,
+            timeout: toastOptions.timeout
+        }
+
+        Toast.render(toastInfo);
     }
 
     /**
@@ -271,13 +283,13 @@ class Toast {
      * @param {HTMLElement} toast The HTML of the toast being modified.
      * @param {number} timeout Time in ms until toast disappears automatically. Indefinite if zero.
      */
-    private static render(toast: HTMLElement, timeout: number): void {
-        if (timeout > 0) {
-            toast.setAttribute("data-bs-delay", timeout.toString());
-            toast.setAttribute("data-bs-autohide", "true");
+    private static render(toastInfo: IToast): void {
+        if (toastInfo.timeout > 0) {
+            toastInfo.toast.setAttribute("data-bs-delay", toastInfo.timeout.toString());
+            toastInfo.toast.setAttribute("data-bs-autohide", "true");
         }
 
-        let timer: HTMLElement = toast.querySelector(".timer");
+        let timer: HTMLElement = toastInfo.toast.querySelector(".timer");
 
         if (enableTimers) {
             // Start a timer that updates the text of the time indicator every minute
@@ -289,28 +301,28 @@ class Toast {
             }, 60 * 1000);
 
             // When the toast hides, delete its timer instance
-            toast.addEventListener('hidden.bs.toast', () => {
+            toastInfo.toast.addEventListener('hidden.bs.toast', () => {
                 clearInterval(elapsedTimer);
             });
         }
         else {
-            let toastHeader: HTMLElement = toast.querySelector(".toast-header");
+            let toastHeader: HTMLElement = toastInfo.toast.querySelector(".toast-header");
             toastHeader.removeChild(timer);
         }
 
-        TOAST_CONTAINER.appendChild(toast);
+        TOAST_CONTAINER.appendChild(toastInfo.toast);
         // Initialize Bootstrap 5's toast plugin
-        const bsToast = new window["bootstrap"].Toast(toast);
+        const bsToast = new window["bootstrap"].Toast(toastInfo.toast);
         bsToast.show();
         currentToastCount++;
 
         // When the toast hides, remove it from the DOM
-        toast.addEventListener('hidden.bs.toast', () => {
-            TOAST_CONTAINER.removeChild(toast);
+        toastInfo.toast.addEventListener('hidden.bs.toast', () => {
+            TOAST_CONTAINER.removeChild(toastInfo.toast);
             currentToastCount--;
             if (enableQueue && this.queue.length > 0 && currentToastCount < maxToastCount) {
                 const queuedToast = this.queue.shift();
-                this.render(queuedToast.toast, queuedToast.timeout);
+                this.render(queuedToast);
             }
         });
     }

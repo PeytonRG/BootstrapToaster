@@ -71,7 +71,7 @@ var enableTimers = true;
 class Toast {
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
-     * @param {ConfigureOptions} options Object containing all the desired toast options.
+     * @param {IConfiguration} options Object containing all the desired toast options.
      */
     static configure(options) {
         Toast.setMaxCount(options === null || options === void 0 ? void 0 : options.maxToasts);
@@ -187,25 +187,29 @@ class Toast {
      * @param {TOAST_STATUS} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
      * @param {number} timeout Time in ms until toast disappears automatically. Defaults to 0, which is indefinite.
      */
-    static create(title, message, status = 0, timeout = 0) {
-        let toast = TOAST_TEMPLATE.cloneNode(true);
-        let toastTitle = toast.querySelector(".toast-title");
-        toastTitle.innerText = title;
-        let toastBody = toast.querySelector(".toast-body");
-        toastBody.innerHTML = message;
-        Toast.setStatus(toast, status);
+    static create(toastOptions) {
+        let toastEl = TOAST_TEMPLATE.cloneNode(true);
+        let toastTitle = toastEl.querySelector(".toast-title");
+        toastTitle.innerText = toastOptions.title;
+        let toastBody = toastEl.querySelector(".toast-body");
+        toastBody.innerHTML = toastOptions.message;
+        Toast.setStatus(toastEl, toastOptions.status);
         // Add toast to the queue if it would exceed maxToastCount
         if (currentToastCount >= maxToastCount) {
             if (!enableQueue)
                 return;
             const toastToQueue = {
-                toast: toast,
-                timeout: timeout
+                toast: toastEl,
+                timeout: toastOptions.timeout
             };
             this.queue.push(toastToQueue);
             return;
         }
-        Toast.render(toast, timeout);
+        const toastInfo = {
+            toast: toastEl,
+            timeout: toastOptions.timeout
+        };
+        Toast.render(toastInfo);
     }
     /**
      * Sets the status icon and modifies ARIA properties if the context necessitates it
@@ -241,12 +245,12 @@ class Toast {
      * @param {HTMLElement} toast The HTML of the toast being modified.
      * @param {number} timeout Time in ms until toast disappears automatically. Indefinite if zero.
      */
-    static render(toast, timeout) {
-        if (timeout > 0) {
-            toast.setAttribute("data-bs-delay", timeout.toString());
-            toast.setAttribute("data-bs-autohide", "true");
+    static render(toastInfo) {
+        if (toastInfo.timeout > 0) {
+            toastInfo.toast.setAttribute("data-bs-delay", toastInfo.timeout.toString());
+            toastInfo.toast.setAttribute("data-bs-autohide", "true");
         }
-        let timer = toast.querySelector(".timer");
+        let timer = toastInfo.toast.querySelector(".timer");
         if (enableTimers) {
             // Start a timer that updates the text of the time indicator every minute
             // Initially set to 1 because for the first minute the indicator reads "just now"
@@ -256,26 +260,26 @@ class Toast {
                 minutes++;
             }, 60 * 1000);
             // When the toast hides, delete its timer instance
-            toast.addEventListener('hidden.bs.toast', () => {
+            toastInfo.toast.addEventListener('hidden.bs.toast', () => {
                 clearInterval(elapsedTimer);
             });
         }
         else {
-            let toastHeader = toast.querySelector(".toast-header");
+            let toastHeader = toastInfo.toast.querySelector(".toast-header");
             toastHeader.removeChild(timer);
         }
-        TOAST_CONTAINER.appendChild(toast);
+        TOAST_CONTAINER.appendChild(toastInfo.toast);
         // Initialize Bootstrap 5's toast plugin
-        const bsToast = new window["bootstrap"].Toast(toast);
+        const bsToast = new window["bootstrap"].Toast(toastInfo.toast);
         bsToast.show();
         currentToastCount++;
         // When the toast hides, remove it from the DOM
-        toast.addEventListener('hidden.bs.toast', () => {
-            TOAST_CONTAINER.removeChild(toast);
+        toastInfo.toast.addEventListener('hidden.bs.toast', () => {
+            TOAST_CONTAINER.removeChild(toastInfo.toast);
             currentToastCount--;
             if (enableQueue && this.queue.length > 0 && currentToastCount < maxToastCount) {
                 const queuedToast = this.queue.shift();
-                this.render(queuedToast.toast, queuedToast.timeout);
+                this.render(queuedToast);
             }
         });
     }

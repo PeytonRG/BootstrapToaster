@@ -45,11 +45,17 @@ declare var enableQueue: boolean;
 declare var currentToastCount: number;
 /** Controls whether elapsed time will be displayed in the toast header. */
 declare var enableTimers: boolean;
-interface QueuedToast {
+interface IToast {
     toast: HTMLElement;
     timeout: number;
 }
-interface ConfigureOptions {
+interface IToastOptions {
+    title: string;
+    message: string;
+    status?: TOAST_STATUS;
+    timeout?: number;
+}
+interface IConfiguration {
     maxToasts?: number;
     placement?: TOAST_PLACEMENT;
     theme?: TOAST_THEME;
@@ -60,9 +66,9 @@ declare class Toast {
     private static queue;
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
-     * @param {ConfigureOptions} options Object containing all the desired toast options.
+     * @param {IConfiguration} options Object containing all the desired toast options.
      */
-    static configure(options: ConfigureOptions): void;
+    static configure(options: IConfiguration): void;
     /**
      * Sets the maximum number of toasts allowed on the page at once.
      * @param {number} maxToasts Maximum number of toasts allowed on the page at once.
@@ -99,7 +105,7 @@ declare class Toast {
      * @param {TOAST_STATUS} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
      * @param {number} timeout Time in ms until toast disappears automatically. Defaults to 0, which is indefinite.
      */
-    static create(title: string, message: string, status?: TOAST_STATUS, timeout?: number): void;
+    static create(toastOptions: IToastOptions): void;
     /**
      * Sets the status icon and modifies ARIA properties if the context necessitates it
      * @param {HTMLElement} toast The HTML of the toast being modified.
