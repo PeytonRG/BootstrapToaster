@@ -10,7 +10,7 @@
  * and the maximum number of toasts allowed on the page at a given time.
  */
 /** Container that generated toasts will be inserted into. */
-declare const TOAST_CONTAINER: Element;
+declare const TOAST_CONTAINER: HTMLDivElement;
 /** HTML markup for the toast template. */
 declare const TOAST_TEMPLATE: HTMLDivElement;
 /** Defines the valid status options for toasts. */
@@ -100,22 +100,18 @@ declare class Toast {
      * Endpoint to generate Bootstrap toasts from a template and insert their HTML onto the page,
      * run timers for each's elapsed time since appearing, and remove them from the
      * DOM after they are hidden. Caps toast count at maxToastCount.
-     * @param {string} title The text of the toast's header.
-     * @param {string} message The text of the toast's body.
-     * @param {TOAST_STATUS} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
-     * @param {number} timeout Time in ms until toast disappears automatically. Defaults to 0, which is indefinite.
+     * @param {IToastOptions} toastOptions Object containing all the desired toast options.
      */
     static create(toastOptions: IToastOptions): void;
     /**
      * Sets the status icon and modifies ARIA properties if the context necessitates it
-     * @param {HTMLElement} toast The HTML of the toast being modified.
+     * @param {HTMLElement} toastEl The HTML of the toast being modified.
      * @param {TOAST_STATUS} status The integer value representing the toast's status.
      */
     private static setStatus;
     /**
      * Inserts toast HTML onto page and sets up for toast deletion.
-     * @param {HTMLElement} toast The HTML of the toast being modified.
-     * @param {number} timeout Time in ms until toast disappears automatically. Indefinite if zero.
+     * @param {IToast} toastInfo The toast object to be rendered.
      */
     private static render;
 }

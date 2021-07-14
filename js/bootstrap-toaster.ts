@@ -11,7 +11,7 @@
  */
 
 /** Container that generated toasts will be inserted into. */
-const TOAST_CONTAINER: Element = document.createElement("div");
+const TOAST_CONTAINER: HTMLDivElement = document.createElement("div");
 TOAST_CONTAINER.id = "toastContainer";
 TOAST_CONTAINER.className = "toast-container position-fixed top-0 end-0";
 TOAST_CONTAINER.setAttribute("aria-live", "polite");
@@ -210,10 +210,7 @@ class Toast {
      * Endpoint to generate Bootstrap toasts from a template and insert their HTML onto the page,
      * run timers for each's elapsed time since appearing, and remove them from the
      * DOM after they are hidden. Caps toast count at maxToastCount.
-     * @param {string} title The text of the toast's header.
-     * @param {string} message The text of the toast's body.
-     * @param {TOAST_STATUS} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
-     * @param {number} timeout Time in ms until toast disappears automatically. Defaults to 0, which is indefinite.
+     * @param {IToastOptions} toastOptions Object containing all the desired toast options.
      */
     public static create(toastOptions: IToastOptions): void {
         let toastEl: HTMLElement = (<HTMLElement>TOAST_TEMPLATE.cloneNode(true));
@@ -249,11 +246,11 @@ class Toast {
 
     /**
      * Sets the status icon and modifies ARIA properties if the context necessitates it
-     * @param {HTMLElement} toast The HTML of the toast being modified.
+     * @param {HTMLElement} toastEl The HTML of the toast being modified.
      * @param {TOAST_STATUS} status The integer value representing the toast's status.
      */
-    private static setStatus(toast: HTMLElement, status: TOAST_STATUS): void {
-        let statusIcon: HTMLElement = toast.querySelector(".status-icon");
+    private static setStatus(toastEl: HTMLElement, status: TOAST_STATUS): void {
+        let statusIcon: HTMLElement = toastEl.querySelector(".status-icon");
 
         switch (status) {
             case TOAST_STATUS.SUCCESS:
@@ -261,13 +258,13 @@ class Toast {
                 break;
             case TOAST_STATUS.DANGER:
                 statusIcon.classList.add("text-danger", "bi-x-circle-fill");
-                toast.setAttribute("role", "alert");
-                toast.setAttribute("aria-live", "assertive");
+                toastEl.setAttribute("role", "alert");
+                toastEl.setAttribute("aria-live", "assertive");
                 break;
             case TOAST_STATUS.WARNING:
                 statusIcon.classList.add("text-warning", "bi-exclamation-circle-fill");
-                toast.setAttribute("role", "alert");
-                toast.setAttribute("aria-live", "assertive");
+                toastEl.setAttribute("role", "alert");
+                toastEl.setAttribute("aria-live", "assertive");
                 break;
             case TOAST_STATUS.INFO:
                 statusIcon.classList.add("text-info", "bi-info-circle-fill");
@@ -280,10 +277,10 @@ class Toast {
 
     /**
      * Inserts toast HTML onto page and sets up for toast deletion.
-     * @param {HTMLElement} toast The HTML of the toast being modified.
-     * @param {number} timeout Time in ms until toast disappears automatically. Indefinite if zero.
+     * @param {IToast} toastInfo The toast object to be rendered.
      */
     private static render(toastInfo: IToast): void {
+        // If the timeout is 0, the toast must be dismissed manually
         if (toastInfo.timeout > 0) {
             toastInfo.toast.setAttribute("data-bs-delay", toastInfo.timeout.toString());
             toastInfo.toast.setAttribute("data-bs-autohide", "true");
