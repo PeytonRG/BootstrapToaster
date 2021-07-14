@@ -69,14 +69,14 @@ infoBtn.onclick = () => {
 var placementBtns = document.querySelectorAll(".placement-grid-btn");
 placementBtns.forEach(btn => {
     btn.onclick = () => {
+        var placement = btn.getAttribute("data-placement");
+        Toast.setPlacement(parseInt(placement));
         let toast = {
             title: "Placement Updated",
             message: `Current placement: ${btn.innerText}`,
             status: TOAST_STATUS.SUCCESS,
             timeout: timeout
         }
-        var placement = btn.getAttribute("data-placement");
-        Toast.setPlacement(parseInt(placement));
         Toast.create(toast);
     };
 });
@@ -85,14 +85,14 @@ placementBtns.forEach(btn => {
 var maxCountInput = document.getElementById("maxCountInput");
 var maxCount = 4;
 maxCountInput.onchange = () => {
+    maxCount = maxCountInput.value;
+    Toast.setMaxCount(maxCount);
     let toast = {
         title: "Max Count Updated",
         message: `Only ${maxCount} toasts can appear at once.`,
         status: TOAST_STATUS.SUCCESS,
         timeout: timeout
     }
-    maxCount = maxCountInput.value;
-    Toast.setMaxCount(maxCount);
     Toast.create(toast);
 };
 
@@ -100,14 +100,14 @@ maxCountInput.onchange = () => {
 var themeBtns = document.querySelectorAll(".theme-btn");
 themeBtns.forEach(btn => {
     btn.onclick = () => {
+        var theme = btn.getAttribute("data-theme");
+        Toast.setTheme(parseInt(theme));
         let toast = {
             title: "Theme Updated",
             message: `Current theme: ${btn.innerText}`,
             status: TOAST_STATUS.SUCCESS,
             timeout: timeout
         }
-        var theme = btn.getAttribute("data-theme");
-        Toast.setTheme(parseInt(theme));
         Toast.create(toast);
     };
 });
@@ -116,14 +116,14 @@ themeBtns.forEach(btn => {
 var timerBtns = document.querySelectorAll(".timer-btn");
 timerBtns.forEach(btn => {
     btn.onclick = () => {
+        var useTimers = btn.getAttribute("data-timer");
+        Toast.enableTimers(parseInt(useTimers));
         let toast = {
             title: `Timers ${btn.innerText}`,
             message: `Timers have been ${btn.innerText.toLowerCase()}.`,
             status: TOAST_STATUS.SUCCESS,
             timeout: timeout
         }
-        var useTimers = btn.getAttribute("data-timer");
-        Toast.enableTimers(parseInt(useTimers));
         Toast.create(toast);
     };
 });
