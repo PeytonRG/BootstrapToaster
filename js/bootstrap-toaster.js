@@ -248,7 +248,7 @@ class Toast {
             toastInfo.toast.setAttribute("data-bs-autohide", "true");
         }
         let timer = toastInfo.toast.querySelector(".timer");
-        if (enableTimers) {
+        if (enableTimers && !toastInfo.countdown) {
             // Start a timer that updates the text of the time indicator every minute
             // Initially set to 1 because for the first minute the indicator reads "just now"
             let minutes = 1;
@@ -259,6 +259,19 @@ class Toast {
             // When the toast hides, delete its timer instance
             toastInfo.toast.addEventListener('hidden.bs.toast', () => {
                 clearInterval(elapsedTimer);
+            });
+        }
+        else if (enableTimers && toastInfo.countdown && toastInfo.timeout > 0) {
+            // Start a coutdown that updates the text of the time indicator every second
+            let seconds = toastInfo.timeout / 1000;
+            let elapsedCountdown = setInterval(() => {
+                timer.innerText = `${seconds}`;
+                seconds--;
+            }, toastInfo.timeout / 10);
+
+            // When the toast hides, delete its timer instance
+            toastInfo.toast.addEventListener('hidden.bs.toast', () => {
+                clearInterval(elapsedCountdown);
             });
         }
         else {

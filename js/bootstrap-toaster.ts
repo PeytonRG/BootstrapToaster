@@ -70,13 +70,15 @@ var enableTimers: boolean = true;
 interface IToast {
     toast: HTMLElement;
     timeout: number;
+    countdown: boolean;
 }
 
 interface IToastOptions {
     title: string,
     message: string,
     status?: TOAST_STATUS,
-    timeout?: number
+    timeout?: number,
+    countdown?: boolean
 }
 
 interface IConfiguration {
@@ -230,7 +232,8 @@ class Toast {
 
             const toastToQueue: IToast = {
                 toast: toastEl,
-                timeout: toastOptions.timeout
+                timeout: toastOptions.timeout,
+                countdown: toastOptions.countdown
             }
             this.queue.push(toastToQueue);
             return;
@@ -238,7 +241,8 @@ class Toast {
 
         const toastInfo: IToast = {
             toast: toastEl,
-            timeout: toastOptions.timeout
+            timeout: toastOptions.timeout,
+            countdown: toastOptions.countdown
         }
 
         Toast.render(toastInfo);
@@ -288,7 +292,7 @@ class Toast {
 
         let timer: HTMLElement = toastInfo.toast.querySelector(".timer");
 
-        if (enableTimers) {
+        if (enableTimers && !toastInfo.countdown) {
             // Start a timer that updates the text of the time indicator every minute
             // Initially set to 1 because for the first minute the indicator reads "just now"
             let minutes: number = 1
@@ -300,6 +304,19 @@ class Toast {
             // When the toast hides, delete its timer instance
             toastInfo.toast.addEventListener('hidden.bs.toast', () => {
                 clearInterval(elapsedTimer);
+            });
+        }
+        else if (enableTimers && toastInfo.countdown && toastInfo.timeout > 0) {
+            // Start a coutdown that updates the text of the time indicator every second
+            let seconds: number = toastInfo.timeout / 1000;
+            let elapsedCountdown: number = setInterval(() => {
+                timer.innerText = `${seconds}`;
+                seconds--;
+            }, toastInfo.timeout / 10);
+
+            // When the toast hides, delete its timer instance
+            toastInfo.toast.addEventListener('hidden.bs.toast', () => {
+                clearInterval(elapsedCountdown);
             });
         }
         else {
