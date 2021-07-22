@@ -188,8 +188,9 @@ class Toast {
      * @param {string} message The text of the toast's body.
      * @param {number} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
      * @param {number} timeout Time in ms until toast disappears automatically. Defaults to 0, which is indefinite.
+     * @param {boolean} countdown Will add optional courdown time in place of [minutes ago] timer.
      */
-    static create(title, message, status = 0, timeout = 0) {
+    static create(title, message, status = 0, timeout = 0, countdown = false) {
         if (currentToastCount >= maxToastCount)
             return;
 
@@ -203,7 +204,7 @@ class Toast {
 
         Toast._setStatus(toast, status);
 
-        Toast._render(toast, timeout);
+        Toast._render(toast, timeout, countdown);
     }
 
     /**
@@ -242,7 +243,7 @@ class Toast {
      * @param {Node} toast The HTML of the toast being modified.
      * @param {number} timeout Time in ms until toast disappears automatically. Indefinite if zero.
      */
-    static _render(toast, timeout) {
+    static _render(toast, timeout, countdown) {
         if (timeout > 0) {
             toast.setAttribute("data-delay", timeout);
             toast.setAttribute("data-autohide", true);
@@ -250,7 +251,7 @@ class Toast {
 
         let timer = toast.querySelector(".timer");
 
-        if (enableTimers) {
+        if (enableTimers && !countdown) {
             // Start a timer that updates the text of the time indicator every minute
             // Initially set to 1 because for the first minute the indicator reads "just now"
             let minutes = 1
@@ -262,6 +263,18 @@ class Toast {
             // When the toast hides, delete its timer instance
             $(toast).on('hidden.bs.toast', () => {
                 clearInterval(elapsedTimer);
+            });
+        }
+        else if (enableTimers && countdown) {
+            let seconds = timeout / 1000;
+            let elapsedCountdown = setInterval(() => {
+                timer.innerText = `${seconds}`;
+                seconds--;
+            }, timeout / 10);
+
+            // When the toast hides, delete its timer instance
+            $(toast).on('hidden.bs.toast', () => {
+                clearInterval(elapsedCountdown);
             });
         }
         else {
