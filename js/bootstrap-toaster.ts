@@ -39,7 +39,7 @@ enum TOAST_STATUS {
     DANGER,
     WARNING,
     INFO
-};
+}
 /** Defines the valid placement options for the toast container. */
 enum TOAST_PLACEMENT {
     TOP_LEFT = 1,
@@ -51,12 +51,12 @@ enum TOAST_PLACEMENT {
     BOTTOM_LEFT,
     BOTTOM_CENTER,
     BOTTOM_RIGHT
-};
+}
 /** Defines the valid options for toast themes. */
 enum TOAST_THEME {
     LIGHT = 1,
     DARK
-};
+}
 /** Defines the valid options for toast header timers. */
 enum TOAST_TIMERS {
     ELAPSED = 1,

@@ -38,7 +38,6 @@ var TOAST_STATUS;
     TOAST_STATUS[TOAST_STATUS["WARNING"] = 3] = "WARNING";
     TOAST_STATUS[TOAST_STATUS["INFO"] = 4] = "INFO";
 })(TOAST_STATUS || (TOAST_STATUS = {}));
-;
 /** Defines the valid placement options for the toast container. */
 var TOAST_PLACEMENT;
 (function (TOAST_PLACEMENT) {
@@ -52,14 +51,12 @@ var TOAST_PLACEMENT;
     TOAST_PLACEMENT[TOAST_PLACEMENT["BOTTOM_CENTER"] = 8] = "BOTTOM_CENTER";
     TOAST_PLACEMENT[TOAST_PLACEMENT["BOTTOM_RIGHT"] = 9] = "BOTTOM_RIGHT";
 })(TOAST_PLACEMENT || (TOAST_PLACEMENT = {}));
-;
 /** Defines the valid options for toast themes. */
 var TOAST_THEME;
 (function (TOAST_THEME) {
     TOAST_THEME[TOAST_THEME["LIGHT"] = 1] = "LIGHT";
     TOAST_THEME[TOAST_THEME["DARK"] = 2] = "DARK";
 })(TOAST_THEME || (TOAST_THEME = {}));
-;
 /** Defines the valid options for toast header timers. */
 var TOAST_TIMERS;
 (function (TOAST_TIMERS) {
