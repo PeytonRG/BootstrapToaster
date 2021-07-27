@@ -147,5 +147,13 @@ declare class Toast {
      * @param {number} timeout Time in ms until toast disappears automatically. Defaults to 0, which is indefinite.
      */
     static oldCreate(title: string, message: string, status?: TOAST_STATUS, timeout?: number): void;
+    /**
+     * @deprecated This will be removed in a future version. Migrate to the new enableTimers method.
+     *
+     * Enables or disables toasts displaying elapsed time since appearing in the header.
+     * Timers are enabled by default.
+     * @param {boolean} enabled Controls whether elapsed time will be displayed in the toast header.
+     */
+    static oldEnableTimers(enabled: boolean): void;
 }
 //# sourceMappingURL=bootstrap-toaster.d.ts.map

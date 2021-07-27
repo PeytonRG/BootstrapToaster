@@ -402,4 +402,15 @@ class Toast {
 
         this.create(toast);
     }
+
+    /**
+     * @deprecated This will be removed in a future version. Migrate to the new enableTimers method.
+     *
+     * Enables or disables toasts displaying elapsed time since appearing in the header.
+     * Timers are enabled by default.
+     * @param {boolean} enabled Controls whether elapsed time will be displayed in the toast header.
+     */
+    public static oldEnableTimers(enabled: boolean): void {
+        enableTimers = enabled ? TOAST_TIMERS.ELAPSED : TOAST_TIMERS.NONE;
+    }
 }
