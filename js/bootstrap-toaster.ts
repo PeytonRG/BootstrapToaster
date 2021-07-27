@@ -28,7 +28,7 @@ TOAST_TEMPLATE.innerHTML = `
         <div class="toast-header">
             <span class="status-icon bi me-2" aria-hidden="true"></span>
             <strong class="me-auto toast-title"></strong>
-            <small class="timer" aria-hidden="true">just now</small>
+            <small class="timer" aria-hidden="true"></small>
             <button type="button" class="btn-close ms-2" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body"></div>`;
@@ -57,13 +57,19 @@ enum TOAST_THEME {
     LIGHT = 1,
     DARK
 };
+/** Defines the valid options for toast header timers. */
+enum TOAST_TIMERS {
+    ELAPSED = 1,
+    COUNTDOWN,
+    NONE
+}
 
 /** Maximum amount of toasts to be allowed on the page at once. */
 var maxToastCount: number = 4;
 /** Number of toasts currently rendered on the page. */
 var currentToastCount: number = 0;
-/** Controls whether elapsed time will be displayed in the toast header. */
-var enableTimers: boolean = true;
+/** Controls whether toasts will have elapsed or countdown timers. */
+var enableTimers: TOAST_TIMERS = TOAST_TIMERS.ELAPSED;
 /** Controls whether to queue toasts that exceed the maximum toast count. */
 var enableQueue: boolean = true;
 
@@ -83,7 +89,7 @@ interface IConfiguration {
     maxToasts?: number;
     placement?: TOAST_PLACEMENT;
     theme?: TOAST_THEME;
-    enableTimers?: boolean;
+    enableTimers?: TOAST_TIMERS;
     enableQueue?: boolean;
 }
 
@@ -96,11 +102,11 @@ class Toast {
      * @param {IConfiguration} options Object containing all the desired toast options.
      */
     public static configure(options: IConfiguration): void {
-        Toast.setMaxCount(options?.maxToasts);
-        Toast.setPlacement(options?.placement);
-        Toast.setTheme(options?.theme);
-        Toast.enableTimers(options?.enableTimers);
-        Toast.enableQueue(options?.enableQueue)
+        this.setMaxCount(options?.maxToasts);
+        this.setPlacement(options?.placement);
+        this.setTheme(options?.theme);
+        this.enableTimers(options?.enableTimers);
+        this.enableQueue(options?.enableQueue)
     }
 
     /**
@@ -160,11 +166,11 @@ class Toast {
 
     /**
      * Sets the toasts' theme to light or dark. If unset, they will follow OS light/dark preference.
-     * @param {TOAST_THEME} theme The toast theme. Options are TOAST_THEME.LIGHT and TOAST_THEME.DARK.
+     * @param {TOAST_THEME} theme The toast theme.
      */
     public static setTheme(theme: TOAST_THEME = null): void {
-        let header: any = TOAST_TEMPLATE.querySelector(".toast-header");
-        let close: any = header.querySelector(".btn-close");
+        let header: HTMLElement = TOAST_TEMPLATE.querySelector(".toast-header");
+        let close: HTMLElement = header.querySelector(".btn-close");
         switch (theme) {
             case TOAST_THEME.LIGHT:
                 TOAST_TEMPLATE.style.backgroundColor = "var(--body-bg-color-light)";
@@ -189,12 +195,12 @@ class Toast {
     }
 
     /**
-     * Enables or disables toasts displaying elapsed time since appearing in the header.
-     * Timers are enabled by default.
-     * @param {boolean} enabled Controls whether elapsed time will be displayed in the toast header.
+     * Sets whether timers in the toast header will display elapsed time or a countdown.
+     * Timers display elapsed time by default.
+     * @param type The timer type.
      */
-    public static enableTimers(enabled: boolean = true): void {
-        enableTimers = enabled;
+    public static enableTimers(type: TOAST_TIMERS): void {
+        enableTimers = type;
     }
 
     /**
@@ -221,7 +227,7 @@ class Toast {
         let toastBody: HTMLElement = toastEl.querySelector(".toast-body");
         toastBody.innerHTML = toastOptions.message;
 
-        Toast.setStatus(toastEl, toastOptions.status);
+        this.setStatus(toastEl, toastOptions.status);
 
         // Add toast to the queue if it would exceed maxToastCount
         if (currentToastCount >= maxToastCount) {
@@ -241,7 +247,7 @@ class Toast {
             timeout: toastOptions.timeout
         }
 
-        Toast.render(toastInfo);
+        this.render(toastInfo);
     }
 
     /**
@@ -286,26 +292,7 @@ class Toast {
             toastInfo.toast.setAttribute("data-bs-autohide", "true");
         }
 
-        let timer: HTMLElement = toastInfo.toast.querySelector(".timer");
-
-        if (enableTimers) {
-            // Start a timer that updates the text of the time indicator every minute
-            // Initially set to 1 because for the first minute the indicator reads "just now"
-            let minutes: number = 1
-            let elapsedTimer: number = setInterval(() => {
-                timer.innerText = `${minutes}m ago`;
-                minutes++;
-            }, 60 * 1000);
-
-            // When the toast hides, delete its timer instance
-            toastInfo.toast.addEventListener('hidden.bs.toast', () => {
-                clearInterval(elapsedTimer);
-            });
-        }
-        else {
-            let toastHeader: HTMLElement = toastInfo.toast.querySelector(".toast-header");
-            toastHeader.removeChild(timer);
-        }
+        this.renderTimer(toastInfo);
 
         TOAST_CONTAINER.appendChild(toastInfo.toast);
         // Initialize Bootstrap 5's toast plugin
@@ -325,6 +312,53 @@ class Toast {
     }
 
     /**
+     * Handles the rendering of the timer in the toast header.
+     * @param toastInfo The toast object to be rendered.
+     */
+    private static renderTimer(toastInfo: IToast) {
+        let timer: HTMLElement = toastInfo.toast.querySelector(".timer");
+
+        switch (enableTimers) {
+            case TOAST_TIMERS.ELAPSED:
+                timer.innerText = "just now";
+                // Start a timer that updates the text of the time indicator every minute
+                // Initially set to 1 because for the first minute the indicator reads "just now"
+                let minutes: number = 1
+                let elapsedTimer: number = setInterval(() => {
+                    timer.innerText = `${minutes}m ago`;
+                    minutes++;
+                }, 60 * 1000);
+
+                // When the toast hides, delete its timer instance
+                toastInfo.toast.addEventListener('hidden.bs.toast', () => {
+                    clearInterval(elapsedTimer);
+                });
+                break;
+            case TOAST_TIMERS.COUNTDOWN:
+                if (toastInfo.timeout > 0) {
+                    // Start a timer that updates the text of the time indicator every minute
+                    // Initially set to 1 because for the first minute the indicator reads "just now"
+                    let seconds = toastInfo.timeout / 1000;
+                    timer.innerText = `${seconds}s`;
+                    let countdownTimer: number = setInterval(() => {
+                        timer.innerText = `${seconds - 1}s`;
+                        seconds--;
+                    }, 1000);
+
+                    // When the toast hides, delete its timer instance
+                    toastInfo.toast.addEventListener('hidden.bs.toast', () => {
+                        clearInterval(countdownTimer);
+                    });
+                    break;
+                }
+            default:
+                let toastHeader: HTMLElement = toastInfo.toast.querySelector(".toast-header");
+                toastHeader.removeChild(timer);
+                break;
+        }
+    }
+
+    /**
      * @deprecated This will be removed in a future version. Migrate to the new configure method.
      * 
      * Shorthand function for quickly setting multiple global toast configurations.
@@ -338,10 +372,10 @@ class Toast {
             maxToasts: maxToasts,
             placement: placement,
             theme: theme,
-            enableTimers: enableTimers
+            enableTimers: enableTimers ? TOAST_TIMERS.ELAPSED : TOAST_TIMERS.NONE
         }
 
-        Toast.configure(configuration);
+        this.configure(configuration);
     }
 
     /**
@@ -363,6 +397,6 @@ class Toast {
             timeout: timeout
         }
 
-        Toast.create(toast);
+        this.create(toast);
     }
 }

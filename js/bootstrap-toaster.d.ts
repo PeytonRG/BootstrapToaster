@@ -37,12 +37,18 @@ declare enum TOAST_THEME {
     LIGHT = 1,
     DARK = 2
 }
+/** Defines the valid options for toast header timers. */
+declare enum TOAST_TIMERS {
+    ELAPSED = 1,
+    COUNTDOWN = 2,
+    NONE = 3
+}
 /** Maximum amount of toasts to be allowed on the page at once. */
 declare var maxToastCount: number;
 /** Number of toasts currently rendered on the page. */
 declare var currentToastCount: number;
-/** Controls whether elapsed time will be displayed in the toast header. */
-declare var enableTimers: boolean;
+/** Controls whether toasts will have elapsed or countdown timers. */
+declare var enableTimers: TOAST_TIMERS;
 /** Controls whether to queue toasts that exceed the maximum toast count. */
 declare var enableQueue: boolean;
 interface IToast {
@@ -59,7 +65,7 @@ interface IConfiguration {
     maxToasts?: number;
     placement?: TOAST_PLACEMENT;
     theme?: TOAST_THEME;
-    enableTimers?: boolean;
+    enableTimers?: TOAST_TIMERS;
     enableQueue?: boolean;
 }
 declare class Toast {
@@ -81,15 +87,15 @@ declare class Toast {
     static setPlacement(placement: TOAST_PLACEMENT): void;
     /**
      * Sets the toasts' theme to light or dark. If unset, they will follow OS light/dark preference.
-     * @param {TOAST_THEME} theme The toast theme. Options are TOAST_THEME.LIGHT and TOAST_THEME.DARK.
+     * @param {TOAST_THEME} theme The toast theme.
      */
     static setTheme(theme?: TOAST_THEME): void;
     /**
-     * Enables or disables toasts displaying elapsed time since appearing in the header.
-     * Timers are enabled by default.
-     * @param {boolean} enabled Controls whether elapsed time will be displayed in the toast header.
+     * Sets whether timers in the toast header will display elapsed time or a countdown.
+     * Timers display elapsed time by default.
+     * @param type The timer type.
      */
-    static enableTimers(enabled?: boolean): void;
+    static enableTimers(type: TOAST_TIMERS): void;
     /**
      * Enables or disables toasts queueing after the maximum toast count is reached.
      * Queuing is enabled by default.
@@ -114,6 +120,11 @@ declare class Toast {
      * @param {IToast} toastInfo The toast object to be rendered.
      */
     private static render;
+    /**
+     * Handles the rendering of the timer in the toast header.
+     * @param toastInfo The toast object to be rendered.
+     */
+    private static renderTimer;
     /**
      * @deprecated This will be removed in a future version. Migrate to the new configure method.
      *
