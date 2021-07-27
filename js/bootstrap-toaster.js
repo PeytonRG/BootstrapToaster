@@ -277,7 +277,7 @@ class Toast {
     static renderTimer(toastInfo) {
         let timer = toastInfo.toast.querySelector(".timer");
         switch (enableTimers) {
-            case TOAST_TIMERS.ELAPSED:
+            case TOAST_TIMERS.ELAPSED: {
                 timer.innerText = "just now";
                 // Start a timer that updates the text of the time indicator every minute
                 // Initially set to 1 because for the first minute the indicator reads "just now"
@@ -291,7 +291,8 @@ class Toast {
                     clearInterval(elapsedTimer);
                 });
                 break;
-            case TOAST_TIMERS.COUNTDOWN:
+            }
+            case TOAST_TIMERS.COUNTDOWN: {
                 if (toastInfo.timeout > 0) {
                     // Start a timer that updates the text of the time indicator every minute
                     // Initially set to 1 because for the first minute the indicator reads "just now"
@@ -307,10 +308,12 @@ class Toast {
                     });
                     break;
                 }
-            default:
+            }
+            default: {
                 let toastHeader = toastInfo.toast.querySelector(".toast-header");
                 toastHeader.removeChild(timer);
                 break;
+            }
         }
     }
     /**
@@ -333,7 +336,7 @@ class Toast {
     }
     /**
      * @deprecated This will be removed in a future version. Migrate to the new create method.
-      
+     *
      * Endpoint to generate Bootstrap toasts from a template and insert their HTML onto the page,
      * run timers for each's elapsed time since appearing, and remove them from the
      * DOM after they are hidden. Caps toast count at maxToastCount.

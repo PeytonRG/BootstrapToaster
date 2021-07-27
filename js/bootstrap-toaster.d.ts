@@ -137,7 +137,7 @@ declare class Toast {
     static oldConfigure(maxToasts?: number, placement?: number, theme?: number, enableTimers?: boolean): void;
     /**
      * @deprecated This will be removed in a future version. Migrate to the new create method.
-      
+     *
      * Endpoint to generate Bootstrap toasts from a template and insert their HTML onto the page,
      * run timers for each's elapsed time since appearing, and remove them from the
      * DOM after they are hidden. Caps toast count at maxToastCount.

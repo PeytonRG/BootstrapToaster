@@ -319,7 +319,7 @@ class Toast {
         let timer: HTMLElement = toastInfo.toast.querySelector(".timer");
 
         switch (enableTimers) {
-            case TOAST_TIMERS.ELAPSED:
+            case TOAST_TIMERS.ELAPSED: {
                 timer.innerText = "just now";
                 // Start a timer that updates the text of the time indicator every minute
                 // Initially set to 1 because for the first minute the indicator reads "just now"
@@ -334,7 +334,8 @@ class Toast {
                     clearInterval(elapsedTimer);
                 });
                 break;
-            case TOAST_TIMERS.COUNTDOWN:
+            }
+            case TOAST_TIMERS.COUNTDOWN: {
                 if (toastInfo.timeout > 0) {
                     // Start a timer that updates the text of the time indicator every minute
                     // Initially set to 1 because for the first minute the indicator reads "just now"
@@ -351,16 +352,18 @@ class Toast {
                     });
                     break;
                 }
-            default:
+            }
+            default: {
                 let toastHeader: HTMLElement = toastInfo.toast.querySelector(".toast-header");
                 toastHeader.removeChild(timer);
                 break;
+            }
         }
     }
 
     /**
      * @deprecated This will be removed in a future version. Migrate to the new configure method.
-     * 
+     *
      * Shorthand function for quickly setting multiple global toast configurations.
      * @param {number} maxToasts The maximum number of toasts allowed on the page at once.
      * @param {number} placement The toast container's placement on-screen, defaults to top right. This will not affect small screens in portrait.
@@ -380,7 +383,7 @@ class Toast {
 
     /**
      * @deprecated This will be removed in a future version. Migrate to the new create method.
-      
+     *
      * Endpoint to generate Bootstrap toasts from a template and insert their HTML onto the page,
      * run timers for each's elapsed time since appearing, and remove them from the
      * DOM after they are hidden. Caps toast count at maxToastCount.
