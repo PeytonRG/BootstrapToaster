@@ -39,12 +39,12 @@ declare enum TOAST_THEME {
 }
 /** Maximum amount of toasts to be allowed on the page at once. */
 declare var maxToastCount: number;
-/** Controls whether to queue toasts that exceed the maximum toast count. */
-declare var enableQueue: boolean;
 /** Number of toasts currently rendered on the page. */
 declare var currentToastCount: number;
 /** Controls whether elapsed time will be displayed in the toast header. */
 declare var enableTimers: boolean;
+/** Controls whether to queue toasts that exceed the maximum toast count. */
+declare var enableQueue: boolean;
 interface IToast {
     toast: HTMLElement;
     timeout: number;
@@ -114,5 +114,27 @@ declare class Toast {
      * @param {IToast} toastInfo The toast object to be rendered.
      */
     private static render;
+    /**
+     * @deprecated This will be removed in a future version. Migrate to the new configure method.
+     *
+     * Shorthand function for quickly setting multiple global toast configurations.
+     * @param {number} maxToasts The maximum number of toasts allowed on the page at once.
+     * @param {number} placement The toast container's placement on-screen, defaults to top right. This will not affect small screens in portrait.
+     * @param {number} theme The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
+     * @param {boolean} enableTimers Controls whether elapsed time will be displayed in the toast header.
+     */
+    static oldConfigure(maxToasts?: number, placement?: number, theme?: number, enableTimers?: boolean): void;
+    /**
+     * @deprecated This will be removed in a future version. Migrate to the new create method.
+      
+     * Endpoint to generate Bootstrap toasts from a template and insert their HTML onto the page,
+     * run timers for each's elapsed time since appearing, and remove them from the
+     * DOM after they are hidden. Caps toast count at maxToastCount.
+     * @param {string} title The text of the toast's header.
+     * @param {string} message The text of the toast's body.
+     * @param {TOAST_STATUS} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
+     * @param {number} timeout Time in ms until toast disappears automatically. Defaults to 0, which is indefinite.
+     */
+    static oldCreate(title: string, message: string, status?: TOAST_STATUS, timeout?: number): void;
 }
 //# sourceMappingURL=bootstrap-toaster.d.ts.map

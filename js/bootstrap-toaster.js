@@ -62,12 +62,12 @@ var TOAST_THEME;
 ;
 /** Maximum amount of toasts to be allowed on the page at once. */
 var maxToastCount = 4;
-/** Controls whether to queue toasts that exceed the maximum toast count. */
-var enableQueue = true;
 /** Number of toasts currently rendered on the page. */
 var currentToastCount = 0;
 /** Controls whether elapsed time will be displayed in the toast header. */
 var enableTimers = true;
+/** Controls whether to queue toasts that exceed the maximum toast count. */
+var enableQueue = true;
 class Toast {
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
@@ -279,6 +279,44 @@ class Toast {
                 this.render(queuedToast);
             }
         });
+    }
+    /**
+     * @deprecated This will be removed in a future version. Migrate to the new configure method.
+     *
+     * Shorthand function for quickly setting multiple global toast configurations.
+     * @param {number} maxToasts The maximum number of toasts allowed on the page at once.
+     * @param {number} placement The toast container's placement on-screen, defaults to top right. This will not affect small screens in portrait.
+     * @param {number} theme The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
+     * @param {boolean} enableTimers Controls whether elapsed time will be displayed in the toast header.
+     */
+    static oldConfigure(maxToasts = null, placement = TOAST_PLACEMENT.TOP_RIGHT, theme = null, enableTimers = true) {
+        const configuration = {
+            maxToasts: maxToasts,
+            placement: placement,
+            theme: theme,
+            enableTimers: enableTimers
+        };
+        Toast.configure(configuration);
+    }
+    /**
+     * @deprecated This will be removed in a future version. Migrate to the new create method.
+      
+     * Endpoint to generate Bootstrap toasts from a template and insert their HTML onto the page,
+     * run timers for each's elapsed time since appearing, and remove them from the
+     * DOM after they are hidden. Caps toast count at maxToastCount.
+     * @param {string} title The text of the toast's header.
+     * @param {string} message The text of the toast's body.
+     * @param {TOAST_STATUS} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
+     * @param {number} timeout Time in ms until toast disappears automatically. Defaults to 0, which is indefinite.
+     */
+    static oldCreate(title, message, status = 0, timeout = 0) {
+        const toast = {
+            title: title,
+            message: message,
+            status: status,
+            timeout: timeout
+        };
+        Toast.create(toast);
     }
 }
 Toast.queue = [];
