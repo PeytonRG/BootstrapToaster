@@ -39,41 +39,59 @@
             <h2 class="text-center">Getting Started</h2>
             <div class="col-md-6">
                 <!-- First code snippet -->
-                <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px">myButton.<span class="hljs-attribute">onclick</span> = function () {
-    <span class="hljs-type">Toast</span>.<span class="hljs-attribute">create</span>(<span class="hljs-string">"Voila!"</span>, <span class="hljs-string">"How easy was that?"</span>, <span class="hljs-type">TOAST_STATUS</span>.<span class="hljs-attribute">SUCCESS</span>, <span class="hljs-number">5000</span>);
+                <pre><code class="hljs" style="background:#030303;border-radius:8px">myButton.<span class="hljs-attribute">onclick</span> = () =&gt; {
+    <span class="hljs-keyword">let</span> toast = {
+        title: <span class="hljs-string">"Voila!"</span>,
+        message: <span class="hljs-string">"How easy was that?"</span>,
+        status: <span class="hljs-type">TOAST_STATUS</span>.<span class="hljs-attribute">SUCCESS</span>,
+        timeout: <span class="hljs-number">5000</span>
+    }
+    <span class="hljs-type">Toast</span>.<span class="hljs-attribute">create</span>(toast);
 }</code></pre>
                 <!-- Second code snippet -->
-                <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px">$.<span class="hljs-attribute">ajax</span>({
+                <pre><code class="hljs" style="background:#030303;border-radius:8px">$.<span class="hljs-attribute">ajax</span>({
     type: <span class="hljs-string">"POST"</span>,
     url: <span class="hljs-string">"https://some-web-api/endpoint"</span>,
     data: {
         .<span class="hljs-literal"></span>.<span class="hljs-attribute"></span>.<span class="hljs-attribute"></span>
     },
     success: function (response) {
-        response = <span class="hljs-type">JSON</span>.<span class="hljs-attribute">parse</span>(response);
-        <span class="hljs-type">Toast</span>.<span class="hljs-attribute">create</span>(<span class="hljs-string">"Success"</span>, response.<span class="hljs-attribute">message</span>, <span class="hljs-type">TOAST_STATUS</span>.<span class="hljs-attribute">SUCCESS</span>, <span class="hljs-number">10000</span>);
+        <span class="hljs-keyword">let</span> toast = {
+            title: <span class="hljs-string">"Success"</span>,
+            message: response,
+            status: <span class="hljs-type">TOAST_STATUS</span>.<span class="hljs-attribute">SUCCESS</span>,
+            timeout: <span class="hljs-number">10000</span>
+        }
+        <span class="hljs-type">Toast</span>.<span class="hljs-attribute">create</span>(toast);
     },
     error: function (response) {
         console.<span class="hljs-attribute">error</span>(response);
-        <span class="hljs-type">Toast</span>.<span class="hljs-attribute">create</span>(<span class="hljs-string">"Error"</span>, response.<span class="hljs-attribute">message</span>, <span class="hljs-type">TOAST_STATUS</span>.<span class="hljs-attribute">DANGER</span>);
+        <span class="hljs-keyword">let</span> toast = {
+            title: <span class="hljs-string">"Error"</span>,
+            message: response,
+            status: <span class="hljs-type">TOAST_STATUS</span>.<span class="hljs-attribute">DANGER</span>
+        }
+        <span class="hljs-type">Toast</span>.<span class="hljs-attribute">create</span>(toast);
     }
 });</code></pre>
             </div>
             <div class="col-md-6 d-flex flex-column align-items-center">
                 <p>Creating a toast is simple. All you need is a call to <span
-                        class="badge bg-dark">Toast.create()</span> to get started. It supports the following 4
-                    parameters
+                        class="badge bg-dark">Toast.create()</span> to get started. Simply pass an object with the
+                    following properties
                 </p>
                 <ol>
                     <li>title: The text of the toast's header.</li>
                     <li>message: The text of the toast's body. Supports plain text and HTML!</li>
                     <li>status: The status/urgency of the toast. Affects status icon and ARIA accessibility features.
-                        Defaults to 0, which renders no icon and has the same ARIA attributes as success and info toasts
+                        Optional, and defaults to 0, which renders no icon and has the same ARIA attributes as success
+                        and info toasts
                     </li>
-                    <li>timeout: Time in ms until toast disappears automatically. Defaults to 0, in which case the toast
+                    <li>timeout: Time in ms until toast disappears automatically. Optional, and defaults to 0, in which
+                        case the toast
                         must be manually dismissed.</li>
                 </ol>
-                <p>There are 4 built-in options for toast status in the call to Toast.create(), named after Bootstrap's
+                <p>There are 4 built-in options for toast status, named after Bootstrap's
                     color convention. They are as follows:</p>
 
                 <div id="startGrid">
@@ -100,9 +118,7 @@
         <div class="row justify-content-center mt-3">
             <div class="col-md-6 d-flex flex-column align-items-center">
                 <h2 class="text-center">Placement</h2>
-                <pre
-                    class="align-self-stretch"><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">setPlacement</span>(<span class="hljs-type">TOAST_PLACEMENT</span>.<span class="hljs-attribute">MIDDLE_CENTER</span>);
-<span class="hljs-type">Toast</span>.<span class="hljs-attribute">create</span>(<span class="hljs-string">"Placement Updated"</span>, <span class="hljs-string">"Current placement: X"</span>, <span class="hljs-type">TOAST_STATUS</span>.<span class="hljs-attribute">SUCCESS</span>, <span class="hljs-number">5000</span>);</code></pre>
+                <pre><code class="hljs" style="background:#030303;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">setPlacement</span>(<span class="hljs-type">TOAST_PLACEMENT</span>.<span class="hljs-attribute">MIDDLE_CENTER</span>);</code></pre>
                 <p>By default, the toast container will be fixed to the top right corner of the screen on larger screen
                     sizes, and top center on mobile. The <span class="badge bg-primary">Toast.setPlacement()</span>
                     function allows that positioning to be
@@ -144,9 +160,7 @@
 
             <div class="col-md-6 d-flex flex-column align-items-center">
                 <h2 class="text-center">Theming</h2>
-                <pre
-                    class="align-self-stretch"><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">setTheme</span>(<span class="hljs-type">TOAST_THEME</span>.<span class="hljs-attribute">LIGHT</span>);
-<span class="hljs-type">Toast</span>.<span class="hljs-attribute">create</span>(<span class="hljs-string">"Theme Updated"</span>, <span class="hljs-string">"Current theme: X"</span>, <span class="hljs-type">TOAST_STATUS</span>.<span class="hljs-attribute">SUCCESS</span>, <span class="hljs-number">5000</span>);</code></pre>
+                <pre><code class="hljs" style="background:#030303;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">setTheme</span>(<span class="hljs-type">TOAST_THEME</span>.<span class="hljs-attribute">LIGHT</span>);</code></pre>
                 <p>In supported browsers and operating systems, toasts will automatically choose a theme based on the
                     user's OS settings. However, there may be times where you want to force one theme or the other. In
                     that case, the <span class="badge bg-primary">Toast.setTheme()</span> function is for you! Each
