@@ -87,13 +87,13 @@ interface IConfiguration {
 class Toast {
 
     /** Maximum amount of toasts to be allowed on the page at once. */
-    public static maxToastCount: number = 4;
+    private static maxToastCount: number = 4;
     /** Number of toasts currently rendered on the page. */
-    public static currentToastCount: number = 0;
+    private static currentToastCount: number = 0;
     /** Controls whether toasts will have elapsed or countdown timers. */
-    public static timersEnabled: TOAST_TIMERS = TOAST_TIMERS.ELAPSED;
+    private static timersEnabled: TOAST_TIMERS = TOAST_TIMERS.ELAPSED;
     /** Controls whether to queue toasts that exceed the maximum toast count. */
-    public static queueEnabled: boolean = true;
+    private static queueEnabled: boolean = true;
 
     private static queue: IToast[] = [];
 

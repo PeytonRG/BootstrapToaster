@@ -62,13 +62,13 @@ interface IConfiguration {
 }
 declare class Toast {
     /** Maximum amount of toasts to be allowed on the page at once. */
-    static maxToastCount: number;
+    private static maxToastCount;
     /** Number of toasts currently rendered on the page. */
-    static currentToastCount: number;
+    private static currentToastCount;
     /** Controls whether toasts will have elapsed or countdown timers. */
-    static timersEnabled: TOAST_TIMERS;
+    private static timersEnabled;
     /** Controls whether to queue toasts that exceed the maximum toast count. */
-    static queueEnabled: boolean;
+    private static queueEnabled;
     private static queue;
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
