@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
-        integrity="sha256-z8OR40MowJ8GgK6P89Y+hiJK5+cclzFHzLhFQLL92bg=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+        integrity="sha256-sAcc18zvMnaJZrNT4v8J0T4HqzEUiUTlVFgDIywjQek=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
         integrity="sha256-PDJQdTN7dolQWDASIoBVrjkuOEaI137FI15sqI3Oxu8=" crossorigin="anonymous">
     <!-- Release -->
@@ -184,19 +184,38 @@
             <div class="col-md-6">
                 <h2 class="text-center">Maximum Toast Count</h2>
                 <div class="d-flex flex-column align-items-center">
-                    <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">setMaxCount</span>(<span class="hljs-number">6</span>);</code></pre>
+                    <pre><code class="hljs" style="background:#030303;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">setMaxCount</span>(<span class="hljs-number">6</span>);
+<span class="hljs-type">Toast</span>.<span class="hljs-attribute">enableQueue</span>(<span class="hljs-literal">true</span>);</code></pre>
 
-                    <p>To avoid becoming a nuisance to users, especially if the creation of toasts is automated, a limit
+                    <p>
+                        To avoid becoming a nuisance to users, especially if the creation of toasts is automated, a
+                        limit
                         is in place to prevent too many toasts from being visible at once. By default, this limit is 4
                         toasts, but this can also be changed.
                         The tool of choice is the
                         <span class="badge bg-primary">Toast.setMaxCount()</span> function. Below is an example of
                         raising toast limit to 6 toasts.
                     </p>
+                    <p>
+                        Additionally, toasts can enter a queue when the limit is reached to be rendered as existing
+                        toasts disappear.
+                        This queue is enabled by default, and can be changed with <span
+                            class="badge bg-primary">Toast.enableQueue()</span>
+                    </p>
 
-                    <div class="form-floating ms-3">
-                        <input id="maxCountInput" class="form-control" type="number" placeholder="6" />
-                        <label for="maxCountInput">Set Max Count</label>
+                    <div class="d-flex justify-content-center">
+                        <div class="form-floating me-3">
+                            <input id="maxCountInput" class="form-control" type="number" placeholder="6" />
+                            <label for="maxCountInput">Set Max Count</label>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <button data-queue="1" class="me-3 queue-btn btn btn-success">
+                                Enable Queue
+                            </button>
+                            <button data-queue="0" class="queue-btn btn btn-danger">
+                                Disable Queue
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -204,16 +223,23 @@
             <div class="col-md-6">
                 <h2 class="text-center">Toast Timers</h2>
                 <div class="d-flex flex-column align-items-center">
-                    <pre><code class="hljs" style="background:#1E1E1E;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">enableTimers</span>(<span class="hljs-literal">false</span>);</code></pre>
+                    <pre><code class="hljs" style="background:#030303;border-radius:8px"><span class="hljs-type">Toast</span>.<span class="hljs-attribute">enableTimers</span>(<span class="hljs-type">TOAST_TIMERS</span>.<span class="hljs-attribute">ELAPSED</span>);
+<span class="hljs-type">Toast</span>.<span class="hljs-attribute">enableTimers</span>(<span class="hljs-type">TOAST_TIMERS</span>.<span class="hljs-attribute">COUNTDOWN</span>);
+<span class="hljs-type">Toast</span>.<span class="hljs-attribute">enableTimers</span>(<span class="hljs-type">TOAST_TIMERS</span>.<span class="hljs-attribute">DISABLED</span>);</code></pre>
 
-                    <p>Perhaps you aren't a fan of the elapsed timers on each toast, or would like to save every
-                        resource you can by not running the timers in the background. Luckily, there's a function for
-                        that, too. Introducing <span class="badge bg-primary">Toast.enableTimers()</span>:
+                    <p>
+                        Toasts can display timers as well! By default, a toast will display the elapsed time since
+                        it was rendered,
+                        but a countdown timer is also available to show when the toast will disappear. Introducing <span
+                            class="badge bg-primary">Toast.enableTimers()</span>:
                     </p>
 
                     <div class="d-flex justify-content-center">
-                        <button data-timer="1" class="me-3 timer-btn btn btn-success">
-                            Enabled
+                        <button data-timer="1" class="me-3 timer-btn btn btn-primary">
+                            Elapsed
+                        </button>
+                        <button data-timer="2" class="me-3 timer-btn btn btn-secondary">
+                            Countdown
                         </button>
                         <button data-timer="0" class="timer-btn btn btn-danger">
                             Disabled
@@ -229,6 +255,8 @@
                 <p>Bootstrap Toaster offers versions for both Bootstrap 4 and Bootstrap 5! For Bootstrap 4
                     compatibility, use version 4.x, and for Bootstrap 5, use version 5.x. They are functionally
                     identical and both fully supported!</p>
+                <small>Note: Queueing and countdown timers are currently exclusive to version 5.1.0 and later. A version
+                    4.1.0 is in development.</small>
             </div>
             <div class="col-md-6">
                 <h2 class="text-center">Accessibility</h2>
@@ -286,8 +314,8 @@
 </body>
 
 <!-- JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
-    integrity="sha256-c4Ll6eSIg6Eothk8pCWAF8aE923EvtU11pqjBy+NjNM=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"
+    integrity="sha256-/hGxZHGQ57fXLp+NDusFZsZo/PG21Bp2+hXYV5a6w+g=" crossorigin="anonymous"></script>
 <!-- Release -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-toaster@5.0.0/js/bootstrap-toaster.min.js"
     integrity="sha256-E/PJ33rPJDlm6dBIERc+A2Yy0JpPL58dUKQNO01GjBo=" crossorigin="anonymous"></script> -->

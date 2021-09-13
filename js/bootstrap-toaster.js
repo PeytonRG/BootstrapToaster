@@ -60,18 +60,10 @@ var TOAST_THEME;
 /** Defines the valid options for toast header timers. */
 var TOAST_TIMERS;
 (function (TOAST_TIMERS) {
+    TOAST_TIMERS[TOAST_TIMERS["DISABLED"] = 0] = "DISABLED";
     TOAST_TIMERS[TOAST_TIMERS["ELAPSED"] = 1] = "ELAPSED";
     TOAST_TIMERS[TOAST_TIMERS["COUNTDOWN"] = 2] = "COUNTDOWN";
-    TOAST_TIMERS[TOAST_TIMERS["NONE"] = 3] = "NONE";
 })(TOAST_TIMERS || (TOAST_TIMERS = {}));
-/** Maximum amount of toasts to be allowed on the page at once. */
-var maxToastCount = 4;
-/** Number of toasts currently rendered on the page. */
-var currentToastCount = 0;
-/** Controls whether toasts will have elapsed or countdown timers. */
-var enableTimers = TOAST_TIMERS.ELAPSED;
-/** Controls whether to queue toasts that exceed the maximum toast count. */
-var enableQueue = true;
 class Toast {
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
@@ -91,7 +83,7 @@ class Toast {
     static setMaxCount(maxToasts) {
         if (maxToasts !== null) {
             if (maxToasts > 0) {
-                maxToastCount = maxToasts;
+                this.maxToastCount = maxToasts;
             }
             else {
                 console.error("The maximum number of toasts must be greater than 0. Reverting to default.");
@@ -172,7 +164,7 @@ class Toast {
      * @param type The timer type.
      */
     static enableTimers(type) {
-        enableTimers = type;
+        this.timersEnabled = type;
     }
     /**
      * Enables or disables toasts queueing after the maximum toast count is reached.
@@ -180,7 +172,10 @@ class Toast {
      * @param {boolean} enabled Controls whether queue is enabled.
      */
     static enableQueue(enabled = true) {
-        enableQueue = enabled;
+        this.queueEnabled = enabled;
+        // Empty the queue once it's disabled.
+        if (!enabled)
+            this.queue = [];
     }
     /**
      * Endpoint to generate Bootstrap toasts from a template and insert their HTML onto the page,
@@ -196,8 +191,8 @@ class Toast {
         toastBody.innerHTML = toastOptions.message;
         this.setStatus(toastEl, toastOptions.status);
         // Add toast to the queue if it would exceed maxToastCount
-        if (currentToastCount >= maxToastCount) {
-            if (!enableQueue)
+        if (this.currentToastCount >= this.maxToastCount) {
+            if (!this.queueEnabled)
                 return;
             const toastToQueue = {
                 toast: toastEl,
@@ -256,12 +251,12 @@ class Toast {
         // Initialize Bootstrap 5's toast plugin
         const bsToast = new window["bootstrap"].Toast(toastInfo.toast);
         bsToast.show();
-        currentToastCount++;
+        this.currentToastCount++;
         // When the toast hides, remove it from the DOM
         toastInfo.toast.addEventListener('hidden.bs.toast', () => {
             TOAST_CONTAINER.removeChild(toastInfo.toast);
-            currentToastCount--;
-            if (enableQueue && this.queue.length > 0 && currentToastCount < maxToastCount) {
+            this.currentToastCount--;
+            if (this.queueEnabled && this.queue.length > 0 && this.currentToastCount < this.maxToastCount) {
                 const queuedToast = this.queue.shift();
                 this.render(queuedToast);
             }
@@ -273,7 +268,7 @@ class Toast {
      */
     static renderTimer(toastInfo) {
         let timer = toastInfo.toast.querySelector(".timer");
-        switch (enableTimers) {
+        switch (this.timersEnabled) {
             case TOAST_TIMERS.ELAPSED: {
                 timer.innerText = "just now";
                 // Start a timer that updates the text of the time indicator every minute
@@ -327,7 +322,7 @@ class Toast {
             maxToasts: maxToasts,
             placement: placement,
             theme: theme,
-            enableTimers: enableTimers ? TOAST_TIMERS.ELAPSED : TOAST_TIMERS.NONE
+            enableTimers: enableTimers ? TOAST_TIMERS.ELAPSED : TOAST_TIMERS.DISABLED
         };
         this.configure(configuration);
     }
@@ -359,8 +354,16 @@ class Toast {
      * @param {boolean} enabled Controls whether elapsed time will be displayed in the toast header.
      */
     static oldEnableTimers(enabled) {
-        enableTimers = enabled ? TOAST_TIMERS.ELAPSED : TOAST_TIMERS.NONE;
+        this.timersEnabled = enabled ? TOAST_TIMERS.ELAPSED : TOAST_TIMERS.DISABLED;
     }
 }
+/** Maximum amount of toasts to be allowed on the page at once. */
+Toast.maxToastCount = 4;
+/** Number of toasts currently rendered on the page. */
+Toast.currentToastCount = 0;
+/** Controls whether toasts will have elapsed or countdown timers. */
+Toast.timersEnabled = TOAST_TIMERS.ELAPSED;
+/** Controls whether to queue toasts that exceed the maximum toast count. */
+Toast.queueEnabled = true;
 Toast.queue = [];
 //# sourceMappingURL=bootstrap-toaster.js.map

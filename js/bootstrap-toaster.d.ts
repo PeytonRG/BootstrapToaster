@@ -39,18 +39,10 @@ declare enum TOAST_THEME {
 }
 /** Defines the valid options for toast header timers. */
 declare enum TOAST_TIMERS {
+    DISABLED = 0,
     ELAPSED = 1,
-    COUNTDOWN = 2,
-    NONE = 3
+    COUNTDOWN = 2
 }
-/** Maximum amount of toasts to be allowed on the page at once. */
-declare var maxToastCount: number;
-/** Number of toasts currently rendered on the page. */
-declare var currentToastCount: number;
-/** Controls whether toasts will have elapsed or countdown timers. */
-declare var enableTimers: TOAST_TIMERS;
-/** Controls whether to queue toasts that exceed the maximum toast count. */
-declare var enableQueue: boolean;
 interface IToast {
     toast: HTMLElement;
     timeout: number;
@@ -69,6 +61,14 @@ interface IConfiguration {
     enableQueue?: boolean;
 }
 declare class Toast {
+    /** Maximum amount of toasts to be allowed on the page at once. */
+    static maxToastCount: number;
+    /** Number of toasts currently rendered on the page. */
+    static currentToastCount: number;
+    /** Controls whether toasts will have elapsed or countdown timers. */
+    static timersEnabled: TOAST_TIMERS;
+    /** Controls whether to queue toasts that exceed the maximum toast count. */
+    static queueEnabled: boolean;
     private static queue;
     /**
      * Shorthand function for quickly setting multiple global toast configurations.

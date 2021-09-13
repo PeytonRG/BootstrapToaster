@@ -71,8 +71,8 @@ infoBtn.onclick = () => {
 var placementBtns = document.querySelectorAll(".placement-grid-btn");
 placementBtns.forEach(btn => {
     btn.onclick = () => {
-        var placement = btn.getAttribute("data-placement");
-        Toast.setPlacement(parseInt(placement));
+        var placement = parseInt(btn.getAttribute("data-placement"));
+        Toast.setPlacement(placement);
         let toast = {
             title: "Placement Updated",
             message: `Current placement: ${btn.innerText}`,
@@ -102,11 +102,27 @@ maxCountInput.onchange = () => {
 var themeBtns = document.querySelectorAll(".theme-btn");
 themeBtns.forEach(btn => {
     btn.onclick = () => {
-        var theme = btn.getAttribute("data-theme");
-        Toast.setTheme(parseInt(theme));
+        var theme = parseInt(btn.getAttribute("data-theme"));
+        Toast.setTheme(theme);
         let toast = {
             title: "Theme Updated",
             message: `Current theme: ${btn.innerText}`,
+            status: TOAST_STATUS.SUCCESS,
+            timeout: timeout
+        }
+        Toast.create(toast);
+    };
+});
+
+// Queue
+var queueBtns = document.querySelectorAll(".queue-btn");
+queueBtns.forEach(btn => {
+    btn.onclick = () => {
+        var enableQueue = parseInt(btn.getAttribute("data-queue"));
+        Toast.enableQueue(enableQueue);
+        let toast = {
+            title: "Queue Setting Updated",
+            message: `The toast queue has been ${enableQueue ? "enabled" : "disabled"}.`,
             status: TOAST_STATUS.SUCCESS,
             timeout: timeout
         }
@@ -118,11 +134,11 @@ themeBtns.forEach(btn => {
 var timerBtns = document.querySelectorAll(".timer-btn");
 timerBtns.forEach(btn => {
     btn.onclick = () => {
-        var useTimers = btn.getAttribute("data-timer");
-        Toast.enableTimers(parseInt(useTimers));
+        var useTimers = parseInt(btn.getAttribute("data-timer"));
+        Toast.enableTimers(useTimers);
         let toast = {
-            title: `Timers ${btn.innerText}`,
-            message: `Timers have been ${btn.innerText.toLowerCase()}.`,
+            title: "Timer Setting Updated",
+            message: `New toasts will have ${btn.innerText.toLowerCase()} timers.`,
             status: TOAST_STATUS.SUCCESS,
             timeout: timeout
         }

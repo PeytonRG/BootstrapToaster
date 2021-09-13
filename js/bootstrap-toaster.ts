@@ -59,19 +59,10 @@ enum TOAST_THEME {
 }
 /** Defines the valid options for toast header timers. */
 enum TOAST_TIMERS {
-    ELAPSED = 1,
+    DISABLED,
+    ELAPSED,
     COUNTDOWN,
-    NONE
 }
-
-/** Maximum amount of toasts to be allowed on the page at once. */
-var maxToastCount: number = 4;
-/** Number of toasts currently rendered on the page. */
-var currentToastCount: number = 0;
-/** Controls whether toasts will have elapsed or countdown timers. */
-var enableTimers: TOAST_TIMERS = TOAST_TIMERS.ELAPSED;
-/** Controls whether to queue toasts that exceed the maximum toast count. */
-var enableQueue: boolean = true;
 
 interface IToast {
     toast: HTMLElement;
@@ -95,6 +86,15 @@ interface IConfiguration {
 
 class Toast {
 
+    /** Maximum amount of toasts to be allowed on the page at once. */
+    public static maxToastCount: number = 4;
+    /** Number of toasts currently rendered on the page. */
+    public static currentToastCount: number = 0;
+    /** Controls whether toasts will have elapsed or countdown timers. */
+    public static timersEnabled: TOAST_TIMERS = TOAST_TIMERS.ELAPSED;
+    /** Controls whether to queue toasts that exceed the maximum toast count. */
+    public static queueEnabled: boolean = true;
+
     private static queue: IToast[] = [];
 
     /**
@@ -116,7 +116,7 @@ class Toast {
     public static setMaxCount(maxToasts: number): void {
         if (maxToasts !== null) {
             if (maxToasts > 0) {
-                maxToastCount = maxToasts;
+                this.maxToastCount = maxToasts;
             }
             else {
                 console.error("The maximum number of toasts must be greater than 0. Reverting to default.");
@@ -200,7 +200,7 @@ class Toast {
      * @param type The timer type.
      */
     public static enableTimers(type: TOAST_TIMERS): void {
-        enableTimers = type;
+        this.timersEnabled = type;
     }
 
     /**
@@ -209,7 +209,10 @@ class Toast {
      * @param {boolean} enabled Controls whether queue is enabled.
      */
     public static enableQueue(enabled: boolean = true): void {
-        enableQueue = enabled;
+        this.queueEnabled = enabled;
+        // Empty the queue once it's disabled.
+        if (!enabled)
+            this.queue = [];
     }
 
     /**
@@ -230,8 +233,8 @@ class Toast {
         this.setStatus(toastEl, toastOptions.status);
 
         // Add toast to the queue if it would exceed maxToastCount
-        if (currentToastCount >= maxToastCount) {
-            if (!enableQueue)
+        if (this.currentToastCount >= this.maxToastCount) {
+            if (!this.queueEnabled)
                 return;
 
             const toastToQueue: IToast = {
@@ -298,13 +301,13 @@ class Toast {
         // Initialize Bootstrap 5's toast plugin
         const bsToast = new window["bootstrap"].Toast(toastInfo.toast);
         bsToast.show();
-        currentToastCount++;
+        this.currentToastCount++;
 
         // When the toast hides, remove it from the DOM
         toastInfo.toast.addEventListener('hidden.bs.toast', () => {
             TOAST_CONTAINER.removeChild(toastInfo.toast);
-            currentToastCount--;
-            if (enableQueue && this.queue.length > 0 && currentToastCount < maxToastCount) {
+            this.currentToastCount--;
+            if (this.queueEnabled && this.queue.length > 0 && this.currentToastCount < this.maxToastCount) {
                 const queuedToast = this.queue.shift();
                 this.render(queuedToast);
             }
@@ -318,7 +321,7 @@ class Toast {
     private static renderTimer(toastInfo: IToast) {
         let timer: HTMLElement = toastInfo.toast.querySelector(".timer");
 
-        switch (enableTimers) {
+        switch (this.timersEnabled) {
             case TOAST_TIMERS.ELAPSED: {
                 timer.innerText = "just now";
                 // Start a timer that updates the text of the time indicator every minute
@@ -375,7 +378,7 @@ class Toast {
             maxToasts: maxToasts,
             placement: placement,
             theme: theme,
-            enableTimers: enableTimers ? TOAST_TIMERS.ELAPSED : TOAST_TIMERS.NONE
+            enableTimers: enableTimers ? TOAST_TIMERS.ELAPSED : TOAST_TIMERS.DISABLED
         }
 
         this.configure(configuration);
@@ -411,6 +414,6 @@ class Toast {
      * @param {boolean} enabled Controls whether elapsed time will be displayed in the toast header.
      */
     public static oldEnableTimers(enabled: boolean): void {
-        enableTimers = enabled ? TOAST_TIMERS.ELAPSED : TOAST_TIMERS.NONE;
+        this.timersEnabled = enabled ? TOAST_TIMERS.ELAPSED : TOAST_TIMERS.DISABLED;
     }
 }
