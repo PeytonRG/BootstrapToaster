@@ -13,7 +13,7 @@
 /** Container that generated toasts will be inserted into. */
 const TOAST_CONTAINER: HTMLDivElement = document.createElement("div");
 TOAST_CONTAINER.id = "toastContainer";
-TOAST_CONTAINER.className = "toast-container position-fixed top-0 end-0";
+TOAST_CONTAINER.className = "toast-container position-fixed top-0 right-0";
 TOAST_CONTAINER.setAttribute("aria-live", "polite");
 document.body.appendChild(TOAST_CONTAINER);
 
@@ -134,34 +134,34 @@ class Toast {
         TOAST_CONTAINER.className = "toast-container position-fixed";
         switch (placement) {
             case TOAST_PLACEMENT.TOP_LEFT:
-                TOAST_CONTAINER.classList.add("top-0", "start-0");
+                TOAST_CONTAINER.classList.add("top-0", "left-0");
                 break;
             case TOAST_PLACEMENT.TOP_CENTER:
-                TOAST_CONTAINER.classList.add("top-0", "start-50", "translate-middle-x");
+                TOAST_CONTAINER.classList.add("top-0", "left-50", "translate-middle-x");
                 break;
             case TOAST_PLACEMENT.TOP_RIGHT:
-                TOAST_CONTAINER.classList.add("top-0", "end-0");
+                TOAST_CONTAINER.classList.add("top-0", "right-0");
                 break;
             case TOAST_PLACEMENT.MIDDLE_LEFT:
-                TOAST_CONTAINER.classList.add("top-50", "start-0", "translate-middle-y");
+                TOAST_CONTAINER.classList.add("top-50", "left-0", "translate-middle-y");
                 break;
             case TOAST_PLACEMENT.MIDDLE_CENTER:
-                TOAST_CONTAINER.classList.add("top-50", "start-50", "translate-middle");
+                TOAST_CONTAINER.classList.add("top-50", "left-50", "translate-middle");
                 break;
             case TOAST_PLACEMENT.MIDDLE_RIGHT:
-                TOAST_CONTAINER.classList.add("top-50", "end-0", "translate-middle-y");
+                TOAST_CONTAINER.classList.add("top-50", "right-0", "translate-middle-y");
                 break;
             case TOAST_PLACEMENT.BOTTOM_LEFT:
-                TOAST_CONTAINER.classList.add("bottom-0", "start-0");
+                TOAST_CONTAINER.classList.add("bottom-0", "left-0");
                 break;
             case TOAST_PLACEMENT.BOTTOM_CENTER:
-                TOAST_CONTAINER.classList.add("bottom-0", "start-50", "translate-middle-x");
+                TOAST_CONTAINER.classList.add("bottom-0", "left-50", "translate-middle-x");
                 break;
             case TOAST_PLACEMENT.BOTTOM_RIGHT:
-                TOAST_CONTAINER.classList.add("bottom-0", "end-0");
+                TOAST_CONTAINER.classList.add("bottom-0", "right-0");
                 break;
             default:
-                TOAST_CONTAINER.classList.add("top-0", "end-0");
+                TOAST_CONTAINER.classList.add("top-0", "right-0");
                 break;
         }
     }
@@ -300,13 +300,11 @@ class Toast {
         this.renderTimer(toastInfo);
 
         TOAST_CONTAINER.appendChild(toastInfo.toast);
-        // Initialize Bootstrap 5's toast plugin
-        const bsToast = new window["bootstrap"].Toast(toastInfo.toast);
-        bsToast.show();
+        $(toastInfo.toast).toast('show');
         this.currentToastCount++;
 
         // When the toast hides, remove it from the DOM
-        toastInfo.toast.addEventListener('hidden.bs.toast', () => {
+        $(toastInfo.toast).on('hidden.bs.toast', () => {
             TOAST_CONTAINER.removeChild(toastInfo.toast);
             this.currentToastCount--;
             if (this.queueEnabled && this.queue.length > 0 && this.currentToastCount < this.maxToastCount) {
