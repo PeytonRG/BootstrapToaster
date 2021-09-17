@@ -1,11 +1,14 @@
 {
   "name": "bootstrap-toaster",
-  "version": "5.1.0",
+  "version": "4.1.0",
   "description": "Robust, plug & play generator for Bootstrap toasts.",
   "main": "js/bootstrap-toaster.js",
   "dependencies": {
     "bootstrap": ">=5.0.0",
     "bootstrap-icons": ">=1.4.0"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.6"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\""

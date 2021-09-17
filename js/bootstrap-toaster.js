@@ -24,10 +24,12 @@ TOAST_TEMPLATE.setAttribute("aria-atomic", "true");
 TOAST_TEMPLATE.setAttribute("data-bs-autohide", "false");
 TOAST_TEMPLATE.innerHTML = `
         <div class="toast-header">
-            <span class="status-icon bi me-2" aria-hidden="true"></span>
-            <strong class="me-auto toast-title"></strong>
+            <span class="status-icon bi mr-2" aria-hidden="true"></span>
+            <strong class="mr-auto toast-title"></strong>
             <small class="timer" aria-hidden="true"></small>
-            <button type="button" class="btn-close ms-2" data-bs-dismiss="toast" aria-label="Close"></button>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         <div class="toast-body"></div>`;
 /** Defines the valid status options for toasts. */
@@ -135,21 +137,21 @@ class Toast {
      */
     static setTheme(theme = null) {
         let header = TOAST_TEMPLATE.querySelector(".toast-header");
-        let close = header.querySelector(".btn-close");
+        let close = header.querySelector(".close");
         switch (theme) {
             case TOAST_THEME.LIGHT:
                 TOAST_TEMPLATE.style.backgroundColor = "var(--body-bg-color-light)";
                 TOAST_TEMPLATE.style.color = "var(--text-color-light)";
                 header.style.backgroundColor = "var(--header-bg-color-light)";
                 header.style.color = "var(--header-color-light)";
-                close.style.filter = "unset";
+                close.style.color = "var(--text-color-light)";
                 break;
             case TOAST_THEME.DARK:
                 TOAST_TEMPLATE.style.backgroundColor = "var(--body-bg-color-dark)";
                 TOAST_TEMPLATE.style.color = "var(--text-color-dark)";
                 header.style.backgroundColor = "var(--header-bg-color-dark)";
                 header.style.color = "var(--header-color-dark)";
-                close.style.filter = "invert(1) grayscale(100%) brightness(200%)";
+                close.style.color = "var(--text-color-dark)";
                 break;
             default:
                 TOAST_TEMPLATE.removeAttribute("style");
@@ -243,8 +245,8 @@ class Toast {
     static render(toastInfo) {
         // If the timeout is 0, the toast must be dismissed manually
         if (toastInfo.timeout > 0) {
-            toastInfo.toast.setAttribute("data-bs-delay", toastInfo.timeout.toString());
-            toastInfo.toast.setAttribute("data-bs-autohide", "true");
+            toastInfo.toast.setAttribute("data-delay", toastInfo.timeout.toString());
+            toastInfo.toast.setAttribute("data-autohide", "true");
         }
         this.renderTimer(toastInfo);
         TOAST_CONTAINER.appendChild(toastInfo.toast);
@@ -279,7 +281,7 @@ class Toast {
                     minutes++;
                 }, 60 * 1000);
                 // When the toast hides, delete its timer instance
-                toastInfo.toast.addEventListener('hidden.bs.toast', () => {
+                $(toastInfo.toast).on('hidden.bs.toast', () => {
                     clearInterval(elapsedTimer);
                 });
                 break;
@@ -295,7 +297,7 @@ class Toast {
                         seconds--;
                     }, 1000);
                     // When the toast hides, delete its timer instance
-                    toastInfo.toast.addEventListener('hidden.bs.toast', () => {
+                    $(toastInfo.toast).on('hidden.bs.toast', () => {
                         clearInterval(countdownTimer);
                     });
                     break;
