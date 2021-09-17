@@ -1,183 +1,210 @@
-        #placementGrid {
-            display: grid;
-            grid-gap: 1rem;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-        }
+    a {
+        color: inherit;
+        /* text-decoration: none !important; */
+    }
 
-        .grid-bottom {
-            grid-row: 3 / span 1;
-        }
+    .circle-image {
+        border: 0.2rem solid #fff;
+        border-radius: 10rem;
+        box-shadow: 0 0 1rem #000;
+        width: 100%;
+    }
 
-        .grid-bottom-2 {
-            grid-row: 2 / span 1;
-        }
+    .connect-image {
+        width: 60%;
+    }
 
-        .grid-center {
-            grid-column: 2 / span 1;
-        }
+    footer {
+        background-color: #222627;
+        color: #fff;
+        padding: 1rem;
+        margin-top: auto;
+    }
 
-        .grid-left {
-            grid-column: 1 / span 1;
-        }
+    footer hr {
+        border-color: #fff;
+    }
 
-        .grid-middle {
-            grid-row: 2 / span 1;
-        }
+    #placementGrid {
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
 
-        .grid-right {
-            grid-column: 3 / span 1;
-        }
+    .grid-bottom {
+        grid-row: 3 / span 1;
+    }
 
-        .grid-top {
-            grid-row: 1 / span 1;
-        }
+    .grid-bottom-2 {
+        grid-row: 2 / span 1;
+    }
 
-        #hero {
-            background-color: #7952b3;
-            margin-bottom: 2rem;
-        }
+    .grid-center {
+        grid-column: 2 / span 1;
+    }
 
-        #startGrid {
-            display: grid;
-            grid-gap: 1rem;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-        }
+    .grid-left {
+        grid-column: 1 / span 1;
+    }
 
-        #timeoutRow {
-            grid-column: 1 / span 2;
-            grid-row: 3 / span 1;
-        }
+    .grid-middle {
+        grid-row: 2 / span 1;
+    }
 
-        /* Codye classes */
-        .hljs
-        {
-            color: #FFFFFF;
-            display: block;
-            padding: 0.5em;
-        }
-        .hljs-addition
-        {
-            color: #98C379;
-        }
-        .hljs-attribute
-        {
-            color: #35B7FF;
-        }
-        .hljs-built_in
-        {
-            color: #00AAFF;
-        }
-        .hljs-builtin-name
-        {
-            color: #00AAFF;
-        }
-        .hljs-bullet
-        {
-            color: #98C379;
-        }
-        .hljs-class
-        {
-            color: #35B7FF;
-        }
-        .hljs-comment
-        {
-            color: #5C6370;
-        }
-        .hljs-deletion
-        {
-            color: #35B7FF;
-        }
-        .hljs-emphasis
-        {
-            font-style: italic;
-        }
-        .hljs-function
-        {
-            color: #35B7FF;
-        }
-        .hljs-keyword
-        {
-            color: #9AE1FF;
-        }
-        .hljs-link
-        {
-            color: #35B7FF;
-        }
-        .hljs-literal
-        {
-            color: #00AAFF;
-        }
-        .hljs-meta
-        {
-            color: #149b93;
-        }
-        .hljs-name
-        {
-            color: #35B7FF;
-        }
-        .hljs-number
-        {
-            color: #D19B66;
-        }
-        .hljs-params
-        {
-            color: #D19B66;
-        }
-        .hljs-quote
-        {
-            color: #5C6370;
-        }
-        .hljs-regexp
-        {
-            color: #35B7FF;
-        }
-        .hljs-section
-        {
-            color: #35B7FF;
-        }
-        .hljs-selector-class
-        {
-            color: #35B7FF;
-        }
-        .hljs-selector-id
-        {
-            color: #35B7FF;
-        }
-        .hljs-selector-tag
-        {
-            color: #9AE1FF;
-        }
-        .hljs-string
-        {
-            color: #98C379;
-        }
-        .hljs-strong
-        {
-            font-weight: bold;
-        }
-        .hljs-symbol
-        {
-            color: #98C379;
-        }
-        .hljs-tag
-        {
-            color: #35B7FF;
-        }
-        .hljs-template-variable
-        {
-            color: #35B7FF;
-        }
-        .hljs-title
-        {
-            color: #35B7FF;
-        }
-        .hljs-type
-        {
-            color: #D19B66;
-        }
-        .hljs-variable
-        {
-            color: #35B7FF;
-        }
+    .grid-right {
+        grid-column: 3 / span 1;
+    }
+
+    .grid-top {
+        grid-row: 1 / span 1;
+    }
+
+    #hero {
+        background-color: #7952b3;
+        margin-bottom: 2rem;
+    }
+
+    #startGrid {
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+
+    #timeoutRow {
+        grid-column: 1 / span 2;
+        grid-row: 3 / span 1;
+    }
+
+    /* Codye classes */
+
+    .hljs {
+        color: #FFFFFF;
+        display: block;
+        padding: 0.5em;
+    }
+
+    .hljs-addition {
+        color: #98C379;
+    }
+
+    .hljs-attribute {
+        color: #35B7FF;
+    }
+
+    .hljs-built_in {
+        color: #00AAFF;
+    }
+
+    .hljs-builtin-name {
+        color: #00AAFF;
+    }
+
+    .hljs-bullet {
+        color: #98C379;
+    }
+
+    .hljs-class {
+        color: #35B7FF;
+    }
+
+    .hljs-comment {
+        color: #5C6370;
+    }
+
+    .hljs-deletion {
+        color: #35B7FF;
+    }
+
+    .hljs-emphasis {
+        font-style: italic;
+    }
+
+    .hljs-function {
+        color: #35B7FF;
+    }
+
+    .hljs-keyword {
+        color: #9AE1FF;
+    }
+
+    .hljs-link {
+        color: #35B7FF;
+    }
+
+    .hljs-literal {
+        color: #00AAFF;
+    }
+
+    .hljs-meta {
+        color: #149b93;
+    }
+
+    .hljs-name {
+        color: #35B7FF;
+    }
+
+    .hljs-number {
+        color: #D19B66;
+    }
+
+    .hljs-params {
+        color: #D19B66;
+    }
+
+    .hljs-quote {
+        color: #5C6370;
+    }
+
+    .hljs-regexp {
+        color: #35B7FF;
+    }
+
+    .hljs-section {
+        color: #35B7FF;
+    }
+
+    .hljs-selector-class {
+        color: #35B7FF;
+    }
+
+    .hljs-selector-id {
+        color: #35B7FF;
+    }
+
+    .hljs-selector-tag {
+        color: #9AE1FF;
+    }
+
+    .hljs-string {
+        color: #98C379;
+    }
+
+    .hljs-strong {
+        font-weight: bold;
+    }
+
+    .hljs-symbol {
+        color: #98C379;
+    }
+
+    .hljs-tag {
+        color: #35B7FF;
+    }
+
+    .hljs-template-variable {
+        color: #35B7FF;
+    }
+
+    .hljs-title {
+        color: #35B7FF;
+    }
+
+    .hljs-type {
+        color: #D19B66;
+    }
+
+    .hljs-variable {
+        color: #35B7FF;
+    }
