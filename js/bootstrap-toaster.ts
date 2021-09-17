@@ -13,7 +13,7 @@
 /** Container that generated toasts will be inserted into. */
 const TOAST_CONTAINER: HTMLDivElement = document.createElement("div");
 TOAST_CONTAINER.id = "toastContainer";
-TOAST_CONTAINER.className = "toast-container position-fixed top-0 right-0";
+TOAST_CONTAINER.className = "position-fixed top-0 right-0";
 TOAST_CONTAINER.setAttribute("aria-live", "polite");
 document.body.appendChild(TOAST_CONTAINER);
 
@@ -23,7 +23,7 @@ TOAST_TEMPLATE.className = "toast";
 TOAST_TEMPLATE.setAttribute("role", "status");
 TOAST_TEMPLATE.setAttribute("aria-live", "polite");
 TOAST_TEMPLATE.setAttribute("aria-atomic", "true");
-TOAST_TEMPLATE.setAttribute("data-bs-autohide", "false");
+TOAST_TEMPLATE.setAttribute("data-autohide", "false");
 TOAST_TEMPLATE.innerHTML = `
         <div class="toast-header">
             <span class="status-icon bi mr-2" aria-hidden="true"></span>
