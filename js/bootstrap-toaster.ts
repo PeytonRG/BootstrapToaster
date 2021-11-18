@@ -87,13 +87,13 @@ interface IConfiguration {
 class Toast {
 
     /** Maximum amount of toasts to be allowed on the page at once. */
-    private static maxToastCount: number = 4;
+    private static maxToastCount = 4;
     /** Number of toasts currently rendered on the page. */
-    private static currentToastCount: number = 0;
+    private static currentToastCount = 0;
     /** Controls whether toasts will have elapsed or countdown timers. */
     private static timersEnabled: TOAST_TIMERS = TOAST_TIMERS.ELAPSED;
     /** Controls whether to queue toasts that exceed the maximum toast count. */
-    private static queueEnabled: boolean = true;
+    private static queueEnabled = true;
 
     private static queue: IToast[] = [];
 
@@ -169,8 +169,8 @@ class Toast {
      * @param {TOAST_THEME} theme The toast theme.
      */
     public static setTheme(theme: TOAST_THEME = null): void {
-        let header: HTMLElement = TOAST_TEMPLATE.querySelector(".toast-header");
-        let close: HTMLElement = header.querySelector(".btn-close");
+        const header: HTMLElement = TOAST_TEMPLATE.querySelector(".toast-header");
+        const close: HTMLElement = header.querySelector(".btn-close");
         switch (theme) {
             case TOAST_THEME.LIGHT:
                 TOAST_TEMPLATE.style.backgroundColor = "var(--body-bg-color-light)";
@@ -208,7 +208,7 @@ class Toast {
      * Queuing is enabled by default.
      * @param {boolean} enabled Controls whether queue is enabled.
      */
-    public static enableQueue(enabled: boolean = true): void {
+    public static enableQueue(enabled = true): void {
         this.queueEnabled = enabled;
         // Empty the queue once it's disabled.
         if (!enabled)
@@ -222,12 +222,12 @@ class Toast {
      * @param {IToastOptions} toastOptions Object containing all the desired toast options.
      */
     public static create(toastOptions: IToastOptions): void {
-        let toastEl: HTMLElement = (<HTMLElement>TOAST_TEMPLATE.cloneNode(true));
+        const toastEl: HTMLElement = (<HTMLElement>TOAST_TEMPLATE.cloneNode(true));
 
-        let toastTitle: HTMLElement = toastEl.querySelector(".toast-title");
+        const toastTitle: HTMLElement = toastEl.querySelector(".toast-title");
         toastTitle.innerText = toastOptions.title;
 
-        let toastBody: HTMLElement = toastEl.querySelector(".toast-body");
+        const toastBody: HTMLElement = toastEl.querySelector(".toast-body");
         toastBody.innerHTML = toastOptions.message;
 
         this.setStatus(toastEl, toastOptions.status);
@@ -259,7 +259,7 @@ class Toast {
      * @param {TOAST_STATUS} status The integer value representing the toast's status.
      */
     private static setStatus(toastEl: HTMLElement, status: TOAST_STATUS): void {
-        let statusIcon: HTMLElement = toastEl.querySelector(".status-icon");
+        const statusIcon: HTMLElement = toastEl.querySelector(".status-icon");
 
         switch (status) {
             case TOAST_STATUS.SUCCESS:
@@ -319,15 +319,15 @@ class Toast {
      * @param toastInfo The toast object to be rendered.
      */
     private static renderTimer(toastInfo: IToast) {
-        let timer: HTMLElement = toastInfo.toast.querySelector(".timer");
+        const timer: HTMLElement = toastInfo.toast.querySelector(".timer");
 
         switch (this.timersEnabled) {
             case TOAST_TIMERS.ELAPSED: {
                 timer.innerText = "just now";
                 // Start a timer that updates the text of the time indicator every minute
                 // Initially set to 1 because for the first minute the indicator reads "just now"
-                let minutes: number = 1
-                let elapsedTimer: number = setInterval(() => {
+                let minutes = 1
+                const elapsedTimer: number = setInterval(() => {
                     timer.innerText = `${minutes}m ago`;
                     minutes++;
                 }, 60 * 1000);
@@ -344,7 +344,7 @@ class Toast {
                     // Initially set to 1 because for the first minute the indicator reads "just now"
                     let seconds = toastInfo.timeout / 1000;
                     timer.innerText = `${seconds}s`;
-                    let countdownTimer: number = setInterval(() => {
+                    const countdownTimer: number = setInterval(() => {
                         timer.innerText = `${seconds - 1}s`;
                         seconds--;
                     }, 1000);
@@ -353,11 +353,11 @@ class Toast {
                     toastInfo.toast.addEventListener('hidden.bs.toast', () => {
                         clearInterval(countdownTimer);
                     });
-                    break;
                 }
+                break;
             }
             default: {
-                let toastHeader: HTMLElement = toastInfo.toast.querySelector(".toast-header");
+                const toastHeader: HTMLElement = toastInfo.toast.querySelector(".toast-header");
                 toastHeader.removeChild(timer);
                 break;
             }
@@ -373,7 +373,7 @@ class Toast {
      * @param {number} theme The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
      * @param {boolean} enableTimers Controls whether elapsed time will be displayed in the toast header.
      */
-    public static oldConfigure(maxToasts: number = null, placement: number = TOAST_PLACEMENT.TOP_RIGHT, theme: number = null, enableTimers: boolean = true): void {
+    public static oldConfigure(maxToasts: number = null, placement: number = TOAST_PLACEMENT.TOP_RIGHT, theme: number = null, enableTimers = true): void {
         const configuration: IConfiguration = {
             maxToasts: maxToasts,
             placement: placement,
@@ -395,7 +395,7 @@ class Toast {
      * @param {TOAST_STATUS} status The status/urgency of the toast. Affects status icon and ARIA accessibility features. Defaults to 0, which renders no icon.
      * @param {number} timeout Time in ms until toast disappears automatically. Defaults to 0, which is indefinite.
      */
-    public static oldCreate(title: string, message: string, status: TOAST_STATUS = 0, timeout: number = 0): void {
+    public static oldCreate(title: string, message: string, status: TOAST_STATUS = 0, timeout = 0): void {
         const toast: IToastOptions = {
             title: title,
             message: message,

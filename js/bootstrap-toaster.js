@@ -134,8 +134,8 @@ class Toast {
      * @param {TOAST_THEME} theme The toast theme.
      */
     static setTheme(theme = null) {
-        let header = TOAST_TEMPLATE.querySelector(".toast-header");
-        let close = header.querySelector(".btn-close");
+        const header = TOAST_TEMPLATE.querySelector(".toast-header");
+        const close = header.querySelector(".btn-close");
         switch (theme) {
             case TOAST_THEME.LIGHT:
                 TOAST_TEMPLATE.style.backgroundColor = "var(--body-bg-color-light)";
@@ -184,10 +184,10 @@ class Toast {
      * @param {IToastOptions} toastOptions Object containing all the desired toast options.
      */
     static create(toastOptions) {
-        let toastEl = TOAST_TEMPLATE.cloneNode(true);
-        let toastTitle = toastEl.querySelector(".toast-title");
+        const toastEl = TOAST_TEMPLATE.cloneNode(true);
+        const toastTitle = toastEl.querySelector(".toast-title");
         toastTitle.innerText = toastOptions.title;
-        let toastBody = toastEl.querySelector(".toast-body");
+        const toastBody = toastEl.querySelector(".toast-body");
         toastBody.innerHTML = toastOptions.message;
         this.setStatus(toastEl, toastOptions.status);
         // Add toast to the queue if it would exceed maxToastCount
@@ -213,7 +213,7 @@ class Toast {
      * @param {TOAST_STATUS} status The integer value representing the toast's status.
      */
     static setStatus(toastEl, status) {
-        let statusIcon = toastEl.querySelector(".status-icon");
+        const statusIcon = toastEl.querySelector(".status-icon");
         switch (status) {
             case TOAST_STATUS.SUCCESS:
                 statusIcon.classList.add("text-success", "bi-check-circle-fill");
@@ -267,14 +267,14 @@ class Toast {
      * @param toastInfo The toast object to be rendered.
      */
     static renderTimer(toastInfo) {
-        let timer = toastInfo.toast.querySelector(".timer");
+        const timer = toastInfo.toast.querySelector(".timer");
         switch (this.timersEnabled) {
             case TOAST_TIMERS.ELAPSED: {
                 timer.innerText = "just now";
                 // Start a timer that updates the text of the time indicator every minute
                 // Initially set to 1 because for the first minute the indicator reads "just now"
                 let minutes = 1;
-                let elapsedTimer = setInterval(() => {
+                const elapsedTimer = setInterval(() => {
                     timer.innerText = `${minutes}m ago`;
                     minutes++;
                 }, 60 * 1000);
@@ -290,7 +290,7 @@ class Toast {
                     // Initially set to 1 because for the first minute the indicator reads "just now"
                     let seconds = toastInfo.timeout / 1000;
                     timer.innerText = `${seconds}s`;
-                    let countdownTimer = setInterval(() => {
+                    const countdownTimer = setInterval(() => {
                         timer.innerText = `${seconds - 1}s`;
                         seconds--;
                     }, 1000);
@@ -298,11 +298,11 @@ class Toast {
                     toastInfo.toast.addEventListener('hidden.bs.toast', () => {
                         clearInterval(countdownTimer);
                     });
-                    break;
                 }
+                break;
             }
             default: {
-                let toastHeader = toastInfo.toast.querySelector(".toast-header");
+                const toastHeader = toastInfo.toast.querySelector(".toast-header");
                 toastHeader.removeChild(timer);
                 break;
             }

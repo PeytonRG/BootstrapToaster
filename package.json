@@ -8,7 +8,7 @@
     "bootstrap-icons": ">=1.4.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\""
+    "eslint": "eslint"
   },
   "repository": {
     "type": "git",
@@ -31,5 +31,11 @@
   "bugs": {
     "url": "https://github.com/PeytonRG/BootstrapToaster/issues"
   },
-  "homepage": "https://bootstraptoaster.peytongasink.dev"
+  "homepage": "https://bootstraptoaster.peytongasink.dev",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "eslint": "^8.2.0",
+    "typescript": "^4.5.2"
+  }
 }
