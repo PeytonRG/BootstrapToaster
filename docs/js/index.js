@@ -1,4 +1,4 @@
-import Toast, { TOAST_STATUS } from "../../js/bootstrap-toaster.js";
+import Toast, { TOAST_STATUS } from "../../umd/bundle.js";
 
 // Getting Started
 var timeoutInput = document.getElementById("timeoutInput");

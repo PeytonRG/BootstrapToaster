@@ -1,7 +1,8 @@
-(function (factory) {
-    typeof define === 'function' && define.amd ? define(factory) :
-    factory();
-})((function () { 'use strict';
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+    typeof define === 'function' && define.amd ? define(['exports'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.myBundle = {}));
+})(this, (function (exports) { 'use strict';
 
     /**
      * Copyright (c) 2021 Peyton Gasink
@@ -36,15 +37,15 @@
         </div>
         <div class="toast-body"></div>`;
     /** Defines the valid status options for toasts. */
-    var TOAST_STATUS;
+    exports.TOAST_STATUS = void 0;
     (function (TOAST_STATUS) {
         TOAST_STATUS[TOAST_STATUS["SUCCESS"] = 1] = "SUCCESS";
         TOAST_STATUS[TOAST_STATUS["DANGER"] = 2] = "DANGER";
         TOAST_STATUS[TOAST_STATUS["WARNING"] = 3] = "WARNING";
         TOAST_STATUS[TOAST_STATUS["INFO"] = 4] = "INFO";
-    })(TOAST_STATUS || (TOAST_STATUS = {}));
+    })(exports.TOAST_STATUS || (exports.TOAST_STATUS = {}));
     /** Defines the valid placement options for the toast container. */
-    var TOAST_PLACEMENT;
+    exports.TOAST_PLACEMENT = void 0;
     (function (TOAST_PLACEMENT) {
         TOAST_PLACEMENT[TOAST_PLACEMENT["TOP_LEFT"] = 1] = "TOP_LEFT";
         TOAST_PLACEMENT[TOAST_PLACEMENT["TOP_CENTER"] = 2] = "TOP_CENTER";
@@ -55,27 +56,27 @@
         TOAST_PLACEMENT[TOAST_PLACEMENT["BOTTOM_LEFT"] = 7] = "BOTTOM_LEFT";
         TOAST_PLACEMENT[TOAST_PLACEMENT["BOTTOM_CENTER"] = 8] = "BOTTOM_CENTER";
         TOAST_PLACEMENT[TOAST_PLACEMENT["BOTTOM_RIGHT"] = 9] = "BOTTOM_RIGHT";
-    })(TOAST_PLACEMENT || (TOAST_PLACEMENT = {}));
+    })(exports.TOAST_PLACEMENT || (exports.TOAST_PLACEMENT = {}));
     /** Defines the valid options for toast themes. */
-    var TOAST_THEME;
+    exports.TOAST_THEME = void 0;
     (function (TOAST_THEME) {
         TOAST_THEME[TOAST_THEME["LIGHT"] = 1] = "LIGHT";
         TOAST_THEME[TOAST_THEME["DARK"] = 2] = "DARK";
-    })(TOAST_THEME || (TOAST_THEME = {}));
+    })(exports.TOAST_THEME || (exports.TOAST_THEME = {}));
     /** Defines the valid options for toast header timers. */
-    var TOAST_TIMERS;
+    exports.TOAST_TIMERS = void 0;
     (function (TOAST_TIMERS) {
         TOAST_TIMERS[TOAST_TIMERS["DISABLED"] = 0] = "DISABLED";
         TOAST_TIMERS[TOAST_TIMERS["ELAPSED"] = 1] = "ELAPSED";
         TOAST_TIMERS[TOAST_TIMERS["COUNTDOWN"] = 2] = "COUNTDOWN";
-    })(TOAST_TIMERS || (TOAST_TIMERS = {}));
+    })(exports.TOAST_TIMERS || (exports.TOAST_TIMERS = {}));
     class Toast {
         /** Maximum amount of toasts to be allowed on the page at once. */
         static maxToastCount = 4;
         /** Number of toasts currently rendered on the page. */
         static currentToastCount = 0;
         /** Controls whether toasts will have elapsed or countdown timers. */
-        static timersEnabled = TOAST_TIMERS.ELAPSED;
+        static timersEnabled = exports.TOAST_TIMERS.ELAPSED;
         /** Controls whether to queue toasts that exceed the maximum toast count. */
         static queueEnabled = true;
         static queue = [];
@@ -111,31 +112,31 @@
         static setPlacement(placement) {
             TOAST_CONTAINER.className = "toast-container position-fixed";
             switch (placement) {
-                case TOAST_PLACEMENT.TOP_LEFT:
+                case exports.TOAST_PLACEMENT.TOP_LEFT:
                     TOAST_CONTAINER.classList.add("top-0", "start-0");
                     break;
-                case TOAST_PLACEMENT.TOP_CENTER:
+                case exports.TOAST_PLACEMENT.TOP_CENTER:
                     TOAST_CONTAINER.classList.add("top-0", "start-50", "translate-middle-x");
                     break;
-                case TOAST_PLACEMENT.TOP_RIGHT:
+                case exports.TOAST_PLACEMENT.TOP_RIGHT:
                     TOAST_CONTAINER.classList.add("top-0", "end-0");
                     break;
-                case TOAST_PLACEMENT.MIDDLE_LEFT:
+                case exports.TOAST_PLACEMENT.MIDDLE_LEFT:
                     TOAST_CONTAINER.classList.add("top-50", "start-0", "translate-middle-y");
                     break;
-                case TOAST_PLACEMENT.MIDDLE_CENTER:
+                case exports.TOAST_PLACEMENT.MIDDLE_CENTER:
                     TOAST_CONTAINER.classList.add("top-50", "start-50", "translate-middle");
                     break;
-                case TOAST_PLACEMENT.MIDDLE_RIGHT:
+                case exports.TOAST_PLACEMENT.MIDDLE_RIGHT:
                     TOAST_CONTAINER.classList.add("top-50", "end-0", "translate-middle-y");
                     break;
-                case TOAST_PLACEMENT.BOTTOM_LEFT:
+                case exports.TOAST_PLACEMENT.BOTTOM_LEFT:
                     TOAST_CONTAINER.classList.add("bottom-0", "start-0");
                     break;
-                case TOAST_PLACEMENT.BOTTOM_CENTER:
+                case exports.TOAST_PLACEMENT.BOTTOM_CENTER:
                     TOAST_CONTAINER.classList.add("bottom-0", "start-50", "translate-middle-x");
                     break;
-                case TOAST_PLACEMENT.BOTTOM_RIGHT:
+                case exports.TOAST_PLACEMENT.BOTTOM_RIGHT:
                     TOAST_CONTAINER.classList.add("bottom-0", "end-0");
                     break;
                 default:
@@ -151,14 +152,14 @@
             const header = TOAST_TEMPLATE.querySelector(".toast-header");
             const close = header.querySelector(".btn-close");
             switch (theme) {
-                case TOAST_THEME.LIGHT:
+                case exports.TOAST_THEME.LIGHT:
                     TOAST_TEMPLATE.style.backgroundColor = "var(--body-bg-color-light)";
                     TOAST_TEMPLATE.style.color = "var(--text-color-light)";
                     header.style.backgroundColor = "var(--header-bg-color-light)";
                     header.style.color = "var(--header-color-light)";
                     close.style.filter = "unset";
                     break;
-                case TOAST_THEME.DARK:
+                case exports.TOAST_THEME.DARK:
                     TOAST_TEMPLATE.style.backgroundColor = "var(--body-bg-color-dark)";
                     TOAST_TEMPLATE.style.color = "var(--text-color-dark)";
                     header.style.backgroundColor = "var(--header-bg-color-dark)";
@@ -229,20 +230,20 @@
         static setStatus(toastEl, status) {
             const statusIcon = toastEl.querySelector(".status-icon");
             switch (status) {
-                case TOAST_STATUS.SUCCESS:
+                case exports.TOAST_STATUS.SUCCESS:
                     statusIcon.classList.add("text-success", "bi-check-circle-fill");
                     break;
-                case TOAST_STATUS.DANGER:
+                case exports.TOAST_STATUS.DANGER:
                     statusIcon.classList.add("text-danger", "bi-x-circle-fill");
                     toastEl.setAttribute("role", "alert");
                     toastEl.setAttribute("aria-live", "assertive");
                     break;
-                case TOAST_STATUS.WARNING:
+                case exports.TOAST_STATUS.WARNING:
                     statusIcon.classList.add("text-warning", "bi-exclamation-circle-fill");
                     toastEl.setAttribute("role", "alert");
                     toastEl.setAttribute("aria-live", "assertive");
                     break;
-                case TOAST_STATUS.INFO:
+                case exports.TOAST_STATUS.INFO:
                     statusIcon.classList.add("text-info", "bi-info-circle-fill");
                     break;
                 default:
@@ -283,7 +284,7 @@
         static renderTimer(toastInfo) {
             const timer = toastInfo.toast.querySelector(".timer");
             switch (this.timersEnabled) {
-                case TOAST_TIMERS.ELAPSED: {
+                case exports.TOAST_TIMERS.ELAPSED: {
                     timer.innerText = "just now";
                     // Start a timer that updates the text of the time indicator every minute
                     // Initially set to 1 because for the first minute the indicator reads "just now"
@@ -298,7 +299,7 @@
                     });
                     break;
                 }
-                case TOAST_TIMERS.COUNTDOWN: {
+                case exports.TOAST_TIMERS.COUNTDOWN: {
                     if (toastInfo.timeout > 0) {
                         // Start a timer that updates the text of the time indicator every minute
                         // Initially set to 1 because for the first minute the indicator reads "just now"
@@ -331,12 +332,12 @@
          * @param {number} theme The toasts' theme, either light or dark. If unset, they will follow OS light/dark preference.
          * @param {boolean} enableTimers Controls whether elapsed time will be displayed in the toast header.
          */
-        static oldConfigure(maxToasts = null, placement = TOAST_PLACEMENT.TOP_RIGHT, theme = null, enableTimers = true) {
+        static oldConfigure(maxToasts = null, placement = exports.TOAST_PLACEMENT.TOP_RIGHT, theme = null, enableTimers = true) {
             const configuration = {
                 maxToasts: maxToasts,
                 placement: placement,
                 theme: theme,
-                enableTimers: enableTimers ? TOAST_TIMERS.ELAPSED : TOAST_TIMERS.DISABLED
+                enableTimers: enableTimers ? exports.TOAST_TIMERS.ELAPSED : exports.TOAST_TIMERS.DISABLED
             };
             this.configure(configuration);
         }
@@ -368,8 +369,12 @@
          * @param {boolean} enabled Controls whether elapsed time will be displayed in the toast header.
          */
         static oldEnableTimers(enabled) {
-            this.timersEnabled = enabled ? TOAST_TIMERS.ELAPSED : TOAST_TIMERS.DISABLED;
+            this.timersEnabled = enabled ? exports.TOAST_TIMERS.ELAPSED : exports.TOAST_TIMERS.DISABLED;
         }
     }
+
+    exports["default"] = Toast;
+
+    Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
