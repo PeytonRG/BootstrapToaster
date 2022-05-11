@@ -84,7 +84,7 @@ interface IConfiguration {
     enableQueue?: boolean;
 }
 
-export default class Toast {
+export class Toast {
 
     /** Maximum amount of toasts to be allowed on the page at once. */
     private static maxToastCount = 4;

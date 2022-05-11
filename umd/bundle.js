@@ -373,7 +373,7 @@
         }
     }
 
-    exports["default"] = Toast;
+    exports.Toast = Toast;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

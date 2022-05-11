@@ -64,7 +64,7 @@ export var TOAST_TIMERS;
     TOAST_TIMERS[TOAST_TIMERS["ELAPSED"] = 1] = "ELAPSED";
     TOAST_TIMERS[TOAST_TIMERS["COUNTDOWN"] = 2] = "COUNTDOWN";
 })(TOAST_TIMERS || (TOAST_TIMERS = {}));
-export default class Toast {
+export class Toast {
     /** Maximum amount of toasts to be allowed on the page at once. */
     static maxToastCount = 4;
     /** Number of toasts currently rendered on the page. */

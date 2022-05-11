@@ -52,7 +52,7 @@ interface IConfiguration {
     enableTimers?: TOAST_TIMERS;
     enableQueue?: boolean;
 }
-export default class Toast {
+export declare class Toast {
     /** Maximum amount of toasts to be allowed on the page at once. */
     private static maxToastCount;
     /** Number of toasts currently rendered on the page. */
