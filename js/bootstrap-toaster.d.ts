@@ -9,19 +9,15 @@
  * Configuration options are also provided for toast placement, light & dark themes,
  * and the maximum number of toasts allowed on the page at a given time.
  */
-/** Container that generated toasts will be inserted into. */
-declare const TOAST_CONTAINER: HTMLDivElement;
-/** HTML markup for the toast template. */
-declare const TOAST_TEMPLATE: HTMLDivElement;
 /** Defines the valid status options for toasts. */
-declare enum TOAST_STATUS {
+export declare enum TOAST_STATUS {
     SUCCESS = 1,
     DANGER = 2,
     WARNING = 3,
     INFO = 4
 }
 /** Defines the valid placement options for the toast container. */
-declare enum TOAST_PLACEMENT {
+export declare enum TOAST_PLACEMENT {
     TOP_LEFT = 1,
     TOP_CENTER = 2,
     TOP_RIGHT = 3,
@@ -33,19 +29,15 @@ declare enum TOAST_PLACEMENT {
     BOTTOM_RIGHT = 9
 }
 /** Defines the valid options for toast themes. */
-declare enum TOAST_THEME {
+export declare enum TOAST_THEME {
     LIGHT = 1,
     DARK = 2
 }
 /** Defines the valid options for toast header timers. */
-declare enum TOAST_TIMERS {
+export declare enum TOAST_TIMERS {
     DISABLED = 0,
     ELAPSED = 1,
     COUNTDOWN = 2
-}
-interface IToast {
-    toast: HTMLElement;
-    timeout: number;
 }
 interface IToastOptions {
     title: string;
@@ -60,7 +52,7 @@ interface IConfiguration {
     enableTimers?: TOAST_TIMERS;
     enableQueue?: boolean;
 }
-declare class Toast {
+export default class Toast {
     /** Maximum amount of toasts to be allowed on the page at once. */
     private static maxToastCount;
     /** Number of toasts currently rendered on the page. */
@@ -156,4 +148,5 @@ declare class Toast {
      */
     static oldEnableTimers(enabled: boolean): void;
 }
+export {};
 //# sourceMappingURL=bootstrap-toaster.d.ts.map

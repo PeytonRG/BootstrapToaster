@@ -31,7 +31,7 @@ TOAST_TEMPLATE.innerHTML = `
         </div>
         <div class="toast-body"></div>`;
 /** Defines the valid status options for toasts. */
-var TOAST_STATUS;
+export var TOAST_STATUS;
 (function (TOAST_STATUS) {
     TOAST_STATUS[TOAST_STATUS["SUCCESS"] = 1] = "SUCCESS";
     TOAST_STATUS[TOAST_STATUS["DANGER"] = 2] = "DANGER";
@@ -39,7 +39,7 @@ var TOAST_STATUS;
     TOAST_STATUS[TOAST_STATUS["INFO"] = 4] = "INFO";
 })(TOAST_STATUS || (TOAST_STATUS = {}));
 /** Defines the valid placement options for the toast container. */
-var TOAST_PLACEMENT;
+export var TOAST_PLACEMENT;
 (function (TOAST_PLACEMENT) {
     TOAST_PLACEMENT[TOAST_PLACEMENT["TOP_LEFT"] = 1] = "TOP_LEFT";
     TOAST_PLACEMENT[TOAST_PLACEMENT["TOP_CENTER"] = 2] = "TOP_CENTER";
@@ -52,29 +52,38 @@ var TOAST_PLACEMENT;
     TOAST_PLACEMENT[TOAST_PLACEMENT["BOTTOM_RIGHT"] = 9] = "BOTTOM_RIGHT";
 })(TOAST_PLACEMENT || (TOAST_PLACEMENT = {}));
 /** Defines the valid options for toast themes. */
-var TOAST_THEME;
+export var TOAST_THEME;
 (function (TOAST_THEME) {
     TOAST_THEME[TOAST_THEME["LIGHT"] = 1] = "LIGHT";
     TOAST_THEME[TOAST_THEME["DARK"] = 2] = "DARK";
 })(TOAST_THEME || (TOAST_THEME = {}));
 /** Defines the valid options for toast header timers. */
-var TOAST_TIMERS;
+export var TOAST_TIMERS;
 (function (TOAST_TIMERS) {
     TOAST_TIMERS[TOAST_TIMERS["DISABLED"] = 0] = "DISABLED";
     TOAST_TIMERS[TOAST_TIMERS["ELAPSED"] = 1] = "ELAPSED";
     TOAST_TIMERS[TOAST_TIMERS["COUNTDOWN"] = 2] = "COUNTDOWN";
 })(TOAST_TIMERS || (TOAST_TIMERS = {}));
-class Toast {
+export default class Toast {
+    /** Maximum amount of toasts to be allowed on the page at once. */
+    static maxToastCount = 4;
+    /** Number of toasts currently rendered on the page. */
+    static currentToastCount = 0;
+    /** Controls whether toasts will have elapsed or countdown timers. */
+    static timersEnabled = TOAST_TIMERS.ELAPSED;
+    /** Controls whether to queue toasts that exceed the maximum toast count. */
+    static queueEnabled = true;
+    static queue = [];
     /**
      * Shorthand function for quickly setting multiple global toast configurations.
      * @param {IConfiguration} options Object containing all the desired toast options.
      */
     static configure(options) {
-        this.setMaxCount(options === null || options === void 0 ? void 0 : options.maxToasts);
-        this.setPlacement(options === null || options === void 0 ? void 0 : options.placement);
-        this.setTheme(options === null || options === void 0 ? void 0 : options.theme);
-        this.enableTimers(options === null || options === void 0 ? void 0 : options.enableTimers);
-        this.enableQueue(options === null || options === void 0 ? void 0 : options.enableQueue);
+        this.setMaxCount(options?.maxToasts);
+        this.setPlacement(options?.placement);
+        this.setTheme(options?.theme);
+        this.enableTimers(options?.enableTimers);
+        this.enableQueue(options?.enableQueue);
     }
     /**
      * Sets the maximum number of toasts allowed on the page at once.
@@ -357,13 +366,4 @@ class Toast {
         this.timersEnabled = enabled ? TOAST_TIMERS.ELAPSED : TOAST_TIMERS.DISABLED;
     }
 }
-/** Maximum amount of toasts to be allowed on the page at once. */
-Toast.maxToastCount = 4;
-/** Number of toasts currently rendered on the page. */
-Toast.currentToastCount = 0;
-/** Controls whether toasts will have elapsed or countdown timers. */
-Toast.timersEnabled = TOAST_TIMERS.ELAPSED;
-/** Controls whether to queue toasts that exceed the maximum toast count. */
-Toast.queueEnabled = true;
-Toast.queue = [];
 //# sourceMappingURL=bootstrap-toaster.js.map

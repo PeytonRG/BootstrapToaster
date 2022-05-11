@@ -1,3 +1,5 @@
+import Toast, { TOAST_STATUS } from "../../js/bootstrap-toaster";
+
 // Getting Started
 var timeoutInput = document.getElementById("timeoutInput");
 var timeout = 5000;

@@ -1,3 +1,4 @@
 node_modules
 js/*.js
+docs/js/*.js
 .eslintrc.js

@@ -34,14 +34,14 @@ TOAST_TEMPLATE.innerHTML = `
         <div class="toast-body"></div>`;
 
 /** Defines the valid status options for toasts. */
-enum TOAST_STATUS {
+export enum TOAST_STATUS {
     SUCCESS = 1,
     DANGER,
     WARNING,
     INFO
 }
 /** Defines the valid placement options for the toast container. */
-enum TOAST_PLACEMENT {
+export enum TOAST_PLACEMENT {
     TOP_LEFT = 1,
     TOP_CENTER,
     TOP_RIGHT,
@@ -53,12 +53,12 @@ enum TOAST_PLACEMENT {
     BOTTOM_RIGHT
 }
 /** Defines the valid options for toast themes. */
-enum TOAST_THEME {
+export enum TOAST_THEME {
     LIGHT = 1,
     DARK
 }
 /** Defines the valid options for toast header timers. */
-enum TOAST_TIMERS {
+export enum TOAST_TIMERS {
     DISABLED,
     ELAPSED,
     COUNTDOWN,
@@ -84,7 +84,7 @@ interface IConfiguration {
     enableQueue?: boolean;
 }
 
-class Toast {
+export default class Toast {
 
     /** Maximum amount of toasts to be allowed on the page at once. */
     private static maxToastCount = 4;
