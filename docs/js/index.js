@@ -1,5 +1,5 @@
 // import Toast, { TOAST_STATUS } from "../../umd/bundle.js";
-import { Toast } from "../../bootstrap-toaster/dist/packages/bootstrap-toaster/index.esm.js";
+import { Toast } from "../js/index.esm.js";
 
 // Getting Started
 var timeoutInput = document.getElementById("timeoutInput");
