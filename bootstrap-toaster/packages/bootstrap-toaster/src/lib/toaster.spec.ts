@@ -1,4 +1,4 @@
-import { bootstrapToaster } from './bootstrap-toaster';
+import { bootstrapToaster } from './toaster';
 
 describe('bootstrapToaster', () => {
   it('should work', () => {

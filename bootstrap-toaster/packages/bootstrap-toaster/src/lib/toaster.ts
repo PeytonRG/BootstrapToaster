@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2021 Peyton Gasink
+ * Copyright (c) 2022 Peyton Gasink
  * Distributed under MIT License.
  *
  * This file contains all the necessary scripting to programmatically
