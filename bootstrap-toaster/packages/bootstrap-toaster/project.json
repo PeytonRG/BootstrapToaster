@@ -37,8 +37,7 @@
         "project": "packages/bootstrap-toaster/package.json",
         "outputPath": "dist/packages/bootstrap-toaster",
         "entryFile": "packages/bootstrap-toaster/src/index.ts",
-        "tsConfig": "packages/bootstrap-toaster/tsconfig.lib.json",
-        "umdName": "Toast"
+        "tsConfig": "packages/bootstrap-toaster/tsconfig.lib.json"
       }
     },
     "test": {
