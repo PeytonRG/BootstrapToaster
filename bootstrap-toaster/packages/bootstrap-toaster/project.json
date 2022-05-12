@@ -1,0 +1,56 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/bootstrap-toaster/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/packages/bootstrap-toaster",
+        "main": "packages/bootstrap-toaster/src/index.ts",
+        "tsConfig": "packages/bootstrap-toaster/tsconfig.lib.json",
+        "assets": [
+          "packages/bootstrap-toaster/*.md"
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "packages/bootstrap-toaster/**/*.ts"
+        ]
+      }
+    },
+    "package": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "project": "packages/bootstrap-toaster/package.json",
+        "outputPath": "dist/packages/bootstrap-toaster",
+        "entryFile": "packages/bootstrap-toaster/src/index.ts",
+        "tsConfig": "packages/bootstrap-toaster/tsconfig.lib.json",
+        "umdName": "Toast"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/packages/bootstrap-toaster"
+      ],
+      "options": {
+        "jestConfig": "packages/bootstrap-toaster/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

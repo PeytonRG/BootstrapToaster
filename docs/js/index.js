@@ -1,4 +1,5 @@
-import Toast, { TOAST_STATUS } from "../../umd/bundle.js";
+// import Toast, { TOAST_STATUS } from "../../umd/bundle.js";
+import { Toast } from "../../bootstrap-toaster/dist/packages/bootstrap-toaster/index.esm.js";
 
 // Getting Started
 var timeoutInput = document.getElementById("timeoutInput");
@@ -8,7 +9,7 @@ timeoutInput.onchange = () => {
     timeout = timeoutInput.value * 1000;
     let toast = {
         title: "Timeout Updated",
-        status: TOAST_STATUS.SUCCESS,
+        status: Toast.TOAST_STATUS.SUCCESS,
         timeout: timeout
     }
     if (timeout !== 0)
@@ -17,6 +18,7 @@ timeoutInput.onchange = () => {
         toast.message = "New toasts must be manually dismissed.";
 
     Toast.create(toast);
+    // Toast.DANGER
 };
 
 var successBtn = document.getElementById("successBtn");
@@ -24,7 +26,7 @@ successBtn.onclick = () => {
     let toast = {
         title: "Voila!",
         message: "How easy was that?",
-        status: TOAST_STATUS.SUCCESS,
+        status: Toast.SUCCESS,
         timeout: timeout
     }
     Toast.create(toast);
@@ -35,7 +37,7 @@ dangerBtn.onclick = () => {
     let toast = {
         title: "Oops",
         message: "That's no good.",
-        status: TOAST_STATUS.DANGER,
+        status: Toast.TOAST_STATUS.DANGER,
         timeout: timeout
     }
     Toast.create(toast);
