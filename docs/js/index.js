@@ -26,7 +26,7 @@ successBtn.onclick = () => {
     let toast = {
         title: "Voila!",
         message: "How easy was that?",
-        status: Toast.SUCCESS,
+        status: Toast.TOAST_STATUS.SUCCESS,
         timeout: timeout
     }
     Toast.create(toast);
