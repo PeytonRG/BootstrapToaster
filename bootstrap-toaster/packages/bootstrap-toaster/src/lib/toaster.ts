@@ -1,3 +1,5 @@
+import "./css/bootstrap-toaster.css";
+
 /**
  * Copyright (c) 2022 Peyton Gasink
  * Distributed under MIT License.
