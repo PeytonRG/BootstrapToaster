@@ -1,5 +1,4 @@
-// import Toast, { BootstrapToaster.TOAST_STATUS } from "../../umd/bundle.js";
-import * as BootstrapToaster from "../../js/index.esm.js";
+// import * as BootstrapToaster from "../../bootstrap-toaster/dist/packages/bootstrap-toaster/bootstrap-toaster.esm.js";
 
 // Getting Started
 var timeoutInput = document.getElementById("timeoutInput");
