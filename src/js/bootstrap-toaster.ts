@@ -1,3 +1,5 @@
+// import { Toast } from "bootstrap"; appears to be broken at the moment, see https://github.com/twbs/bootstrap/issues/31944
+
 /**
  * Copyright (c) 2022 Peyton Gasink
  * Distributed under MIT License.
@@ -297,7 +299,8 @@ function render(toastInfo: IToast): void {
 
     TOAST_CONTAINER.appendChild(toastInfo.toast);
     // Initialize Bootstrap 5's toast plugin
-    const bsToast = new window["bootstrap"].Toast(toastInfo.toast);
+    // @ts-ignore
+    const bsToast = new bootstrap.Toast(toastInfo.toast);
     bsToast.show();
     currentToastCount++;
 

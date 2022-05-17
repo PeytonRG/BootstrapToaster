@@ -1,8 +1,8 @@
 {
   "name": "bootstrap-toaster",
-  "version": "5.2.0-alpha1",
+  "version": "5.2.0-alpha4",
   "description": "Robust, plug & play generator for Bootstrap toasts.",
-  "main": "js/bootstrap-toaster.js",
+  "main": "dist/esm/bootstrap-toaster.js",
   "dependencies": {
     "bootstrap": ">=5.0.0",
     "bootstrap-icons": ">=1.4.0"

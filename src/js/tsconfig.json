@@ -5,9 +5,8 @@
         "moduleResolution": "node",
         "sourceMap": true,
         "declaration": true,
-        "declarationDir": "../../dist/dts",
+        "declarationDir": "../../dist/esm",
         "outDir": "tsc-out"
-        // "emitDeclarationOnly": true
     },
     "compileOnSave": true,
     "exclude": [
