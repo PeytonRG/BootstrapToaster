@@ -1,4 +1,6 @@
 node_modules
-js/*.js
+src/js/*.js
 docs/js/*.js
 .eslintrc.js
+dist
+rollup.config.js
