@@ -1,5 +1,5 @@
 node_modules
-src/js/*.js
+src/js/tsc-out/*.js
 docs/js/*.js
 .eslintrc.js
 dist

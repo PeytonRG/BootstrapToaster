@@ -1,6 +1,11 @@
 /docs
 /images
+/src
 /.github
 *.code-workspace
 .gitignore
 *.html
+.eslintignore
+.eslintrc.js
+CNAME
+rollup.config.js

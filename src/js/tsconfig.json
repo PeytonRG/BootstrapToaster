@@ -5,7 +5,9 @@
         "moduleResolution": "node",
         "sourceMap": true,
         "declaration": true,
-        "declarationMap": true
+        "declarationDir": "../../dist/dts",
+        "outDir": "tsc-out"
+        // "emitDeclarationOnly": true
     },
     "compileOnSave": true,
     "exclude": [

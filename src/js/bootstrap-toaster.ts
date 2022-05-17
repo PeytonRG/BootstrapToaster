@@ -325,7 +325,7 @@ function renderTimer(toastInfo: IToast) {
             // Start a timer that updates the text of the time indicator every minute
             // Initially set to 1 because for the first minute the indicator reads "just now"
             let minutes = 1
-            const elapsedTimer: number = setInterval(() => {
+            const elapsedTimer = setInterval(() => {
                 timer.innerText = `${minutes}m ago`;
                 minutes++;
             }, 60 * 1000);
@@ -342,7 +342,7 @@ function renderTimer(toastInfo: IToast) {
                 // Initially set to 1 because for the first minute the indicator reads "just now"
                 let seconds = toastInfo.timeout / 1000;
                 timer.innerText = `${seconds}s`;
-                const countdownTimer: number = setInterval(() => {
+                const countdownTimer = setInterval(() => {
                     timer.innerText = `${seconds - 1}s`;
                     seconds--;
                 }, 1000);

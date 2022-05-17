@@ -1,4 +1,4 @@
-// import * as BootstrapToaster from "../../bootstrap-toaster/dist/packages/bootstrap-toaster/bootstrap-toaster.esm.js";
+// import * as BootstrapToaster from "../../dist/esm/bootstrap-toaster.js";
 
 // Getting Started
 var timeoutInput = document.getElementById("timeoutInput");

@@ -1,4 +1,5 @@
 import typescript from "@rollup/plugin-typescript";
+import copy from "rollup-plugin-copy";
 
 export default {
     input: 'src/js/bootstrap-toaster.ts',
@@ -8,11 +9,12 @@ export default {
         format: `${process.env.format}`,
         name: 'BootstrapToaster'
     },
-    plugins: [typescript()],
-
-    // output: {
-    //     file: 'dist/esm/bootstrap-toaster.js',
-    //     // dir: 'dist',
-    //     format: 'es'
-    // }
+    plugins: [
+        typescript(),
+        copy({
+            targets: [
+                { src: 'src/css', dest: 'dist' }
+            ]
+        })
+    ]
 };

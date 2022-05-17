@@ -1,10 +1,9 @@
 {
   "name": "bootstrap-toaster",
-  "version": "5.1.0",
+  "version": "5.2.0-test3",
   "description": "Robust, plug & play generator for Bootstrap toasts.",
   "main": "js/bootstrap-toaster.js",
   "dependencies": {
-    "@rollup/plugin-typescript": "^8.3.2",
     "bootstrap": ">=5.0.0",
     "bootstrap-icons": ">=1.4.0"
   },
@@ -34,9 +33,11 @@
   },
   "homepage": "https://bootstraptoaster.peytongasink.dev",
   "devDependencies": {
+    "@rollup/plugin-typescript": "^8.3.2",
     "@typescript-eslint/eslint-plugin": "^5.24.0",
     "@typescript-eslint/parser": "^5.24.0",
     "eslint": "^8.15.0",
+    "rollup-plugin-copy": "^3.4.0",
     "typescript": "^4.6.4"
   }
 }
