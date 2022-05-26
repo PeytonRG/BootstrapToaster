@@ -18,12 +18,12 @@
     */
     --header-color-light: #6c757d;
     --text-color-light: #212529;
-    --header-bg-color-light: rgba(255,255,255,.85);
-    --body-bg-color-light: rgba(255,255,255,.85);
+    --header-bg-color-light: rgba(255, 255, 255, .85);
+    --body-bg-color-light: rgba(255, 255, 255, .85);
     --header-color-dark: #f8f9fa;
     --text-color-dark: #f8f9fa;
-    --header-bg-color-dark: rgba(30,40,45,.85);
-    --body-bg-color-dark: rgba(30,40,45,.85);
+    --header-bg-color-dark: rgba(30, 40, 45, .85);
+    --body-bg-color-dark: rgba(30, 40, 45, .85);
     max-height: 100vh;
     /* Override Bootstrap 5's pointer-events:none on .toast-container, so overflow-y: scroll works */
     pointer-events: auto;
@@ -58,8 +58,10 @@
     }
 }
 
-@media (prefers-color-scheme: dark){
-    .toast, .toast-header {
+@media (prefers-color-scheme: dark) {
+
+    .toast,
+    .toast-header {
         color: var(--text-color-dark);
     }
 
