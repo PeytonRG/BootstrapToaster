@@ -9,7 +9,7 @@
   },
   "scripts": {
     "eslint": "eslint",
-    "build": "rollup -c"
+    "rollup": "rollup -c"
   },
   "repository": {
     "type": "git",
