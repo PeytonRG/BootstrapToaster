@@ -66,19 +66,19 @@ enum TOAST_TIMERS {
   COUNTDOWN,
 }
 
-interface IToast {
+interface Toast {
   toast: HTMLElement;
   timeout: number;
 }
 
-interface IToastOptions {
+interface ToastOptions {
   title: string;
   message: string;
   status?: TOAST_STATUS;
   timeout?: number;
 }
 
-interface IConfiguration {
+interface ToastConfigOptions {
   maxToasts?: number;
   placement?: TOAST_PLACEMENT;
   theme?: TOAST_THEME;
@@ -95,13 +95,13 @@ let timersEnabled: TOAST_TIMERS = TOAST_TIMERS.ELAPSED;
 /** Controls whether to queue toasts that exceed the maximum toast count. */
 let queueEnabled = true;
 
-let queue: IToast[] = [];
+let queue: Toast[] = [];
 
 /**
  * Shorthand function for quickly setting multiple global toast configurations.
- * @param {IConfiguration} options Object containing all the desired toast options.
+ * @param {ToastConfigOptions} options Object containing all the desired toast options.
  */
-function configure(options: IConfiguration): void {
+function configure(options: ToastConfigOptions): void {
   setMaxCount(options?.maxToasts);
   setPlacement(options?.placement);
   setTheme(options?.theme);
@@ -223,9 +223,9 @@ function enableQueue(enabled = true): void {
  * Endpoint to generate Bootstrap toasts from a template and insert their HTML onto the page,
  * run timers for each's elapsed time since appearing, and remove them from the
  * DOM after they are hidden. Caps toast count at maxToastCount.
- * @param {IToastOptions} toastOptions Object containing all the desired toast options.
+ * @param {ToastOptions} toastOptions Object containing all the desired toast options.
  */
-function create(toastOptions: IToastOptions): void {
+function create(toastOptions: ToastOptions): void {
   const toastEl: HTMLElement = <HTMLElement>TOAST_TEMPLATE.cloneNode(true);
 
   const toastTitle: HTMLElement = toastEl.querySelector(".toast-title");
@@ -240,7 +240,7 @@ function create(toastOptions: IToastOptions): void {
   if (currentToastCount >= maxToastCount) {
     if (!queueEnabled) return;
 
-    const toastToQueue: IToast = {
+    const toastToQueue: Toast = {
       toast: toastEl,
       timeout: toastOptions.timeout,
     };
@@ -248,7 +248,7 @@ function create(toastOptions: IToastOptions): void {
     return;
   }
 
-  const toastInfo: IToast = {
+  const toastInfo: Toast = {
     toast: toastEl,
     timeout: toastOptions.timeout,
   };
@@ -289,9 +289,9 @@ function setStatus(toastEl: HTMLElement, status: TOAST_STATUS): void {
 
 /**
  * Inserts toast HTML onto page and sets up for toast deletion.
- * @param {IToast} toastInfo The toast object to be rendered.
+ * @param {Toast} toastInfo The toast object to be rendered.
  */
-function render(toastInfo: IToast): void {
+function render(toastInfo: Toast): void {
   // If the timeout is 0, the toast must be dismissed manually
   if (toastInfo.timeout > 0) {
     toastInfo.toast.setAttribute("data-bs-delay", toastInfo.timeout.toString());
@@ -321,7 +321,7 @@ function render(toastInfo: IToast): void {
  * Handles the rendering of the timer in the toast header.
  * @param toastInfo The toast object to be rendered.
  */
-function renderTimer(toastInfo: IToast) {
+function renderTimer(toastInfo: Toast) {
   const timer: HTMLElement = toastInfo.toast.querySelector(".timer");
 
   switch (timersEnabled) {
@@ -376,7 +376,6 @@ export {
   configure,
   setMaxCount,
   setPlacement,
-  setStatus,
   setTheme,
   enableQueue,
   enableTimers,
