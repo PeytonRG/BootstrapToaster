@@ -1,4 +1,4 @@
-// import { Toast } from "bootstrap"; appears to be broken at the moment, see https://github.com/twbs/bootstrap/issues/31944
+import Toast from "bootstrap/js/src/toast";
 /**
  * Copyright (c) 2022 Peyton Gasink
  * Distributed under MIT License.
@@ -76,7 +76,7 @@ let queueEnabled = true;
 let queue = [];
 /**
  * Shorthand function for quickly setting multiple global toast configurations.
- * @param {IConfiguration} options Object containing all the desired toast options.
+ * @param {ToastConfigOptions} options Object containing all the desired toast options.
  */
 function configure(options) {
     setMaxCount(options?.maxToasts);
@@ -190,7 +190,7 @@ function enableQueue(enabled = true) {
  * Endpoint to generate Bootstrap toasts from a template and insert their HTML onto the page,
  * run timers for each's elapsed time since appearing, and remove them from the
  * DOM after they are hidden. Caps toast count at maxToastCount.
- * @param {IToastOptions} toastOptions Object containing all the desired toast options.
+ * @param {ToastOptions} toastOptions Object containing all the desired toast options.
  */
 function create(toastOptions) {
     const toastEl = TOAST_TEMPLATE.cloneNode(true);
@@ -205,14 +205,14 @@ function create(toastOptions) {
             return;
         const toastToQueue = {
             toast: toastEl,
-            timeout: toastOptions.timeout
+            timeout: toastOptions.timeout,
         };
         queue.push(toastToQueue);
         return;
     }
     const toastInfo = {
         toast: toastEl,
-        timeout: toastOptions.timeout
+        timeout: toastOptions.timeout,
     };
     render(toastInfo);
 }
@@ -247,7 +247,7 @@ function setStatus(toastEl, status) {
 }
 /**
  * Inserts toast HTML onto page and sets up for toast deletion.
- * @param {IToast} toastInfo The toast object to be rendered.
+ * @param {Toast} toastInfo The toast object to be rendered.
  */
 function render(toastInfo) {
     // If the timeout is 0, the toast must be dismissed manually
@@ -258,12 +258,11 @@ function render(toastInfo) {
     renderTimer(toastInfo);
     TOAST_CONTAINER.appendChild(toastInfo.toast);
     // Initialize Bootstrap 5's toast plugin
-    // @ts-ignore
-    const bsToast = new bootstrap.Toast(toastInfo.toast);
+    const bsToast = new Toast(toastInfo.toast);
     bsToast.show();
     currentToastCount++;
     // When the toast hides, remove it from the DOM
-    toastInfo.toast.addEventListener('hidden.bs.toast', () => {
+    toastInfo.toast.addEventListener("hidden.bs.toast", () => {
         TOAST_CONTAINER.removeChild(toastInfo.toast);
         currentToastCount--;
         if (queueEnabled && queue.length > 0 && currentToastCount < maxToastCount) {
@@ -289,7 +288,7 @@ function renderTimer(toastInfo) {
                 minutes++;
             }, 60 * 1000);
             // When the toast hides, delete its timer instance
-            toastInfo.toast.addEventListener('hidden.bs.toast', () => {
+            toastInfo.toast.addEventListener("hidden.bs.toast", () => {
                 clearInterval(elapsedTimer);
             });
             break;
@@ -305,7 +304,7 @@ function renderTimer(toastInfo) {
                     seconds--;
                 }, 1000);
                 // When the toast hides, delete its timer instance
-                toastInfo.toast.addEventListener('hidden.bs.toast', () => {
+                toastInfo.toast.addEventListener("hidden.bs.toast", () => {
                     clearInterval(countdownTimer);
                 });
             }
@@ -318,5 +317,5 @@ function renderTimer(toastInfo) {
         }
     }
 }
-export { TOAST_STATUS, TOAST_PLACEMENT, TOAST_THEME, TOAST_TIMERS, configure, setMaxCount, setPlacement, setStatus, setTheme, enableQueue, enableTimers, create };
+export { TOAST_STATUS, TOAST_PLACEMENT, TOAST_THEME, TOAST_TIMERS, configure, setMaxCount, setPlacement, setTheme, enableQueue, enableTimers, create, };
 //# sourceMappingURL=bootstrap-toaster.js.map
