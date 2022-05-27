@@ -1,23 +1,36 @@
 import typescript from "@rollup/plugin-typescript";
+import dts from "rollup-plugin-dts";
 import copy from "rollup-plugin-copy";
 
-export default {
-  input: "src/js/bootstrap-toaster.ts",
-  output: [
-    {
-      dir: "dist/esm",
-      format: "esm",
+export default [
+  {
+    input: "src/js/bootstrap-toaster.ts",
+    output: [
+      {
+        dir: "dist/esm",
+        format: "es",
+        sourcemap: true,
+      },
+      {
+        dir: "dist/umd",
+        format: "umd",
+        name: "Toast",
+        sourcemap: true,
+      },
+    ],
+    plugins: [
+      typescript(),
+      copy({
+        targets: [{ src: "src/css", dest: "dist" }],
+      }),
+    ],
+  },
+  {
+    input: "src/js/tsc-out/bootstrap-toaster.d.ts",
+    output: {
+      file: "dist/bootstrap-toaster.d.ts",
+      format: "es",
     },
-    {
-      dir: "dist/umd",
-      format: "umd",
-      name: "Toast",
-    },
-  ],
-  plugins: [
-    typescript(),
-    copy({
-      targets: [{ src: "src/css", dest: "dist" }],
-    }),
-  ],
-};
+    plugins: [dts()],
+  },
+];

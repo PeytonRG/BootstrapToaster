@@ -39,6 +39,7 @@
     "@typescript-eslint/parser": "^5.26.0",
     "eslint": "^8.16.0",
     "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-dts": "^4.2.2",
     "typescript": "^4.7.2"
   }
 }

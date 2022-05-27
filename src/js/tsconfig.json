@@ -1,15 +1,12 @@
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "module": "esnext",
-        "moduleResolution": "node",
-        "sourceMap": true,
-        "declaration": true,
-        "declarationDir": "../../dist/esm",
-        "outDir": "tsc-out"
-    },
-    "compileOnSave": true,
-    "exclude": [
-        "node_modules"
-    ]
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    // "sourceMap": true,
+    "declaration": true,
+    "outDir": "tsc-out"
+  },
+  "compileOnSave": true,
+  "exclude": ["node_modules", "tsc-out"]
 }
