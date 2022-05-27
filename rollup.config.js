@@ -27,10 +27,16 @@ export default [
   },
   {
     input: "src/js/tsc-out/bootstrap-toaster.d.ts",
-    output: {
-      file: "dist/bootstrap-toaster.d.ts",
-      format: "es",
-    },
+    output: [
+      {
+        file: "dist/esm/bootstrap-toaster.d.ts",
+        format: "es",
+      },
+      {
+        file: "dist/umd/bootstrap-toaster.d.ts",
+        format: "umd",
+      },
+    ],
     plugins: [dts()],
   },
 ];
