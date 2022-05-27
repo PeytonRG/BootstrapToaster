@@ -3,11 +3,15 @@
 
 name: Build & Publish
 
+# on:
+#   push:
+#     branches: [module-test]
+#   pull_request:
+#     branches: [master]
+
 on:
-  push:
-    branches: [module-test]
-  pull_request:
-    branches: [master]
+  release:
+    types: [created]
 
 jobs:
   build:
