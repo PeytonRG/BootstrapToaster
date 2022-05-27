@@ -12,6 +12,8 @@ import Toast from "bootstrap/js/src/toast";
  * and the maximum number of toasts allowed on the page at a given time.
  */
 
+console.log("snorkel");
+
 /** Container that generated toasts will be inserted into. */
 const TOAST_CONTAINER: HTMLDivElement = document.createElement("div");
 TOAST_CONTAINER.id = "toastContainer";

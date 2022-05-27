@@ -33,7 +33,6 @@ jobs:
       - run: npm run rollup --if-present
       - run: git config --global user.name 'Peyton Gasink'
       - run: git config --global user.email 'peyton@peytongasink.dev'
-      - run: npm version prerelease
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
