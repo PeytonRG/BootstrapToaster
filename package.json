@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-toaster",
-  "version": "5.2.0-beta.3",
+  "version": "5.2.0-beta1",
   "description": "Robust, plug & play generator for Bootstrap toasts.",
   "main": "dist/esm/bootstrap-toaster.js",
   "dependencies": {
