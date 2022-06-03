@@ -38,7 +38,7 @@ jobs:
       - run: git config --global user.name 'Peyton Gasink'
       - run: git config --global user.email 'peyton@peytongasink.dev'
       - run: npm version prerelease
-      - run: git push
+      - run: git push origin module-test
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
