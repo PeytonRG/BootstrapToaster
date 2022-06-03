@@ -3,7 +3,6 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
-    // "sourceMap": true,
     "declaration": true,
     "outDir": "tsc-out"
   },

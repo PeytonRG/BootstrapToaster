@@ -1,6 +1,5 @@
 node_modules
 src/js/tsc-out/*.js
-docs/js/*.js
 .eslintrc.js
 dist
 rollup.config.js
