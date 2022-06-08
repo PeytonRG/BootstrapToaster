@@ -81,19 +81,19 @@ enum TOAST_TIMERS {
 }
 (window as any).TOAST_TIMERS = TOAST_TIMERS;
 
-interface ToastData {
+export interface ToastData {
   toast: HTMLElement;
   timeout: number;
 }
 
-interface ToastOptions {
+export interface ToastOptions {
   title: string;
   message: string;
   status?: TOAST_STATUS;
   timeout?: number;
 }
 
-interface ToastConfigOptions {
+export interface ToastConfigOptions {
   maxToasts?: number;
   placement?: TOAST_PLACEMENT;
   theme?: TOAST_THEME;

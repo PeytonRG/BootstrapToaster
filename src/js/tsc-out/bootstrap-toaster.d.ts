@@ -48,13 +48,17 @@ declare enum TOAST_TIMERS {
     ELAPSED = 1,
     COUNTDOWN = 2
 }
-interface ToastOptions {
+export interface ToastData {
+    toast: HTMLElement;
+    timeout: number;
+}
+export interface ToastOptions {
     title: string;
     message: string;
     status?: TOAST_STATUS;
     timeout?: number;
 }
-interface ToastConfigOptions {
+export interface ToastConfigOptions {
     maxToasts?: number;
     placement?: TOAST_PLACEMENT;
     theme?: TOAST_THEME;
