@@ -73,7 +73,8 @@ interface IToastOptions {
     title: string,
     message: string,
     status?: TOAST_STATUS,
-    timeout?: number
+    timeout?: number,
+    classes?: string[]
 }
 
 interface IConfiguration {
@@ -229,6 +230,11 @@ class Toast {
 
         let toastBody: HTMLElement = toastEl.querySelector(".toast-body");
         toastBody.innerHTML = toastOptions.message;
+
+        // Add any additional classes to the toast
+        if (toastOptions.classes) {
+            toastEl.classList.add(...toastOptions.classes);
+        }
 
         this.setStatus(toastEl, toastOptions.status);
 

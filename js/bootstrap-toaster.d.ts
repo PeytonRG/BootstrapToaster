@@ -52,6 +52,7 @@ interface IToastOptions {
     message: string;
     status?: TOAST_STATUS;
     timeout?: number;
+    classes?: string[];
 }
 interface IConfiguration {
     maxToasts?: number;
