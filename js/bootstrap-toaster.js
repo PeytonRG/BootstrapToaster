@@ -189,6 +189,10 @@ class Toast {
         toastTitle.innerText = toastOptions.title;
         let toastBody = toastEl.querySelector(".toast-body");
         toastBody.innerHTML = toastOptions.message;
+        // Add any additional classes to the toast
+        if (toastOptions.classes) {
+            toastEl.classList.add(...toastOptions.classes);
+        }
         this.setStatus(toastEl, toastOptions.status);
         // Add toast to the queue if it would exceed maxToastCount
         if (this.currentToastCount >= this.maxToastCount) {
