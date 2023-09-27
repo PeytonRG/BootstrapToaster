@@ -1,0 +1,20 @@
+{
+    "name": "peytonrg/bootstraptoaster",
+    "description": "Robust, plug & play generator for Bootstrap toasts.",
+    "keywords": ["bootstrap","toaster"],
+    "homepage": "https://github.com/PeytonRG/BootstrapToaster/",
+    "license": "MIT",
+    "type": "bootstrap-extension",
+    "version": "5.1.0",
+    "authors": [
+    {
+      "name": "Peyton Gasink",
+      "email": "pg@auburn.edu",
+      "role": "Developer"
+    }
+  ],
+    "require": {
+        "twbs/bootstrap": "^5.0",
+        "twbs/bootstrap-icons": "^1.9"
+    }
+}
